@@ -1,0 +1,23 @@
+﻿<Properties StartupConfiguration="{4C4416B3-A398-4226-A053-D5678951C25C}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FacElec/helpers/SqlHelper.cs">
+    <Files>
+      <File FileName="FacElec/Program.cs" Line="12" Column="1" />
+      <File FileName="FacElec/model/Factura.cs" Line="24" Column="32" />
+      <File FileName="FacElec/model/factura_detalle.cs" Line="23" Column="34" />
+      <File FileName="FacElec/model/cliente.cs" Line="12" Column="23" />
+      <File FileName="FacElec/helpers/SqlHelper.cs" Line="21" Column="57" />
+      <File FileName="FacElec/model/producto.cs" Line="13" Column="39" />
+      <File FileName="FacElec/sync/Sincronizador.cs" Line="10" Column="50" />
+      <File FileName="FacElec/helpers/RestHelper.cs" Line="22" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/pablillo/Documents/repos/master/FacElec/FacElec/sync/Sincronizador.cs" relfile="FacElec/sync/Sincronizador.cs" line="26" column="38" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.FacElec PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

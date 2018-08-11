@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SIAI_LAURITA">
+</Property><Property Name="Solution File" Value="D:\IT\SIAI_LAURITA\SIAI_LAURITA.sln">
+</Property><Property Name="Date" Value="Miércoles, 28 de Diciembre de 2005">
+</Property><Property Name="Time" Value="13:58 p.m.">
+</Property></Properties><Event ErrorLevel="0" Project="SIAI_LAURITA" Source="SIAI_LAURITA\SIAI_LAURITA.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SIAI_LAURITA" Source="SIAI_LAURITA\SIAI_LAURITA.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SIAI_LAURITA.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SIAI_LAURITA.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SIAI_LAURITA" Source="SIAI_LAURITA\SIAI_LAURITA.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="1" Project="SIAI_LAURITA" Source="Crystal Reports" Description="">
+</Event></UpgradeLog>

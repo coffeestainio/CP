@@ -1,0 +1,11 @@
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/bin/Debug/netcoreapp2.1/FacElec.deps.json
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/bin/Debug/netcoreapp2.1/FacElec.runtimeconfig.json
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/bin/Debug/netcoreapp2.1/FacElec.runtimeconfig.dev.json
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/bin/Debug/netcoreapp2.1/FacElec.dll
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/bin/Debug/netcoreapp2.1/FacElec.pdb
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/obj/Debug/netcoreapp2.1/FacElec.csprojResolveAssemblyReference.cache
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/obj/Debug/netcoreapp2.1/FacElec.csproj.CoreCompileInputs.cache
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/obj/Debug/netcoreapp2.1/FacElec.AssemblyInfoInputs.cache
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/obj/Debug/netcoreapp2.1/FacElec.AssemblyInfo.cs
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/obj/Debug/netcoreapp2.1/FacElec.dll
+/Users/pablillo/Documents/repos/master/FacElec/FacElec/obj/Debug/netcoreapp2.1/FacElec.pdb

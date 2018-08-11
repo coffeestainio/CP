@@ -1,0 +1,19 @@
+1-factura
+2-reversion factura
+3-recibo
+4-reversion recibo
+5-nota credito
+6 -reversion nota credito
+7-devolucion
+8-reversion devolucion
+9-descuento financiero
+10-reversion descuento financiero
+
+
+
+1-Pago
+2-Vale
+3-Recibo efectivo
+4-Recibo Cheque
+5-Reversion Recibo Efectivo
+6-Reversion Recibo Cheque
