@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<provincias>
+  <provincia>
+    <nombre>San Jose</nombre>
+    <codigo>1</codigo>
+    <cantones>
+      <canton>
+        <nombre>San Jose</nombre>
+        <codigo>1</codigo>
+        <distritos>
+          <distrito>
+            <nombre>Carmen</nombre>
+            <codigo>1</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Merced</nombre>
+            <codigo>2</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Hospital</nombre>
+            <codigo>3</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Catedral</nombre>
+            <codigo>4</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Zapote</nombre>
+            <codigo>5</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Fco Dos Rios</nombre>
+            <codigo>6</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Uruca</nombre>
+            <codigo>7</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Mata Redonda</nombre>
+            <codigo>8</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Pavas</nombre>
+            <codigo>9</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Hatillo</nombre>
+            <codigo>10</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Sebastian</nombre>
+            <codigo>11</codigo>
+          </distrito>
+        </distritos>
+      </canton>
+      <canton>
+        <nombre>Escazu</nombre>
+        <codigo>2</codigo>
+        <distritos>
+          <distrito>
+            <nombre>Escazu</nombre>
+            <codigo>1</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Antonio</nombre>
+            <codigo>2</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Rafael</nombre>
+            <codigo>3</codigo>
+          </distrito>
+        </distritos>
+      </canton>
+      <canton>
+        <nombre>Desamparados</nombre>
+        <codigo>3</codigo>
+        <distritos>
+          <distrito>
+            <nombre>Desamparados</nombre>
+            <codigo>1</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Miguel</nombre>
+            <codigo>2</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Juan de Dios</nombre>
+            <codigo>3</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Rafael Arriba</nombre>
+            <codigo>4</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Antonio</nombre>
+            <codigo>5</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Frailes</nombre>
+            <codigo>6</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Patarra</nombre>
+            <codigo>7</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Cristobal</nombre>
+            <codigo>8</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Rosario</nombre>
+            <codigo>9</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Damas</nombre>
+            <codigo>10</codigo>
+          </distrito>
+          <distrito>
+            <nombre>San Rafael Abajo</nombre>
+            <codigo>11</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Gravilias</nombre>
+            <codigo>12</codigo>
+          </distrito>
+          <distrito>
+            <nombre>Los Guido</nombre>
+            <codigo>13</codigo>
+          </distrito>
+        </distritos>
+      </canton>
+    </cantones>
+  </provincia>
+</provincias>
