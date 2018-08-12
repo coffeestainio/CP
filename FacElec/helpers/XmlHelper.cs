@@ -60,7 +60,8 @@ namespace FacElec.helpers
                                                        new XElement("CorreoElectronico","comercialpozos2@hotmail.com"),
                                                        new XElement("CondicionVenta", 1),
                                                        new XElement("PlazoCredito", factura.plazo),
-                                                       new XElement("MedioPago", 1),
+                                                       new XElement("MedioPago", 1)
+                                                      ),
                                                        generateDetailsXml(factura.factura_Detalle),
               
                                                        new XElement("ResumenFactura",
@@ -83,7 +84,6 @@ namespace FacElec.helpers
                                                                     new XElement("NumeroResolucion","DGT-R-48-2016"),
                                                                     new XElement("FechaResolucion","2016-10-07 10:22:22"))
                                                        )
-                                         )
             );
             return xmlDoc;
         }

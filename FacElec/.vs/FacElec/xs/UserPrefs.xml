@@ -1,4 +1,4 @@
-﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default">
+﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="facturasEnviadas/facturaElectronica_998506.xml">
     <Files>
       <File FileName="helpers/RestHelper.cs" Line="17" Column="1" />
@@ -17,6 +17,5 @@
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.FacElec PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
