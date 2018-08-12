@@ -1,20 +1,22 @@
-﻿<Properties StartupConfiguration="{4C4416B3-A398-4226-A053-D5678951C25C}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="FacElec/helpers/SqlHelper.cs">
+﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="facturasEnviadas/facturaElectronica_18199.xml">
     <Files>
-      <File FileName="FacElec/Program.cs" Line="12" Column="1" />
-      <File FileName="FacElec/model/Factura.cs" Line="24" Column="32" />
-      <File FileName="FacElec/model/factura_detalle.cs" Line="23" Column="34" />
-      <File FileName="FacElec/model/cliente.cs" Line="12" Column="23" />
-      <File FileName="FacElec/helpers/SqlHelper.cs" Line="21" Column="57" />
-      <File FileName="FacElec/model/producto.cs" Line="13" Column="39" />
-      <File FileName="FacElec/sync/Sincronizador.cs" Line="10" Column="50" />
-      <File FileName="FacElec/helpers/RestHelper.cs" Line="22" Column="32" />
+      <File FileName="helpers/SqlHelper.cs" Line="80" Column="1" />
+      <File FileName="helpers/XmlHelper.cs" Line="68" Column="77" />
+      <File FileName="helpers/RestHelper.cs" Line="17" Column="1" />
+      <File FileName="ServiceReference1/Reference.cs" Line="161" Column="74" />
+      <File FileName="sync/Sincronizador.cs" Line="21" Column="47" />
+      <File FileName="model/GTIResponse.cs" Line="14" Column="33" />
+      <File FileName="model/factura_detalle.cs" Line="20" Column="1" />
+      <File FileName="model/producto.cs" Line="9" Column="1" />
+      <File FileName="model/cliente.cs" Line="34" Column="1" />
+      <File FileName="facturasEnviadas/facturaElectronica_18199.xml" Line="80" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/pablillo/Documents/repos/master/FacElec/FacElec/sync/Sincronizador.cs" relfile="FacElec/sync/Sincronizador.cs" line="26" column="38" />
+      <Breakpoint file="/Users/pablillo/Documents/repos/PT/FacElec/helpers/SqlHelper.cs" relfile="helpers/SqlHelper.cs" line="64" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
