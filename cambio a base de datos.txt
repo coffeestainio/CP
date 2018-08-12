@@ -1,0 +1,9 @@
+ALTER TABLE dbo.Cliente ADD
+identificacion VARCHAR(20) NULL,
+tipoIdentificacion int NULL,
+provincia int NULL default 1,
+canton int NULL default 1,
+distrito int NULL default 1
+;
+
+update cliente set provincia = 1, canton =1 , distrito = 1, tipoIdentificacion =1;
