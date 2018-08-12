@@ -1,5 +1,4 @@
-**/bin
-**/obj
-SIAI_LAURITA/obj*
+SIAI_LAURITA/bin
+SIAI_LAURITA/obj
 .vs*
 FacElec/facturasEnviadas/

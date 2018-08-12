@@ -2294,6 +2294,7 @@ Public Class frm_datos_mantenimiento
         With cliente_Mantenimiento
             .Owner = Me
             .PopulateCBAddress()
+            .loading = True
             .lblid_cliente.Text = rowc("id_cliente").ToString
             .txtnombre.Text = rowc("nombre")
             .txtemail.Text = rowc("email").ToString.TrimEnd
@@ -2315,6 +2316,7 @@ Public Class frm_datos_mantenimiento
 
             .lbltitulo.Text = "Modificar Cliente"
             .Show()
+            .loading = False
         End With
         'Catch myerror As Exception
         'ONEX(Me.Name, myerror)

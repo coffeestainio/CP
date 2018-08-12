@@ -619,7 +619,7 @@ Public Class frm_cliente_mantenimiento
 #End Region
 
     Public Provincias As ArrayList
-    Public loading As Boolean
+    Public loading As Boolean = False
 
     Private Sub btnaceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaceptar.Click
         Try
@@ -835,15 +835,20 @@ Public Class frm_cliente_mantenimiento
     End Sub
 
     Private Sub frm_cliente_mantenimiento_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         If Provincias.Count = 0 Then
             Provincias = PopulateDistritos()
         End If
-        cbProvincia.Items.Clear()
 
-        For Each prov As Provincia In Provincias
-            cbProvincia.Items.Add(prov.name)
-        Next
-        cbProvincia.SelectedIndex = 0
+        If Not loading Then
+            cbProvincia.Items.Clear()
+
+            For Each prov As Provincia In Provincias
+                cbProvincia.Items.Add(prov.name)
+            Next
+            cbProvincia.SelectedIndex = 0
+        End If
+
     End Sub
 
     Public Sub PopulateCBAddress()
