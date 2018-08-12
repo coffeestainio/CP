@@ -9,7 +9,7 @@ namespace FacElec.helpers
 {
     public static class SqlHelper
     {
-        private const string sqlConnection = "Server=tcp:pt2.database.windows.net,1433;Initial Catalog = pt2_test; Persist Security Info=False;User ID = PTSQL; Password=SQLPT12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
+        private const string sqlConnection = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog = cp2_test; Persist Security Info=False;User ID = CPSQL; Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
 
         public static List<Factura> GetFacturas()
         {

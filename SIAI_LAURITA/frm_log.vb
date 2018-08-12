@@ -110,6 +110,7 @@ Public Class frm_log
         Me.txtnombre.Name = "txtnombre"
         Me.txtnombre.Size = New System.Drawing.Size(128, 26)
         Me.txtnombre.TabIndex = 0
+        Me.txtnombre.Text = "pablillo"
         Me.ToolTip.SetToolTip(Me.txtnombre, "Escriba el nombre del Usuario")
         '
         'txtclave
@@ -121,6 +122,7 @@ Public Class frm_log
         Me.txtclave.PasswordChar = Global.Microsoft.VisualBasic.ChrW(119)
         Me.txtclave.Size = New System.Drawing.Size(128, 25)
         Me.txtclave.TabIndex = 1
+        Me.txtclave.Text = "123456"
         Me.ToolTip.SetToolTip(Me.txtclave, "Escriba la contraseña del Usuario")
         '
         'btnsalir

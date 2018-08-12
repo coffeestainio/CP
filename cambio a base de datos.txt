@@ -7,3 +7,15 @@ distrito int NULL default 1
 ;
 
 update cliente set provincia = 1, canton =1 , distrito = 1, tipoIdentificacion =1;
+
+ALTER TABLE dbo.factura ADD
+sincronizada int NULL DEFAULT 0,
+IdCarga INT NULL,
+ClaveNumerica nvarchar(50) NULL,
+NumConsecutivo nvarchar(50) NULL,
+CodError nvarchar(50) NULL,
+DescripcionError nvarchar(300) NULL,
+Actualizada datetime null 
+;
+
+UPDATe dbo.factura SET sincronizada =3;

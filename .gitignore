@@ -1,4 +1,6 @@
-SIAI_LAURITA/bin
-SIAI_LAURITA/obj
-.vs*
-FacElec/facturasEnviadas/
+*/Release
+FacElec/bin
+FacElec/obj
+**/obj
+**/bin
+FacElec/FacturasEnviadas

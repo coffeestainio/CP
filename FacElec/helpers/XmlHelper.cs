@@ -21,7 +21,6 @@ namespace FacElec.helpers
 
             var cliente = factura.cliente[0];
 
-            var numCuenta = "4445";
             var periodo = 0;
             if (System.DateTime.Today.Month < 10)
                 periodo = System.DateTime.Today.Year;
@@ -30,58 +29,60 @@ namespace FacElec.helpers
 
             var xmlDoc = new XDocument(
                              new XDeclaration("1.0", "utf-8", ""),
-                             new XElement("root",
-                             new XElement("FacturaElectronicaXML",
-                                   new XElement("Encabezado",
-                                                new XElement("NumeroFactura", factura.id_factura),
-                                                new XElement("FechaFactura", factura.fecha.ToString("yyyy-MM-dd")),
-                                                new XElement("Emisor", new XElement("NumCuenta", numCuenta)),
-                                                new XElement("TipoCambio", "1.00"),
-                                                new XElement("TipoDoc", (!factura.notaCredito) ? "1" : "3"),
-                                                new XElement("CondicionVenta", 1),
-                                                new XElement("NumOrdenCompra", factura.ordenCompra),
-                                                new XElement("Moneda", 1),
-                                                new XElement("idMedioPago", 1),
-                                                new XElement("DiasCredito", factura.plazo),
-                                                new XElement("Sucursal", 1),
-                                                new XElement("Terminal", 1),
-                                                new XElement("FechaVencimiento", ""),
-                                                new XElement("SituacionEnvio", 1),
-                                                new XElement("Periodo", periodo),
-                                                new XElement("Receptor",
-                                                             new XElement("TipoIdentificacion", cliente.tipoIdentificacion),
-                                                             new XElement("IdentificacionReceptor", cliente.identificacion.Replace("-", "")),
-                                                             new XElement("NombreReceptor", cliente.nombre_sociedad),
-                                                             new XElement("idProvincia", cliente.provincia),
-                                                             new XElement("idCanton", cliente.canton),
-                                                             new XElement("idDistrito", cliente.distrito),
-                                                             new XElement("idBarrio", 1),
-                                                             new XElement("DireccionReceptor", cliente.direccion),
-                                                             new XElement("NumeroAreaTelReceptor", "506"),
-                                                             new XElement("NumeroTelReceptor", cliente.telefono.Replace("-", "")),
-                                                             new XElement("CorreoElectronicoReceptor", cliente.email),
-                                                             new XElement("CopiaCortesia", "rmorae@ice.co.cr;pcalvo@coffeestain.io")
-                                                            )
+                             
+                             new XElement("TiqueteElectronico",
+                                          //new XAttribute("xmlns","https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/tiqueteElectronico"),
+                                          //new XAttribute($"{XNamespace.Xmlns}xsd","http://www.w3.org/2001/XMLSchema"),
+                                          //new XAttribute($"{XNamespace.Xmlns}xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                                                
+                                          new XElement("Clave",""),
+                                          new XElement("NumeroConsecutivo",""),
+                                          new XElement("FechaEmision", factura.fecha.ToString("yyyy-MM-dd")), 
 
-                                               ),
-                                                generateDetailsXml(factura.factura_Detalle),
-                                                generarNotaCredito(factura),
-                                                new XElement("Totales",
-                                                             new XElement("TotalServGravados", 0),
-                                                             new XElement("TotalServExentos", 0),
-                                                             new XElement("TotalMercanciasGravadas", totalGravado),
-                                                             new XElement("TotalMercanciasExentas", totalExento),
-                                                             new XElement("TotalMercanciasGravadas", totalGravado),
-                                                             new XElement("TotalGravado", totalGravado),
-                                                             new XElement("TotalExento", totalExento),
-                                                             new XElement("TotalVenta", total),
-                                                             new XElement("TotalDescuentos", totalDescuentos),
-                                                             new XElement("TotalVentaNeta", totalVentaNeta),
-                                                             new XElement("TotalImpuesto", totalImpuestos),
-                                                             new XElement("TotalComprobante", totalVentaNeta + totalImpuestos)
-                                                             ),
-                                                new XElement("Otros", "")
-                                               )
+                                          new XElement("Emisor",
+                                                             new XElement("Nombre", "Comercial Pozos S.A"),
+                                                             new XElement("Identificacion",
+                                                                          new XElement("Tipo","02"),
+                                                                          new XElement("Numero","3101159911")
+                                                                         ),
+                                                       new XElement("NombreComercial", "Comercial Pozos S.A"),
+                                                       new XElement("Ubicacion",
+                                                                    new XElement("Provincia",1),
+                                                                    new XElement("Canton",9),
+                                                                    new XElement("Distrito",3),
+                                                                    new XElement("Barrio",1),
+                                                                    new XElement("OtrasSenas","100 Sur Iglesia Pozos, Santa Ana")
+                                                                   ),
+                                                       new XElement("Telefono",
+                                                                    new XElement("CodigoPais","506"),
+                                                                    new XElement("NumTelefono","2282-6030")
+                                                                   ),
+                                                       new XElement("CorreoElectronico","comercialpozos2@hotmail.com"),
+                                                       new XElement("CondicionVenta", 1),
+                                                       new XElement("PlazoCredito", factura.plazo),
+                                                       new XElement("MedioPago", 1),
+                                                       generateDetailsXml(factura.factura_Detalle),
+              
+                                                       new XElement("ResumenFactura",
+                                                                    new XElement("CodigoMoneda","CRC"),
+                                                                    new XElement("TipoCambio",1),
+                                                                     new XElement("TotalServGravados", 0),
+                                                                     new XElement("TotalServExentos", 0),
+                                                                    new XElement("TotalMercanciasGravadas", totalGravado),
+                                                                    new XElement("TotalMercanciasExentas", totalExento),
+                                                                     new XElement("TotalMercanciasGravadas", totalGravado),
+                                                                    new XElement("TotalGravado", totalGravado),
+                                                                    new XElement("TotalExento", totalExento),
+                                                                    new XElement("TotalVenta", total),
+                                                                    new XElement("TotalDescuentos", totalDescuentos),
+                                                                    new XElement("TotalVentaNeta", totalVentaNeta),
+                                                                    new XElement("TotalImpuesto", totalImpuestos),
+                                                                    new XElement("TotalComprobante", totalVentaNeta + totalImpuestos)
+                                                                     ),
+                                                       new XElement("Normativa", 
+                                                                    new XElement("NumeroResolucion","DGT-R-48-2016"),
+                                                                    new XElement("FechaResolucion","2016-10-07 10:22:22"))
+                                                       )
                                          )
             );
             return xmlDoc;
@@ -101,28 +102,32 @@ namespace FacElec.helpers
         }
 
         private static XElement generateDetailsXml(List<factura_Detalle> detalles){
-            var xml = new XElement("Detalle");
+                var xml = new XElement("DetalleServicio");
+            var i = 1;
 
-               foreach(factura_Detalle detalle in detalles)
-                xml.Add(new XElement("Linea",
-                                new XElement("Tipo", "M"),
-                               new XElement("CodigoProducto", detalle.producto[0].id_producto),
-                                     new XElement("Cantidad",detalle.cantidad),
-                               new XElement("UnidadMedida", 40),
-                               new XElement("DetalleMerc", detalle.producto[0].nombre),
-                               new XElement("PrecioUnitario", detalle.precio),
-                               new XElement("MontoDescuento", getDescuento(detalle)),
-                                     new XElement("NaturalezaDescuento","Descuento"),
-                               new XElement("Impuestos",
-                                           new XElement("Impuesto",
-                                                           new XElement("CodigoImpuesto",1),
-                                                           new XElement("PorcentajeImpuesto",(detalle.IV == true) ? "13.00":"00.00"),
-                                                        new XElement("MontoImpuesto",getMontoImpuesto(detalle)),
-                                                           new XElement("Exoneracion",null)
-                                                          )
-                                             )
-                                ) 
+            foreach (factura_Detalle detalle in detalles)
+            {
+                xml.Add(new XElement("LineaDetalle",
+                                     new XElement("NumeroLinea", i),
+                                     new XElement("Codigo",
+                                                  new XElement("Tipo", 4),
+                                                  new XElement("Codigo",3)
+                                                 ),
+                                     
+                                     new XElement("Cantidad", detalle.cantidad),
+                                     new XElement("UnidadMedida", "Unid"),
+                                     new XElement("UnidadMedidaComercial",null),
+                                     new XElement("Detalle", detalle.producto[0].nombre),
+                                     new XElement("PrecioUnitario", detalle.precio),
+                                     new XElement("MontoTotal",detalle.precio * detalle.cantidad),
+                                     new XElement("Descuento",getDescuento(detalle)),
+                                     new XElement("Subtotal", detalle.precio * detalle.cantidad - getDescuento(detalle)),
+                                     new XElement("MontoTotalLinea", detalle.precio * detalle.cantidad)
+                              
+                                )
                        );
+                i++;
+            }
 
             return xml;
 
