@@ -62,6 +62,26 @@ namespace FacElec.helpers
                                                        new XElement("PlazoCredito", factura.plazo),
                                                        new XElement("MedioPago", 1)
                                                       ),
+                                          new XElement("Receptor",
+                                                             new XElement("Nombre", cliente.nombre),
+                                                             new XElement("Identificacion",
+                                                                          new XElement("Tipo", cliente.tipoIdentificacion),
+                                                                          new XElement("Numero", cliente.identificacion)
+                                                                         ),
+                                                       new XElement("NombreComercial", cliente.nombre),
+                                                       new XElement("Ubicacion",
+                                                                    new XElement("Provincia", cliente.provincia),
+                                                                    new XElement("Canton", cliente.canton),
+                                                                    new XElement("Distrito", cliente.distrito),
+                                                                    new XElement("Barrio", 1),
+                                                                    new XElement("OtrasSenas", cliente.direccion)
+                                                                   ),
+                                                       new XElement("Telefono",
+                                                                    new XElement("CodigoPais", "506"),
+                                                                    new XElement("NumTelefono", cliente.telefono)
+                                                                   ),
+                                                       new XElement("CorreoElectronico", cliente.email)
+                                                      ),
                                                        generateDetailsXml(factura.factura_Detalle),
               
                                                        new XElement("ResumenFactura",
@@ -107,22 +127,32 @@ namespace FacElec.helpers
 
             foreach (factura_Detalle detalle in detalles)
             {
+                var montoImpuesto = getMontoImpuesto(detalle);
+                var montoDescuento = getDescuento(detalle);
+
                 xml.Add(new XElement("LineaDetalle",
                                      new XElement("NumeroLinea", i),
                                      new XElement("Codigo",
                                                   new XElement("Tipo", 4),
-                                                  new XElement("Codigo",3)
+                                                  new XElement("Codigo", 3)
                                                  ),
-                                     
+
                                      new XElement("Cantidad", detalle.cantidad),
                                      new XElement("UnidadMedida", "Unid"),
-                                     new XElement("UnidadMedidaComercial",null),
+                                     new XElement("UnidadMedidaComercial", null),
                                      new XElement("Detalle", detalle.producto[0].nombre),
                                      new XElement("PrecioUnitario", detalle.precio),
+                                     new XElement("MontoDescuento", montoDescuento),
+                                     new XElement("NaturalezaDescuento", "Descuento"),
+                                     new XElement("Impuesto",
+                                                           new XElement("CodigoImpuesto", 1),
+                                                           new XElement("PorcentajeImpuesto", (detalle.IV == true) ? "13.00" : "00.00"),
+                                                           new XElement("MontoImpuesto", montoImpuesto),
+                                                           new XElement("Exoneracion", null)
+                                                 ),
                                      new XElement("MontoTotal",detalle.precio * detalle.cantidad),
-                                     new XElement("Descuento",getDescuento(detalle)),
-                                     new XElement("Subtotal", detalle.precio * detalle.cantidad - getDescuento(detalle)),
-                                     new XElement("MontoTotalLinea", detalle.precio * detalle.cantidad)
+                                     new XElement("Subtotal", detalle.precio * detalle.cantidad - montoDescuento),
+                                     new XElement("MontoTotalLinea", detalle.precio * detalle.cantidad + montoImpuesto)
                               
                                 )
                        );

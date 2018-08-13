@@ -1,21 +1,23 @@
-﻿<Properties>
+﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="facturasEnviadas/facturaElectronica_998506.xml">
     <Files>
       <File FileName="helpers/RestHelper.cs" Line="17" Column="1" />
       <File FileName="helpers/SqlHelper.cs" Line="53" Column="1" />
       <File FileName="model/Factura.cs" Line="31" Column="36" />
       <File FileName="model/factura_detalle.cs" Line="20" Column="1" />
-      <File FileName="helpers/XmlHelper.cs" Line="184" Column="1" />
+      <File FileName="helpers/XmlHelper.cs" Line="214" Column="1" />
       <File FileName="sync/Sincronizador.cs" Line="23" Column="1" />
-      <File FileName="facturasEnviadas/facturaElectronica_998506.xml" Line="83" Column="22" />
+      <File FileName="model/cliente.cs" Line="17" Column="118" />
+      <File FileName="facturasEnviadas/facturaElectronica_998506.xml" Line="53" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/pablillo/Documents/repos/CP/FacElec/helpers/XmlHelper.cs" relfile="helpers/XmlHelper.cs" line="88" column="1" />
+      <Breakpoint file="/Users/pablillo/Documents/repos/CP/FacElec/helpers/XmlHelper.cs" relfile="helpers/XmlHelper.cs" line="213" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.FacElec PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
