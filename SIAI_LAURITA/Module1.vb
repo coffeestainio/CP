@@ -13,7 +13,7 @@ Module Module1
 
     Public Const PRINTER As String = "S1"
 
-    Public Const Version As String = "4.2.08.07"
+    Public Const Version As String = "4.2.08.07 Pruebas"
 
     Public Const NEGOCIO As String = "COMERCIAL POZOS S.A."
 
@@ -21,6 +21,8 @@ Module Module1
     Public Const WEB As String = " "
     Public Const TELEFONO As String = "2282-6030  2282-4516"
     Public Const DIRECCION As String = "100 Sur Iglesia Pozos, Santa Ana"
+
+    Public Const CEDULA = "000310115991"
 
     Public Prst(4) As String
 

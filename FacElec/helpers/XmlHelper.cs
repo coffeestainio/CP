@@ -35,8 +35,8 @@ namespace FacElec.helpers
                                           //new XAttribute($"{XNamespace.Xmlns}xsd","http://www.w3.org/2001/XMLSchema"),
                                           //new XAttribute($"{XNamespace.Xmlns}xsi", "http://www.w3.org/2001/XMLSchema-instance"),
                                                 
-                                          new XElement("Clave",""),
-                                          new XElement("NumeroConsecutivo",""),
+                                          new XElement("Clave",factura.claveNumerica),
+                                          new XElement("NumeroConsecutivo",factura.numConsecutivo),
                                           new XElement("FechaEmision", factura.fecha.ToString("yyyy-MM-dd")), 
 
                                           new XElement("Emisor",

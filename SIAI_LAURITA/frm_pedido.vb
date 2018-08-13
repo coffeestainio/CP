@@ -757,6 +757,12 @@ Public Class frm_pedido
             Dim Facturas As Integer = IIf(TPD.Rows.Count > 28, IIf(TPD.Rows.Count Mod 28 > 0, Int(TPD.Rows.Count / 28) + 1, TPD.Rows.Count / 28), 1)
             ReDim FS(Facturas + 1)
 
+            Dim consec As Integer = Table("select top 1 consecutivoElectronico as consecutivo from factura order by id_factura desc", "").Rows(0).Item("consecutivo")
+            consec = consec + 1
+
+            Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
+            Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345679"
+
             Dim h As Integer
 
             For h = 1 To Facturas
@@ -766,8 +772,11 @@ Public Class frm_pedido
                 Fdescuento = 0
                 Fiv = 0
 
-                Sql = "INSERT INTO FACTURA (id_cliente,id_agente,fecha,plazo,piv,id_usuario) values (" & _
+                Sql = "INSERT INTO FACTURA (id_cliente,clavenumerica,numconsecutivo,consecutivoelectronico, id_agente,fecha,plazo,piv,id_usuario) values (" & _
                 txtid_cliente.Text & "," & _
+                "'" & claveNumerica & "'," & _
+                "'" & numConsecutivo & "'," & _
+                consec & "," & _
                 cbid(cbid_agente.Text) & "," & _
                 "'" & EDATE(Date.Today.ToShortDateString) & "'," & _
                 Val(txtplazo.Text).ToString & "," & _

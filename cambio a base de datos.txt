@@ -15,7 +15,9 @@ ClaveNumerica nvarchar(50) NULL,
 NumConsecutivo nvarchar(50) NULL,
 CodError nvarchar(50) NULL,
 DescripcionError nvarchar(300) NULL,
-Actualizada datetime null 
+Actualizada datetime null,
+consecutivoElectronico int Null 
 ;
 
 UPDATe dbo.factura SET sincronizada =3;
+update dbo.factura set consecutivoElectronico = 0;

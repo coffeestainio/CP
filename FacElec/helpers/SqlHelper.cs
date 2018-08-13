@@ -56,7 +56,7 @@ namespace FacElec.helpers
 
         public static void GuardarEstado(List<GTIResponse> resultados)
         {
-            var sqlCommando = "";
+            /*var sqlCommando = "";
             if (resultados.Count > 0)
             {
                 foreach (GTIResponse res in resultados)
@@ -65,7 +65,6 @@ namespace FacElec.helpers
                         sqlCommando +=
                             $"update dbo.factura set idCarga={res.IdCarga}, " +
                             $"ClaveNumerica='{res.ClaveNumerica}', " +
-                            $"NumConsecutivo='{res.NumConsecutivoCompr}', " +
                             $"CodError='{res.CodigoError}', " +
                             $"DescripcionError='{res.DescripcionError}', " +
                             $"sincronizada=1, " +
@@ -95,7 +94,7 @@ namespace FacElec.helpers
                 {
                     Console.WriteLine(ex.Message);
                 }
-            }
+            }*/
         }
     }
 }
