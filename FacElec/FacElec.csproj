@@ -31,5 +31,6 @@
     <None Remove="facturasEnviadas\facturaElectronica_18199.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_998506.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_998506.xml" />
+    <None Remove="facturasEnviadas\facturaElectronica_998507.xml" />
   </ItemGroup>
 </Project>

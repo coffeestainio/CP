@@ -58,7 +58,7 @@ namespace FacElec.helpers
                                                                     new XElement("NumTelefono","2282-6030")
                                                                    ),
                                                        new XElement("CorreoElectronico","comercialpozos2@hotmail.com"),
-                                                       new XElement("CondicionVenta", 1),
+                                                       new XElement("CondicionVenta", (factura.plazo == 0 ) ? "1":"2"),
                                                        new XElement("PlazoCredito", factura.plazo),
                                                        new XElement("MedioPago", 1)
                                                       ),

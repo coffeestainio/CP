@@ -206,6 +206,8 @@ Public Class frm_datos_mantenimiento
     Friend WithEvents provincia As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents canton As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents distrito As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents representante As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents numeroRepresentante As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblm2 As System.Windows.Forms.Label
 
 
@@ -421,6 +423,8 @@ Public Class frm_datos_mantenimiento
         Me.provincia = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.canton = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.distrito = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.representante = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.numeroRepresentante = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Tabparametro.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Tabusuario.SuspendLayout()
@@ -1536,7 +1540,7 @@ Public Class frm_datos_mantenimiento
         Me.dtgcliente.AllowUserToResizeColumns = False
         Me.dtgcliente.AllowUserToResizeRows = False
         Me.dtgcliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dtgcliente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dtgcid, Me.identificacion, Me.cnombre, Me.cTelefono, Me.cdireccion, Me.cplazo, Me.cfax, Me.cemail, Me.cnombre_encargado, Me.ctelefono_encargado, Me.climite, Me.cobservaciones, Me.celiminado, Me.precio, Me.tipoIdentificacion, Me.provincia, Me.canton, Me.distrito})
+        Me.dtgcliente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dtgcid, Me.identificacion, Me.cnombre, Me.cTelefono, Me.cdireccion, Me.cplazo, Me.cfax, Me.cemail, Me.cnombre_encargado, Me.ctelefono_encargado, Me.climite, Me.cobservaciones, Me.celiminado, Me.precio, Me.tipoIdentificacion, Me.provincia, Me.canton, Me.distrito, Me.representante, Me.numeroRepresentante})
         Me.dtgcliente.Location = New System.Drawing.Point(137, 57)
         Me.dtgcliente.Name = "dtgcliente"
         Me.dtgcliente.ReadOnly = True
@@ -1999,6 +2003,22 @@ Public Class frm_datos_mantenimiento
         Me.distrito.ReadOnly = True
         Me.distrito.Visible = False
         '
+        'representante
+        '
+        Me.representante.DataPropertyName = "representante"
+        Me.representante.HeaderText = "representante"
+        Me.representante.Name = "representante"
+        Me.representante.ReadOnly = True
+        Me.representante.Visible = False
+        '
+        'numeroRepresentante
+        '
+        Me.numeroRepresentante.DataPropertyName = "numeroRepresentante"
+        Me.numeroRepresentante.HeaderText = "numeroRepresentante"
+        Me.numeroRepresentante.Name = "numeroRepresentante"
+        Me.numeroRepresentante.ReadOnly = True
+        Me.numeroRepresentante.Visible = False
+        '
         'frm_datos_mantenimiento
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
@@ -2207,12 +2227,12 @@ Public Class frm_datos_mantenimiento
             ' Insert
             Dacliente.InsertCommand = CONN1.CreateCommand()
             Dacliente.InsertCommand.CommandText = "INSERT INTO cliente(nombre, telefono,fax,email,direccion,nombre_encargado," + _
-            "telefono_encargado,precio,plazo,limite_credito,observaciones,comercio, provincia, canton, distrito, tipoIdentificacion,identificacion )" + _
+            "telefono_encargado,precio,plazo,limite_credito,observaciones,comercio, representante, numeroRepresentante, provincia, canton, distrito, tipoIdentificacion,identificacion )" + _
             "values(@nombre, @telefono,@fax,@email,@direccion,@nombre_encargado," + _
-            "@telefono_encargado,@precio,@plazo,@limite_credito,@observaciones,@comercio,@provincia, @canton, @distrito, @tipoIdentificacion, @identificacion);" + _
+            "@telefono_encargado,@precio,@plazo,@limite_credito,@observaciones,@comercio,@representante, @numeroRepresentante, @provincia, @canton, @distrito, @tipoIdentificacion, @identificacion);" + _
            "SELECT * FROM cliente WHERE (id_cliente = @@IDENTITY)"
             AddParams(Dacliente.InsertCommand, "nombre", "telefono", "fax", "email", "direccion", "nombre_encargado", _
-            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio", "provincia", "canton", "distrito", "tipoIdentificacion", "identificacion")
+            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio", "representante", "numeroRepresentante", "provincia", "canton", "distrito", "tipoIdentificacion", "identificacion")
 
             ' Update
             Dacliente.UpdateCommand = CONN1.CreateCommand()
@@ -2220,10 +2240,10 @@ Public Class frm_datos_mantenimiento
                 "UPDATE cliente SET " + _
                 "nombre=@nombre, telefono=@telefono,fax=@fax,email=@email," + _
                 "direccion=@direccion,nombre_encargado=@nombre_encargado,telefono_encargado=@telefono_encargado," + _
-                "plazo=@plazo,limite_credito=@limite_credito,precio=@precio,observaciones=@observaciones, comercio = @comercio , tipoIdentificacion = @tipoIdentificacion, provincia = @provincia, canton = @canton, distrito = @distrito , identificacion = @identificacion" + _
+                "plazo=@plazo,limite_credito=@limite_credito,precio=@precio,observaciones=@observaciones, comercio = @comercio , tipoIdentificacion = @tipoIdentificacion, representante = @representante, numeroRepresentante = @numeroRepresentante, provincia = @provincia, canton = @canton, distrito = @distrito , identificacion = @identificacion" + _
                 " WHERE id_cliente = @id_cliente"
             AddParams(Dacliente.UpdateCommand, "id_cliente", "nombre", "telefono", "fax", "email", "direccion", "nombre_encargado", _
-            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio", "provincia", "canton", "distrito", "tipoIdentificacion", "identificacion")
+            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio", "representante", "numeroRepresentante", "provincia", "canton", "distrito", "tipoIdentificacion", "identificacion")
 
 
         Catch myerror As Exception
@@ -2313,6 +2333,8 @@ Public Class frm_datos_mantenimiento
             .cbDistrito.SelectedIndex = rowc("distrito").ToString - 1
             .txtIdentificacion.Text = rowc("identificacion").ToString
             .cbIdentificacion.SelectedIndex = rowc("tipoIdentificacion").ToString - 1
+            .txtRepresentante.Text = rowc("representante").ToString
+            .txtNumeroRepresentante.Text = rowc("numeroRepresentante").ToString
 
             .lbltitulo.Text = "Modificar Cliente"
             .Show()

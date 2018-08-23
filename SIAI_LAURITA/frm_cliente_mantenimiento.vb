@@ -71,6 +71,10 @@ Public Class frm_cliente_mantenimiento
     Friend WithEvents cbDistrito As System.Windows.Forms.ComboBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents cbCanton As System.Windows.Forms.ComboBox
+    Friend WithEvents txtNumeroRepresentante As System.Windows.Forms.TextBox
+    Friend WithEvents txtRepresentante As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents btnaceptar As System.Windows.Forms.Button
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
@@ -79,6 +83,16 @@ Public Class frm_cliente_mantenimiento
         Me.btncancelar = New System.Windows.Forms.Button
         Me.btnaceptar = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.cbDistrito = New System.Windows.Forms.ComboBox
+        Me.Label18 = New System.Windows.Forms.Label
+        Me.cbCanton = New System.Windows.Forms.ComboBox
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.cbProvincia = New System.Windows.Forms.ComboBox
+        Me.Label13 = New System.Windows.Forms.Label
+        Me.cbIdentificacion = New System.Windows.Forms.ComboBox
+        Me.Label12 = New System.Windows.Forms.Label
+        Me.txtIdentificacion = New System.Windows.Forms.TextBox
+        Me.Label11 = New System.Windows.Forms.Label
         Me.Label5 = New System.Windows.Forms.Label
         Me.cbcomercio = New System.Windows.Forms.ComboBox
         Me.Label1 = New System.Windows.Forms.Label
@@ -108,16 +122,10 @@ Public Class frm_cliente_mantenimiento
         Me.Label2 = New System.Windows.Forms.Label
         Me.PictureBox3 = New System.Windows.Forms.PictureBox
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.txtIdentificacion = New System.Windows.Forms.TextBox
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.cbIdentificacion = New System.Windows.Forms.ComboBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.cbProvincia = New System.Windows.Forms.ComboBox
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.cbCanton = New System.Windows.Forms.ComboBox
-        Me.Label18 = New System.Windows.Forms.Label
-        Me.cbDistrito = New System.Windows.Forms.ComboBox
+        Me.txtNumeroRepresentante = New System.Windows.Forms.TextBox
+        Me.txtRepresentante = New System.Windows.Forms.TextBox
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.Label20 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         CType(Me.pbnombre_sociedad, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,7 +146,7 @@ Public Class frm_cliente_mantenimiento
         '
         Me.btncancelar.Image = CType(resources.GetObject("btncancelar.Image"), System.Drawing.Image)
         Me.btncancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btncancelar.Location = New System.Drawing.Point(377, 527)
+        Me.btncancelar.Location = New System.Drawing.Point(377, 578)
         Me.btncancelar.Name = "btncancelar"
         Me.btncancelar.Size = New System.Drawing.Size(88, 32)
         Me.btncancelar.TabIndex = 16
@@ -150,7 +158,7 @@ Public Class frm_cliente_mantenimiento
         '
         Me.btnaceptar.Image = CType(resources.GetObject("btnaceptar.Image"), System.Drawing.Image)
         Me.btnaceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnaceptar.Location = New System.Drawing.Point(267, 527)
+        Me.btnaceptar.Location = New System.Drawing.Point(267, 578)
         Me.btnaceptar.Name = "btnaceptar"
         Me.btnaceptar.Size = New System.Drawing.Size(88, 32)
         Me.btnaceptar.TabIndex = 15
@@ -161,6 +169,10 @@ Public Class frm_cliente_mantenimiento
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.txtNumeroRepresentante)
+        Me.Panel1.Controls.Add(Me.txtRepresentante)
+        Me.Panel1.Controls.Add(Me.Label19)
+        Me.Panel1.Controls.Add(Me.Label20)
         Me.Panel1.Controls.Add(Me.cbDistrito)
         Me.Panel1.Controls.Add(Me.Label18)
         Me.Panel1.Controls.Add(Me.cbCanton)
@@ -201,8 +213,109 @@ Public Class frm_cliente_mantenimiento
         Me.Panel1.Controls.Add(Me.PictureBox3)
         Me.Panel1.Location = New System.Drawing.Point(23, 29)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(689, 492)
+        Me.Panel1.Size = New System.Drawing.Size(689, 543)
         Me.Panel1.TabIndex = 0
+        '
+        'cbDistrito
+        '
+        Me.cbDistrito.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDistrito.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbDistrito.Location = New System.Drawing.Point(166, 225)
+        Me.cbDistrito.Name = "cbDistrito"
+        Me.cbDistrito.Size = New System.Drawing.Size(250, 26)
+        Me.cbDistrito.TabIndex = 106
+        Me.ToolTip1.SetToolTip(Me.cbDistrito, "Seleccione el Destino")
+        '
+        'Label18
+        '
+        Me.Label18.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(16, 225)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(88, 24)
+        Me.Label18.TabIndex = 105
+        Me.Label18.Text = "Distrito"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cbCanton
+        '
+        Me.cbCanton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCanton.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCanton.Location = New System.Drawing.Point(422, 185)
+        Me.cbCanton.Name = "cbCanton"
+        Me.cbCanton.Size = New System.Drawing.Size(202, 26)
+        Me.cbCanton.TabIndex = 104
+        Me.ToolTip1.SetToolTip(Me.cbCanton, "Seleccione el Destino")
+        '
+        'Label17
+        '
+        Me.Label17.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(356, 185)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(88, 24)
+        Me.Label17.TabIndex = 103
+        Me.Label17.Text = "Canton"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cbProvincia
+        '
+        Me.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbProvincia.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbProvincia.Location = New System.Drawing.Point(166, 185)
+        Me.cbProvincia.Name = "cbProvincia"
+        Me.cbProvincia.Size = New System.Drawing.Size(184, 26)
+        Me.cbProvincia.TabIndex = 102
+        Me.ToolTip1.SetToolTip(Me.cbProvincia, "Seleccione el Destino")
+        '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(16, 185)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(88, 24)
+        Me.Label13.TabIndex = 101
+        Me.Label13.Text = "Provincia"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cbIdentificacion
+        '
+        Me.cbIdentificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbIdentificacion.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbIdentificacion.Items.AddRange(New Object() {"Fisico", "Juridico", "Dimex", "Nite", "Extranjero"})
+        Me.cbIdentificacion.Location = New System.Drawing.Point(410, 79)
+        Me.cbIdentificacion.Name = "cbIdentificacion"
+        Me.cbIdentificacion.Size = New System.Drawing.Size(214, 26)
+        Me.cbIdentificacion.TabIndex = 100
+        Me.ToolTip1.SetToolTip(Me.cbIdentificacion, "Seleccione el Destino")
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(366, 79)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(128, 24)
+        Me.Label12.TabIndex = 99
+        Me.Label12.Text = "Tipo:"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtIdentificacion
+        '
+        Me.txtIdentificacion.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIdentificacion.Location = New System.Drawing.Point(166, 77)
+        Me.txtIdentificacion.MaxLength = 20
+        Me.txtIdentificacion.Name = "txtIdentificacion"
+        Me.txtIdentificacion.Size = New System.Drawing.Size(194, 26)
+        Me.txtIdentificacion.TabIndex = 98
+        Me.ToolTip1.SetToolTip(Me.txtIdentificacion, "Escriba el E-mail del cliente")
+        '
+        'Label11
+        '
+        Me.Label11.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(16, 77)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(144, 24)
+        Me.Label11.TabIndex = 97
+        Me.Label11.Text = "Identificacion"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label5
         '
@@ -292,7 +405,7 @@ Public Class frm_cliente_mantenimiento
         'txtobservaciones
         '
         Me.txtobservaciones.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtobservaciones.Location = New System.Drawing.Point(166, 433)
+        Me.txtobservaciones.Location = New System.Drawing.Point(166, 476)
         Me.txtobservaciones.MaxLength = 50
         Me.txtobservaciones.Multiline = True
         Me.txtobservaciones.Name = "txtobservaciones"
@@ -457,7 +570,7 @@ Public Class frm_cliente_mantenimiento
         '
         Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label4.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(16, 436)
+        Me.Label4.Location = New System.Drawing.Point(16, 479)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(112, 24)
         Me.Label4.TabIndex = 57
@@ -493,112 +606,53 @@ Public Class frm_cliente_mantenimiento
         Me.PictureBox3.TabIndex = 67
         Me.PictureBox3.TabStop = False
         '
-        'Label11
+        'txtNumeroRepresentante
         '
-        Me.Label11.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(16, 77)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(144, 24)
-        Me.Label11.TabIndex = 97
-        Me.Label11.Text = "Identificacion"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.txtNumeroRepresentante.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNumeroRepresentante.Location = New System.Drawing.Point(584, 437)
+        Me.txtNumeroRepresentante.MaxLength = 8
+        Me.txtNumeroRepresentante.Name = "txtNumeroRepresentante"
+        Me.txtNumeroRepresentante.Size = New System.Drawing.Size(80, 26)
+        Me.txtNumeroRepresentante.TabIndex = 108
+        Me.ToolTip1.SetToolTip(Me.txtNumeroRepresentante, "Escriba el teléfono del encargado")
         '
-        'txtIdentificacion
+        'txtRepresentante
         '
-        Me.txtIdentificacion.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtIdentificacion.Location = New System.Drawing.Point(166, 77)
-        Me.txtIdentificacion.MaxLength = 20
-        Me.txtIdentificacion.Name = "txtIdentificacion"
-        Me.txtIdentificacion.Size = New System.Drawing.Size(194, 26)
-        Me.txtIdentificacion.TabIndex = 98
-        Me.ToolTip1.SetToolTip(Me.txtIdentificacion, "Escriba el E-mail del cliente")
+        Me.txtRepresentante.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRepresentante.Location = New System.Drawing.Point(166, 435)
+        Me.txtRepresentante.MaxLength = 35
+        Me.txtRepresentante.Name = "txtRepresentante"
+        Me.txtRepresentante.Size = New System.Drawing.Size(328, 26)
+        Me.txtRepresentante.TabIndex = 107
+        Me.ToolTip1.SetToolTip(Me.txtRepresentante, "Escriba el nombre del encargado")
         '
-        'Label12
+        'Label19
         '
-        Me.Label12.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(366, 79)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(128, 24)
-        Me.Label12.TabIndex = 99
-        Me.Label12.Text = "Tipo:"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label19.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label19.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(514, 437)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(64, 24)
+        Me.Label19.TabIndex = 110
+        Me.Label19.Text = "Teléfono"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'cbIdentificacion
+        'Label20
         '
-        Me.cbIdentificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbIdentificacion.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbIdentificacion.Items.AddRange(New Object() {"Fisico", "Juridico", "Dimex", "Nite", "Extranjero"})
-        Me.cbIdentificacion.Location = New System.Drawing.Point(410, 79)
-        Me.cbIdentificacion.Name = "cbIdentificacion"
-        Me.cbIdentificacion.Size = New System.Drawing.Size(214, 26)
-        Me.cbIdentificacion.TabIndex = 100
-        Me.ToolTip1.SetToolTip(Me.cbIdentificacion, "Seleccione el Destino")
-        '
-        'Label13
-        '
-        Me.Label13.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(16, 185)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(88, 24)
-        Me.Label13.TabIndex = 101
-        Me.Label13.Text = "Provincia"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'cbProvincia
-        '
-        Me.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbProvincia.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbProvincia.Location = New System.Drawing.Point(166, 185)
-        Me.cbProvincia.Name = "cbProvincia"
-        Me.cbProvincia.Size = New System.Drawing.Size(184, 26)
-        Me.cbProvincia.TabIndex = 102
-        Me.ToolTip1.SetToolTip(Me.cbProvincia, "Seleccione el Destino")
-        '
-        'Label17
-        '
-        Me.Label17.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(356, 185)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(88, 24)
-        Me.Label17.TabIndex = 103
-        Me.Label17.Text = "Canton"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'cbCanton
-        '
-        Me.cbCanton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCanton.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCanton.Location = New System.Drawing.Point(422, 185)
-        Me.cbCanton.Name = "cbCanton"
-        Me.cbCanton.Size = New System.Drawing.Size(202, 26)
-        Me.cbCanton.TabIndex = 104
-        Me.ToolTip1.SetToolTip(Me.cbCanton, "Seleccione el Destino")
-        '
-        'Label18
-        '
-        Me.Label18.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(16, 225)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(88, 24)
-        Me.Label18.TabIndex = 105
-        Me.Label18.Text = "Distrito"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'cbDistrito
-        '
-        Me.cbDistrito.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDistrito.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbDistrito.Location = New System.Drawing.Point(166, 225)
-        Me.cbDistrito.Name = "cbDistrito"
-        Me.cbDistrito.Size = New System.Drawing.Size(250, 26)
-        Me.cbDistrito.TabIndex = 106
-        Me.ToolTip1.SetToolTip(Me.cbDistrito, "Seleccione el Destino")
+        Me.Label20.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label20.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(16, 437)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(159, 24)
+        Me.Label20.TabIndex = 109
+        Me.Label20.Text = "Representante Legal"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frm_cliente_mantenimiento
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(737, 571)
+        Me.ClientSize = New System.Drawing.Size(737, 623)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btncancelar)
         Me.Controls.Add(Me.btnaceptar)
@@ -669,6 +723,8 @@ Public Class frm_cliente_mantenimiento
                 .rowc("distrito") = Val(cbDistrito.SelectedIndex + 1)
                 .rowc("identificacion") = txtIdentificacion.Text
                 .rowc("tipoIdentificacion") = cbIdentificacion.SelectedIndex + 1
+                .rowc("representante") = txtRepresentante.Text
+                .rowc("numeroRepresentante") = txtNumeroRepresentante.Text
 
                 OpenConn()
                 If lbltitulo.Text = "Incluir Cliente" Then .Dvcliente.Table.Rows.Add(.rowc)
