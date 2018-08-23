@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="helpers/SqlHelper.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="model/factura_detalle.cs">
     <Files>
-      <File FileName="helpers/XmlHelper.cs" Line="61" Column="119" />
-      <File FileName="helpers/SqlHelper.cs" Line="40" Column="26" />
+      <File FileName="helpers/XmlHelper.cs" Line="133" Column="17" />
+      <File FileName="helpers/SqlHelper.cs" Line="54" Column="13" />
+      <File FileName="model/Factura.cs" Line="55" Column="10" NotebookId="1" />
+      <File FileName="model/factura_detalle.cs" Line="17" Column="30" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -50,9 +50,21 @@ namespace FacElec.helpers
                 return null;
             }
 
-            return facturas;
+            facturas = generateData(facturas);
 
+            return facturas;
         }
+
+
+        static List<Factura> generateData(List<Factura> facturas){
+
+            foreach (Factura fac in facturas){
+              //  fac.
+            }
+
+            return facturas;
+        }
+
 
         public static void GuardarEstado(List<GTIResponse> resultados)
         {

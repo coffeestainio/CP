@@ -13,16 +13,9 @@
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="RestSharp" Version="106.3.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-svcutil" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="facturasEnviadas\facturaElectronica_18186.xml" />
@@ -32,5 +25,9 @@
     <None Remove="facturasEnviadas\facturaElectronica_998506.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_998506.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_998507.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ServiceReference1\Reference.cs" />
+    <Compile Remove="helpers\RestHelper.cs" />
   </ItemGroup>
 </Project>

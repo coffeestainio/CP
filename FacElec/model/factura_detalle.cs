@@ -14,6 +14,11 @@ namespace FacElec.model
         public decimal descuento;
         public bool IV;
         public List<producto> producto;
+        public decimal montoImpuesto;
+        public decimal montoDescuento;
+        public decimal montoTotal;
+        public decimal subtotal;
+        public decimal montoTotalLinea;
 
         public factura_Detalle(string id_Producto, decimal cantidad, int unidad, int id_factura, decimal precio, decimal descuento, bool iV , List<producto> producto)
         {

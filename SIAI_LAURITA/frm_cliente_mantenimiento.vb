@@ -83,6 +83,10 @@ Public Class frm_cliente_mantenimiento
         Me.btncancelar = New System.Windows.Forms.Button
         Me.btnaceptar = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.txtNumeroRepresentante = New System.Windows.Forms.TextBox
+        Me.txtRepresentante = New System.Windows.Forms.TextBox
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.Label20 = New System.Windows.Forms.Label
         Me.cbDistrito = New System.Windows.Forms.ComboBox
         Me.Label18 = New System.Windows.Forms.Label
         Me.cbCanton = New System.Windows.Forms.ComboBox
@@ -122,10 +126,6 @@ Public Class frm_cliente_mantenimiento
         Me.Label2 = New System.Windows.Forms.Label
         Me.PictureBox3 = New System.Windows.Forms.PictureBox
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtNumeroRepresentante = New System.Windows.Forms.TextBox
-        Me.txtRepresentante = New System.Windows.Forms.TextBox
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.Label20 = New System.Windows.Forms.Label
         Me.Panel1.SuspendLayout()
         CType(Me.pbnombre_sociedad, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -215,6 +215,48 @@ Public Class frm_cliente_mantenimiento
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(689, 543)
         Me.Panel1.TabIndex = 0
+        '
+        'txtNumeroRepresentante
+        '
+        Me.txtNumeroRepresentante.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNumeroRepresentante.Location = New System.Drawing.Point(584, 437)
+        Me.txtNumeroRepresentante.MaxLength = 8
+        Me.txtNumeroRepresentante.Name = "txtNumeroRepresentante"
+        Me.txtNumeroRepresentante.Size = New System.Drawing.Size(80, 26)
+        Me.txtNumeroRepresentante.TabIndex = 108
+        Me.ToolTip1.SetToolTip(Me.txtNumeroRepresentante, "Escriba el teléfono del encargado")
+        '
+        'txtRepresentante
+        '
+        Me.txtRepresentante.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRepresentante.Location = New System.Drawing.Point(166, 435)
+        Me.txtRepresentante.MaxLength = 35
+        Me.txtRepresentante.Name = "txtRepresentante"
+        Me.txtRepresentante.Size = New System.Drawing.Size(328, 26)
+        Me.txtRepresentante.TabIndex = 107
+        Me.ToolTip1.SetToolTip(Me.txtRepresentante, "Escriba el nombre del encargado")
+        '
+        'Label19
+        '
+        Me.Label19.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label19.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(514, 437)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(64, 24)
+        Me.Label19.TabIndex = 110
+        Me.Label19.Text = "Teléfono"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label20
+        '
+        Me.Label20.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label20.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(16, 437)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(159, 24)
+        Me.Label20.TabIndex = 109
+        Me.Label20.Text = "Representante Legal"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cbDistrito
         '
@@ -456,9 +498,9 @@ Public Class frm_cliente_mantenimiento
         '
         Me.txtemail.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtemail.Location = New System.Drawing.Point(166, 112)
-        Me.txtemail.MaxLength = 20
+        Me.txtemail.MaxLength = 100
         Me.txtemail.Name = "txtemail"
-        Me.txtemail.Size = New System.Drawing.Size(194, 26)
+        Me.txtemail.Size = New System.Drawing.Size(458, 26)
         Me.txtemail.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.txtemail, "Escriba el E-mail del cliente")
         '
@@ -605,48 +647,6 @@ Public Class frm_cliente_mantenimiento
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox3.TabIndex = 67
         Me.PictureBox3.TabStop = False
-        '
-        'txtNumeroRepresentante
-        '
-        Me.txtNumeroRepresentante.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNumeroRepresentante.Location = New System.Drawing.Point(584, 437)
-        Me.txtNumeroRepresentante.MaxLength = 8
-        Me.txtNumeroRepresentante.Name = "txtNumeroRepresentante"
-        Me.txtNumeroRepresentante.Size = New System.Drawing.Size(80, 26)
-        Me.txtNumeroRepresentante.TabIndex = 108
-        Me.ToolTip1.SetToolTip(Me.txtNumeroRepresentante, "Escriba el teléfono del encargado")
-        '
-        'txtRepresentante
-        '
-        Me.txtRepresentante.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRepresentante.Location = New System.Drawing.Point(166, 435)
-        Me.txtRepresentante.MaxLength = 35
-        Me.txtRepresentante.Name = "txtRepresentante"
-        Me.txtRepresentante.Size = New System.Drawing.Size(328, 26)
-        Me.txtRepresentante.TabIndex = 107
-        Me.ToolTip1.SetToolTip(Me.txtRepresentante, "Escriba el nombre del encargado")
-        '
-        'Label19
-        '
-        Me.Label19.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label19.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(514, 437)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(64, 24)
-        Me.Label19.TabIndex = 110
-        Me.Label19.Text = "Teléfono"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label20
-        '
-        Me.Label20.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label20.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(16, 437)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(159, 24)
-        Me.Label20.TabIndex = 109
-        Me.Label20.Text = "Representante Legal"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frm_cliente_mantenimiento
         '
