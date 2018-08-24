@@ -13,12 +13,6 @@ namespace FacElec.helpers
         { 
             var cliente = factura.cliente[0];
 
-            var periodo = 0;
-            if (System.DateTime.Today.Month < 10)
-                periodo = System.DateTime.Today.Year;
-            else
-                periodo = System.DateTime.Today.Year + 1;
-
             var xmlDoc = new XDocument(
                              new XDeclaration("1.0", "utf-8", ""),
                              
@@ -97,6 +91,8 @@ namespace FacElec.helpers
                                                                     new XElement("FechaResolucion","2016-10-07 10:22:22"))
                                                        )
             );
+            storeXml(xmlDoc, factura.id_factura);
+
             return xmlDoc;
         }
 

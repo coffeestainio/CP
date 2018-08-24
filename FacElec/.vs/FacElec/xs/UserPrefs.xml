@@ -1,16 +1,21 @@
-﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="model/factura_detalle.cs">
+﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="dist/template.css">
     <Files>
-      <File FileName="helpers/XmlHelper.cs" Line="133" Column="17" />
-      <File FileName="helpers/SqlHelper.cs" Line="54" Column="13" />
-      <File FileName="model/Factura.cs" Line="55" Column="10" NotebookId="1" />
-      <File FileName="model/factura_detalle.cs" Line="17" Column="30" NotebookId="1" />
+      <File FileName="helpers/PdfHelper.cs" Line="147" Column="1" />
+      <File FileName="Program.cs" Line="11" Column="1" />
+      <File FileName="sync/Sincronizador.cs" Line="23" Column="1" />
+      <File FileName="FacElec.csproj" Line="1" Column="1" />
+      <File FileName="model/Factura.cs" Line="71" Column="24" NotebookId="1" />
+      <File FileName="model/factura_detalle.cs" Line="32" Column="44" NotebookId="1" />
+      <File FileName="helpers/SqlHelper.cs" Line="23" Column="27" NotebookId="1" />
+      <File FileName="helpers/XmlHelper.cs" Line="24" Column="85" NotebookId="1" />
+      <File FileName="dist/template.css" Line="35" Column="17" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/pablillo/Documents/repos/CP/FacElec/sync/Sincronizador.cs" relfile="sync/Sincronizador.cs" line="23" column="31" />
+      <Breakpoint file="/Users/pablillo/Documents/repos/CP/FacElec/helpers/PdfHelper.cs" relfile="helpers/PdfHelper.cs" line="147" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -1,0 +1,119 @@
+﻿
+html {
+    border: solid 5px black;
+    line-height:1.2;
+}
+
+.header {
+    background-color: #F5F2F4;
+    padding:20px;
+    display:table;
+    clear:both;
+    width:100%;
+}
+
+.row {
+    border-bottom: solid 10px #CAE9C5;
+}
+
+.subtotal {
+    display: table;
+    clear: both;
+}
+
+h1 {
+    font-size: 80px;
+    font-weight:bold;
+}
+
+.header h1 {
+    font-size: 90px;
+    font-weight:100;
+}
+
+h3 {
+    font-size: 60px;
+    font-weight:normal;
+}
+
+h2 {
+    font-size: 70px;
+    font-weight: normal;
+}
+
+.header .date {
+    position: fixed;
+    right:20px;
+    top :10px;
+
+}
+
+.col-50 {
+    text-align:left;
+    width:50%;
+    float:left;
+}
+
+.table-row, .table-header {
+    border-bottom: solid 3px #CAE9C5;
+    line-height: 3;
+}
+
+table {
+    width: 100%;
+    font-size: 40px;
+    border-collapse: collapse;
+}
+
+.table-header {
+    border-bottom: solid 3px #CAE9C5;
+    font-size:60px;
+}
+
+.table-row {
+    font-size: 50px;
+}
+
+th {
+    font-weight:bold;
+    padding-bottom:40px;
+}
+
+.totales {
+    margin-top:150px;
+    position:relative;
+    left:60%;
+    margin-bottom: 150px;
+    min-height: 1200px;
+}
+
+.tabla-totales {
+    width: 30%;
+    border-collapse:collapse;
+}
+
+.row-totales {
+    font-size:55px;
+    width:auto;
+    line-height:1.5;
+    border: solid 5px #000;
+}
+
+.toti {
+    text-align: right;
+    border: solid 2px #000;
+    background-color: #F5F2F4;
+}
+
+.foota {
+    position: fixed;
+    bottom: 0px;
+    border-bottom: none;
+    border-top: solid 10px #CAE9C5;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.foota h1 {
+        font-size:80px;  
+}
