@@ -1,21 +1,23 @@
 ﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="dist/template.css">
+  <MonoDevelop.Ide.Workbench ActiveDocument="model/cliente.cs">
     <Files>
-      <File FileName="helpers/PdfHelper.cs" Line="147" Column="1" />
+      <File FileName="helpers/PdfHelper.cs" Line="94" Column="44" />
       <File FileName="Program.cs" Line="11" Column="1" />
-      <File FileName="sync/Sincronizador.cs" Line="23" Column="1" />
+      <File FileName="sync/Sincronizador.cs" Line="22" Column="22" />
       <File FileName="FacElec.csproj" Line="1" Column="1" />
-      <File FileName="model/Factura.cs" Line="71" Column="24" NotebookId="1" />
-      <File FileName="model/factura_detalle.cs" Line="32" Column="44" NotebookId="1" />
+      <File FileName="model/factura_detalle.cs" Line="55" Column="152" />
+      <File FileName="model/cliente.cs" Line="16" Column="26" />
+      <File FileName="model/Factura.cs" Line="73" Column="34" NotebookId="1" />
       <File FileName="helpers/SqlHelper.cs" Line="23" Column="27" NotebookId="1" />
-      <File FileName="helpers/XmlHelper.cs" Line="24" Column="85" NotebookId="1" />
-      <File FileName="dist/template.css" Line="35" Column="17" NotebookId="1" />
+      <File FileName="helpers/XmlHelper.cs" Line="97" Column="1" NotebookId="1" />
+      <File FileName="dist/template.css" Line="87" Column="19" NotebookId="1" />
+      <File FileName="model/producto.cs" Line="16" Column="18" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/pablillo/Documents/repos/CP/FacElec/helpers/PdfHelper.cs" relfile="helpers/PdfHelper.cs" line="147" column="1" />
+      <Breakpoint file="/Users/pablillo/Documents/repos/CP/FacElec/helpers/XmlHelper.cs" relfile="helpers/XmlHelper.cs" line="155" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

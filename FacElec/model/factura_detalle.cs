@@ -19,6 +19,8 @@ namespace FacElec.model
         public decimal montoTotal;
         public decimal subtotal;
         public decimal montoTotalLinea;
+        public string unidadString;
+        public decimal consumidor;
 
         public factura_Detalle(string id_Producto, decimal cantidad, int unidad, int id_factura, decimal precio, decimal descuento, bool iV , List<producto> producto)
         {
@@ -30,6 +32,29 @@ namespace FacElec.model
             IV = iV;
             this.producto = producto;
             this.Id_Producto = id_Producto;
+            switch (unidad)
+            {
+                case 1:
+                    {
+                        unidadString = "Und";
+                        break;
+                    }
+                case 2:
+                    {
+                        unidadString = "Caj";
+                        break;
+                    }
+                case 3:
+                    {
+                        unidadString = "Blt";
+                        break;
+                    }
+                case 4:
+                    {
+                        unidadString = "Pqt";
+                        break;
+                    }
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace FacElec.helpers
                 var sqlQuery = "SELECT *, " +
                     "factura_Detalle = ( " +
                                        "select *, " +
-                                       "producto = (select id_producto, nombre from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
+                                       "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
                                        "from Factura_Detalle fd where f.id_factura = fd.id_factura " +
                     "FOR JSON PATH ) ,    " +
                     " cliente = ( " +

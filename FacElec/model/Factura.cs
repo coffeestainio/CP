@@ -54,8 +54,12 @@ namespace FacElec.model
         private void calculateTotals()
         {
 
+            var precioId = cliente[0].precio;
+
             foreach (factura_Detalle det in factura_Detalle)
             {
+                var prod = det.producto[0];
+
                 if (det.IV == true)
                     totalGravado += det.cantidad * det.precio;
                 else
@@ -76,8 +80,37 @@ namespace FacElec.model
                 det.subtotal = det.montoTotal - det.montoDescuento;
                 det.montoTotalLinea = det.montoTotal + det.montoImpuesto;
 
+                decimal utilidad = getUtilidad(det, precioId);
+
+                det.consumidor = Decimal.Round(prod.costo * (1 + utilidad) / prod.empaque / prod.sub_empaque * (1 + prod.detalle) * (1 + ((det.IV == true) ? new decimal(0.13) : 0)),2,MidpointRounding.AwayFromZero);
+
             }
 
+        }
+
+        private decimal getUtilidad (factura_Detalle det,int precioId){
+            
+            switch (precioId)
+            {
+                case 1:
+                    {
+                        return det.producto[0].utilidad_1;
+                    }
+                case 2:
+                    {
+                        return det.producto[0].utilidad_2;
+                    }
+                case 3:
+                    {
+                        return det.producto[0].utilidad_3;
+                    }
+                case 4:
+                    {
+                        return det.producto[0].utilidad_4;
+                    }
+            }
+
+            return new decimal(0);
         }
 
         private decimal getDescuento(factura_Detalle detalle)
