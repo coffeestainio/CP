@@ -13,8 +13,9 @@ namespace FacElec.sync
         {
 
             var facturas = new List<Factura>();
-            var resultados = new List<GTIResponse>();
+
             facturas = SqlHelper.GetFacturas();
+
             if (facturas != null && facturas.Count > 0)
             {
                 foreach (Factura fac in facturas)

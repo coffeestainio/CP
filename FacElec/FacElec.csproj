@@ -29,6 +29,8 @@
     <None Remove="facturasEnviadas\facturaElectronica_998506.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_998507.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_998507.pdf" />
+    <None Remove="facturasEnviadas\facturaElectronica_998499.pdf" />
+    <None Remove="facturasEnviadas\facturaElectronica_1075904.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ServiceReference1\Reference.cs" />

@@ -1,17 +1,18 @@
 ﻿<Properties StartupConfiguration="{5EC883AE-4E4E-4E81-8EDD-E85F4983929B}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="model/cliente.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="model/GTIResponse.cs">
     <Files>
-      <File FileName="helpers/PdfHelper.cs" Line="94" Column="44" />
+      <File FileName="helpers/PdfHelper.cs" Line="145" Column="44" />
       <File FileName="Program.cs" Line="11" Column="1" />
       <File FileName="sync/Sincronizador.cs" Line="22" Column="22" />
       <File FileName="FacElec.csproj" Line="1" Column="1" />
-      <File FileName="model/factura_detalle.cs" Line="55" Column="152" />
-      <File FileName="model/cliente.cs" Line="16" Column="26" />
-      <File FileName="model/Factura.cs" Line="73" Column="34" NotebookId="1" />
-      <File FileName="helpers/SqlHelper.cs" Line="23" Column="27" NotebookId="1" />
+      <File FileName="model/factura_detalle.cs" Line="31" Column="40" />
+      <File FileName="model/cliente.cs" Line="30" Column="30" />
+      <File FileName="model/Factura.cs" Line="85" Column="1" NotebookId="1" />
+      <File FileName="helpers/SqlHelper.cs" Line="59" Column="29" NotebookId="1" />
       <File FileName="helpers/XmlHelper.cs" Line="97" Column="1" NotebookId="1" />
-      <File FileName="dist/template.css" Line="87" Column="19" NotebookId="1" />
-      <File FileName="model/producto.cs" Line="16" Column="18" NotebookId="1" />
+      <File FileName="dist/template.css" Line="125" Column="16" NotebookId="1" />
+      <File FileName="model/producto.cs" Line="21" Column="32" NotebookId="1" />
+      <File FileName="model/GTIResponse.cs" Line="13" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

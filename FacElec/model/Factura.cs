@@ -120,10 +120,13 @@ namespace FacElec.model
 
         private decimal getMontoImpuesto(factura_Detalle detalle)
         {
+
+            decimal imp = new decimal(0.13);
+
             if (!detalle.IV)
                 return 0;
             return (
-                decimal.Round(((detalle.precio * detalle.cantidad) - getDescuento(detalle)) * decimal.Parse("0.13"), 2, System.MidpointRounding.AwayFromZero)
+                decimal.Round(detalle.precio * detalle.cantidad - (getDescuento(detalle)) * imp, 2, System.MidpointRounding.AwayFromZero)
             );
         }
     }

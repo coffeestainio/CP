@@ -83,7 +83,7 @@ th {
     margin-top:150px;
     position:relative;
     left:60%;
-    margin-bottom: 150px;
+    margin-bottom: 300px;
     min-height: 1200px;
 }
 
@@ -115,5 +115,12 @@ th {
 }
 
 .foota h1 {
-        font-size:80px;  
+        font-size:65px;  
+}
+
+p {
+    display:inline-block;
+    font-size:80px;
+    padding-right:100px;
+    max-width:35%;
 }

@@ -13,13 +13,11 @@ namespace FacElec.helpers
         public static void generatePDF(Factura factura)
         {
 
+            var decimales = (factura.totalComprobante - Math.Truncate(factura.totalComprobante)).ToString().Remove(0,2).Remove(2);
             var cliente = factura.cliente[0];
-            string humanizedTotal = int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords();
-            string human = 1.ToWords();
-
-            /*+
-                $" con {int.Parse(factura.totalComprobante.ToString("N2").Substring(factura.totalComprobante.ToString().IndexOf('.') + 1)).ToWords()}";
-              */                            
+            string humanizedTotal = int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords(new System.Globalization.CultureInfo("es")) +
+                                       $" con {int.Parse(decimales).ToWords(new System.Globalization.CultureInfo("es"))}" +
+                                       " decimos";
 
             string cssPath = Path.Combine(Directory.GetCurrentDirectory(), "dist/template.css");
 
@@ -89,7 +87,7 @@ namespace FacElec.helpers
                                     <td align='left'>{3}</td>
                                     <td>₡{4}</td>
                                     <td>₡{5}</td>   
-                                    <td>₡{6}</td>
+                                    <td>{6}</td>
                                     <td>₡{7}</td>
                                   </tr>", detalle.Id_Producto,
                                 detalle.cantidad,
@@ -97,7 +95,7 @@ namespace FacElec.helpers
                                 detalle.producto[0].nombre,
                                 detalle.consumidor.ToString("N2"),
                                 detalle.precio.ToString("N2"),
-                                detalle.descuento.ToString("N2"),
+                                $"{Convert.ToInt32(detalle.descuento * 100)}%",     
                                 $"{detalle.montoTotal.ToString("n2")}{((!detalle.IV) ? "*":"" )}");
             }
 
@@ -109,22 +107,22 @@ namespace FacElec.helpers
                                 <div class='totales'>
                                        <table class='tabla-totales' cellpadding='30'>
                                             <tr class='row-totales'>
-                                                <td class='toti'><strong>Subtotal Neto:</strong></td>
+                                                <td class='toti'><strong>Gravado:</strong></td>
                                                 <td> ₡</td>
                                                 <td class='toti'>{0}</td>
                                             </tr>
                                             <tr class='row-totales'>
-                                                <td class='toti'><strong>Descuentos:</strong></td>
+                                                <td class='toti'><strong>Exento:</strong></td>
                                                 <td> ₡</td>
                                                 <td class='toti'>{1}</td>
                                             </tr>
                                             <tr class='row-totales'>
-                                                <td class ='toti'><strong>Imp. de Ventas:</strong></td>
+                                                <td class ='toti'><strong>Descuento:</strong></td>
                                                 <td> ₡</td>
                                                 <td class='toti'>{2}</td>
                                             </tr>
                                             <tr class='row-totales'>
-                                                <td class ='toti'><strong>Otros Impuestos:</strong></td>
+                                                <td class ='toti'><strong>Impuestos:</strong></td>
                                                 <td> ₡</td>
                                                 <td class='toti'>{3}</td>
                                             </tr>
@@ -133,18 +131,19 @@ namespace FacElec.helpers
                                                 <td> ₡</td>
                                                 <td class='toti'>{4}</td>
                                             </tr>                                       
-                                       </table>
-                                       <h1>{5}</h1> 
-                                </div>
+                                       </table>  
+                                       <p>{5}</p>
+                                </div>                              
                                 <div class='header foota'>
                                     <h1>Emitida confirme lo establecido en la resolucion de Facturacion Eletronica, No DGT-R-48-2016 siete de octubre
                                         de dos mil dieciseis de la Direccion General de Tributacion</h1>                     
                                 </div>
                             </body>
-                        </html>",factura.total.ToString("N2"),
-                            factura.totalDescuentos.ToString("N2"),
+                        </html>",factura.totalGravado.ToString("N2"),
+                            factura.totalExento.ToString("N2"),
+                            factura.totalDescuentos.ToString("N2"), 
                             factura.totalImpuestos.ToString("N2"), 
-                            "0.00", factura.totalComprobante.ToString("N2"),
+                            factura.totalComprobante.ToString("N2"),
                             humanizedTotal,
                             (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : ""
                            );
