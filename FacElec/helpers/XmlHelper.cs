@@ -155,5 +155,25 @@ namespace FacElec.helpers
             xmlDoc.Save(fileName);
         }
 
+        public static string formatedDireccion (cliente cliente){
+            var Xdoc = XElement.Load("provincias.xml");
+
+            var provincia = "";
+            var canton = "";
+
+            var query = from d in Xdoc.Descendants("provincia")
+                        where d.Element("codigo").Value.Equals(cliente.provincia.ToString())
+                        select d;
+
+            var subquery = from c in query.Descendants("canton")
+                           where c.Element("codigo").Value.Equals(cliente.canton.ToString())
+                           select c;
+
+            provincia = query.First().Element("nombre").Value;
+            canton = subquery.First().Element("nombre").Value;
+
+            return $"{provincia}, {canton}. {cliente.direccion}";
+        }
+
     }
 }

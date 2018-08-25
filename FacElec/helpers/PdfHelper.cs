@@ -13,11 +13,11 @@ namespace FacElec.helpers
         public static void generatePDF(Factura factura)
         {
 
-            var decimales = (factura.totalComprobante - Math.Truncate(factura.totalComprobante)).ToString().Remove(0,2).Remove(2);
             var cliente = factura.cliente[0];
-            string humanizedTotal = int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords(new System.Globalization.CultureInfo("es")) +
-                                       $" con {int.Parse(decimales).ToWords(new System.Globalization.CultureInfo("es"))}" +
-                                       " decimos";
+
+            string formatedId = formatIndentificacion(cliente);
+            string humanizedTotal = humanizeTotal(factura);
+            string formatedDireccion = XmlHelper.formatedDireccion(cliente);
 
             string cssPath = Path.Combine(Directory.GetCurrentDirectory(), "dist/template.css");
 
@@ -55,8 +55,7 @@ namespace FacElec.helpers
                                     </div>
                                     <div class='col-50'>
                                        <h2><strong>Numero de referencia: </strong>{8}</h2> 
-                                       <h2><strong>Condicion de Venta: </strong>{9}</h2>
-                                       <h2><strong>Medio de Pago: </strong>Contado</h2>  
+                                       <h2><strong>Condicion de venta: </strong>{9}</h2>  
                                     </div>
                                 </div>
 
@@ -74,9 +73,12 @@ namespace FacElec.helpers
                                         <th>Precio Unitario</th>
                                         <th>Descuento</th>
                                         <th>SubTotal</th>
-                                    </tr>",factura.numConsecutivo,factura.claveNumerica,factura.fecha,
-                            cliente.nombre, cliente.identificacion, cliente.telefono, cliente.email, $"{cliente.provincia}, {cliente.canton}. {cliente.direccion}",
-                            factura.id_factura,factura.condicionVenta);
+                                    </tr>", factura.numConsecutivo, factura.claveNumerica, factura.fecha,
+                            cliente.nombre,
+                            formatedId,
+                            cliente.telefono, cliente.email, formatedDireccion,
+                            factura.id_factura,
+                            $"{(factura.plazo == 0 ? "Contado" : $"Credito a {factura.plazo} dias plazo")}");
 
             foreach (factura_Detalle detalle in factura.factura_Detalle)
             {
@@ -95,8 +97,8 @@ namespace FacElec.helpers
                                 detalle.producto[0].nombre,
                                 detalle.consumidor.ToString("N2"),
                                 detalle.precio.ToString("N2"),
-                                $"{Convert.ToInt32(detalle.descuento * 100)}%",     
-                                $"{detalle.montoTotal.ToString("n2")}{((!detalle.IV) ? "*":"" )}");
+                                $"{Convert.ToInt32(detalle.descuento * 100)}%",
+                                $"{detalle.montoTotal.ToString("n2")}{((!detalle.IV) ? "*" : "")}");
             }
 
             sb.AppendFormat(@"
@@ -139,10 +141,10 @@ namespace FacElec.helpers
                                         de dos mil dieciseis de la Direccion General de Tributacion</h1>                     
                                 </div>
                             </body>
-                        </html>",factura.totalGravado.ToString("N2"),
+                        </html>", factura.totalGravado.ToString("N2"),
                             factura.totalExento.ToString("N2"),
-                            factura.totalDescuentos.ToString("N2"), 
-                            factura.totalImpuestos.ToString("N2"), 
+                            factura.totalDescuentos.ToString("N2"),
+                            factura.totalImpuestos.ToString("N2"),
                             factura.totalComprobante.ToString("N2"),
                             humanizedTotal,
                             (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : ""
@@ -166,15 +168,11 @@ namespace FacElec.helpers
                         PagesCount = true,
                         HtmlContent = sb.ToString(),
                             WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = cssPath},
-                            FooterSettings = { 
-                                FontSize = 9, 
-                                Right = "Pagina [page] de [toPage]", 
-                                Center = "<div class='header foota'> " +
-                                    " <h1>Emitida confirme lo establecido en la resolucion de Facturacion Eletronica, No DGT-R-48-2016 siete de octubre " +
-                                      "  de dos mil dieciseis de la Direccion General de Tributacion</h1> " +
-                                "</div>",
-                                Line = true, 
-                                Spacing = 10 
+                            FooterSettings = {
+                                FontSize = 9,
+                                Right = "Pagina [page] de [toPage]",
+                                Line = true,
+                                Spacing = 2.812
                         }
                 }
             }
@@ -183,7 +181,47 @@ namespace FacElec.helpers
             converter.Convert(doc);
 
         }
+
+        static string formatIndentificacion(cliente cliente)
+        {
+            var formatedId = "";
+
+            try
+            {
+                switch (cliente.tipoIdentificacion)
+                {
+                    case 0:
+                        {
+                            formatedId = $"{cliente.identificacion.Substring(0, 1)}-{cliente.identificacion.Substring(1, 4)}-{cliente.identificacion.Substring(5)}";
+                            break;
+                        }
+                    case 1:
+                        {
+                            formatedId = $"{cliente.identificacion.Substring(0, 1)}-{cliente.identificacion.Substring(1, 3)}-{cliente.identificacion.Substring(4)}";
+                            break;
+                        }
+                    default:
+                        {
+                            formatedId = cliente.identificacion;
+                            break;
+                        }
+                }
+            }
+            catch
+            {
+                formatedId = cliente.identificacion;
+            }
+
+            return formatedId;
+        }
+
+        static string humanizeTotal(Factura factura)
+        {
+
+            var decimales = (factura.totalComprobante - Math.Truncate(factura.totalComprobante)).ToString().Remove(0, 2).Remove(2);
+            return int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords(new System.Globalization.CultureInfo("es")) +
+                                       $" con {int.Parse(decimales).ToWords(new System.Globalization.CultureInfo("es"))}" +
+                      " decimos";
+        }
     }
-
-
 }
