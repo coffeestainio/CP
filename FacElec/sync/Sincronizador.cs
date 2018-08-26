@@ -20,16 +20,21 @@ namespace FacElec.sync
             {
                 foreach (Factura fac in facturas)
                 {
-                   // XmlHelper.generateXML(fac);
-                    PdfHelper.generatePDF(fac);
+
+                    var error = ValidatorHelper.validarFacturas(fac);
+                    if (error != null)
+                        SqlHelper.updateWithError(error);
+                    else {
+                        XmlHelper.generateXML(fac);
+                        PdfHelper.generatePDF(fac);
+                        SqlHelper.updateSuccessful(fac.id_factura);
+                    }
 
                 }
             }
             else{
                 Console.WriteLine("Nothing to sync.");
             }
-
-            //SqlHelper.GuardarEstado(resultados);
 
         }
     }

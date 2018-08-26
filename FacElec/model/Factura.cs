@@ -27,9 +27,13 @@ namespace FacElec.model
         public decimal totalVentaNeta;
         public decimal totalImpuestos;
         public decimal totalComprobante;
+        public bool clienteTributa;
+        public bool conError;
+        public string codigoError;
+        public string descripcionError;
 
         public Factura(string id_factura, int id_cliente, int id_agente, int plazo, DateTime fecha, int id_usuario, decimal pIV, List<factura_Detalle> factura_Detalle, List<cliente> cliente, string ordenCompra, DateTime fechaOrden,
-                       int sincronizada, string claveNumerica, string numConsecutivo,bool notaCredito = false)
+                       int sincronizada, string claveNumerica, string numConsecutivo, bool clienteTributa)
         {
             this.id_factura = id_factura;
             this.id_cliente = id_cliente;
@@ -41,9 +45,10 @@ namespace FacElec.model
             this.factura_Detalle = factura_Detalle;
             this.cliente = cliente;
             this.sincronizada = sincronizada;
-            this.notaCredito = notaCredito;
             this.claveNumerica = claveNumerica;
             this.numConsecutivo = numConsecutivo;
+            this.clienteTributa = clienteTributa;
+
             condicionVenta = (plazo == 0)? 1:2;
 
             calculateTotals();

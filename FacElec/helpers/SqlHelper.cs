@@ -45,85 +45,77 @@ namespace FacElec.helpers
                     }
 
                     facturas = JsonConvert.DeserializeObject<List<Factura>>(jsonResult.ToString());
+                    connection.Close();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return null;
+
             }
 
-            //facturas = validarFacturas(facturas);
 
             return facturas;
         }
 
+        public static void updateWithError(Error error){
+            try{
 
-        static List<Factura> validarFacturas(List<Factura> facturas)
-        {
+                var sqlQuery = $"update factura set " +
+                    $"actualizada = getDate(), " +
+                    $"sincronizada = 1 ," +
+                    $"coderror = '{error.CodigoError}' ," +
+                    $"DESCRIPCIONERROR = '{ error.DescripcionError}' " +
+                    $"where id_factura = {error.NumFacturaInterno}";
 
-            var errores = new List<Error>();
-            var facturasvalidas = new List<Factura>();
-
-            foreach (Factura fac in facturas)
+                using (var connection = new SqlConnection(sqlConnection))
+                {
+                    var command = new SqlCommand(sqlQuery, connection);
+                    connection.Open();
+                    var cantidadError = command.ExecuteNonQuery();
+                    if (cantidadError > 0)
+                        Console.WriteLine("Error loguedo satisfactoriamente : "+
+                                          $"Factura : {error.NumFacturaInterno}. " +
+                                          $"Codigo : {error.CodigoError}. " +
+                                          $"Descipcion : {error.DescripcionError} ");
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
             {
-                var cliente = fac.cliente[0];
-
-                //validate email
-                try
-                {
-                    MailAddress mail = new MailAddress(cliente.email);
-                }
-                catch (FormatException)
-                {
-                    errores.Add(new Error(fac.id_factura, fac.claveNumerica, fac.numConsecutivo, "Error:001", "Formato del correo incorrecto"));
-                    facturas.Remove(fac);
-                    break;
-                }
-
-                Regex regex = new Regex(@"^[0-9]{8}$");
-
-                //validate phone
-                if (regex.Match(cliente.telefono.Trim().Replace("-","")) == Match.Empty)
-                {
-                    errores.Add(new Error(fac.id_factura, fac.claveNumerica, fac.numConsecutivo, "Error:002", "Formato del numero de correo"));
-                    facturas.Remove(fac);
-                    break;
-                }
-
-                regex = new Regex(@"^[0-9]{17}$");
-                //validate identificacion
-                if (cliente.tipoIdentificacion == 3 && 
-                    regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
-                {
-                    errores.Add(new Error(fac.id_factura, fac.claveNumerica, fac.numConsecutivo, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
-                    facturas.Remove(fac);
-                    break;
-                }
-
-                regex = new Regex(@"^[0-9]{10}$");
-                //validate identificacion
-                if (cliente.tipoIdentificacion == 2 &&
-                    regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
-                {
-                    errores.Add(new Error(fac.id_factura, fac.claveNumerica, fac.numConsecutivo, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
-                    facturas.Remove(fac);
-                    break;
-                }
-
-                regex = new Regex(@"^[0-9]{9}$");
-                //validate identificacion
-                if (cliente.tipoIdentificacion == 1 &&
-                    regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
-                {
-                    errores.Add(new Error(fac.id_factura, fac.claveNumerica, fac.numConsecutivo, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
-                    facturas.Remove(fac);
-                    break;
-                }
-               
+                Console.WriteLine(ex);
             }
-
-            return facturas;
         }
+
+        public static void updateSuccessful(string idFactura)
+        {
+            try
+            {
+
+                var sqlQuery = $"update factura set " +
+                    $"sincronizada = 1 ," +
+                    $"coderror = 'Error:00' ," +
+                    $"DESCRIPCIONERROR = 'No error', " +
+                    $"actualizada = getDate() " +
+                    $"where id_factura = {idFactura}";
+
+                using (var connection = new SqlConnection(sqlConnection))
+                {
+                    var command = new SqlCommand(sqlQuery, connection);
+                    connection.Open();
+                    var cantidadError = command.ExecuteNonQuery();
+                    if (cantidadError > 0)
+                        Console.WriteLine("Factura enviada satisfactoriamente : " +
+                                          $"Factura : {idFactura}.");
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+      
     }
 }

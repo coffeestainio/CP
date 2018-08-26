@@ -36,7 +36,7 @@ namespace FacElec.model
             {
                 case 1:
                     {
-                        unidadString = "Und";
+                        unidadString = "Unid";
                         break;
                     }
                 case 2:

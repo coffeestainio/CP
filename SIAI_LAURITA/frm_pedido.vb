@@ -695,15 +695,30 @@ Public Class frm_pedido
                 SendKeys.Send("{home}+{end}")
                 Exit Sub
             End If
+
+
+            Dim hacienda As Boolean = True
+
+            Dim res As DialogResult
+            res = MessageBox.Show("Desea incluir emisor en la factura?", "Sistema de Facturacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+
+            If res = Windows.Forms.DialogResult.Cancel Then
+                Exit Sub
+            End If
+
+            If res = Windows.Forms.DialogResult.No Then
+                hacienda = False
+            End If
+
             btnfacturar.Enabled = False
 
             ' seleccionar el usuario que hizo el pedido
             If cbid_pedido.Text = "Nuevo" Then
-                Facturas_Generar(USUARIO_ID)
+                Facturas_Generar(USUARIO_ID, hacienda)
             Else
                 Dim TPU As DataTable
                 TPU = Table("select id_usuario from Pedido where id_pedido = " & cbid_pedido.Text, "")
-                Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString))
+                Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString), hacienda)
             End If
 
             Facturas_imprimir("F", True)
@@ -729,7 +744,7 @@ Public Class frm_pedido
 
     End Sub
 
-    Private Sub Facturas_Generar(ByVal id_usuario As Integer)
+    Private Sub Facturas_Generar(ByVal id_usuario As Integer, ByVal hacienda As Integer)
 
         Try
             Dim Sql As String
@@ -757,7 +772,6 @@ Public Class frm_pedido
             Dim Facturas As Integer = IIf(TPD.Rows.Count > 28, IIf(TPD.Rows.Count Mod 28 > 0, Int(TPD.Rows.Count / 28) + 1, TPD.Rows.Count / 28), 1)
             ReDim FS(Facturas + 1)
 
-
             Dim consec As Integer = Table("select top 1 consecutivoElectronico as consecutivo from factura order by id_factura desc", "").Rows(0).Item("consecutivo")
             consec = consec + 1
 
@@ -776,7 +790,7 @@ Public Class frm_pedido
                 Fdescuento = 0
                 Fiv = 0
 
-                Sql = "INSERT INTO FACTURA (id_cliente,clavenumerica,numconsecutivo,consecutivoelectronico, id_agente,fecha,plazo,piv,id_usuario) values (" & _
+                Sql = "INSERT INTO FACTURA (id_cliente,clavenumerica,numconsecutivo,consecutivoelectronico, id_agente,fecha,plazo,clienteTributa,piv, id_usuario) values (" & _
                 txtid_cliente.Text & "," & _
                 "'" & claveNumerica & "'," & _
                 "'" & numConsecutivo & "'," & _
@@ -784,6 +798,7 @@ Public Class frm_pedido
                 cbid(cbid_agente.Text) & "," & _
                 "getDate()," & _
                 Val(txtplazo.Text).ToString & "," & _
+                hacienda & "," + _
                 PIV.ToString & "," & _
                 id_usuario & ")"
 
@@ -867,13 +882,12 @@ Public Class frm_pedido
                     With TPD.Rows(z)
 
                         m = .Item("precio") * .Item("cantidad")
-                        d = m * (.Item("descuento") / 100)
 
 
                         mf = m
                         If .Item("iv") Then
                             FGravado = FGravado + mf
-                            Fiv = Fiv + ((mf - d) * PIV)
+                            Fiv = Fiv + mf * PIV
                         Else
                             FExento = FExento + mf
                         End If
@@ -975,14 +989,14 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("descuento")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = FormatNumber(Fdescuento, 2)
+                rParameterDiscreteValue.Value = ""
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("Total")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = "¢ " + FormatNumber(FGravado + Fiv + FExento - Fdescuento, 2)
+                rParameterDiscreteValue.Value = "¢ " + FormatNumber(FGravado + Fiv + FExento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 

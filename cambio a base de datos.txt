@@ -21,3 +21,6 @@ consecutivoElectronico int Null
 
 UPDATe dbo.factura SET sincronizada =3;
 update dbo.factura set consecutivoElectronico = 0;
+
+alter table dbo.factura ADD
+clienteContado bit NULL default 0;
