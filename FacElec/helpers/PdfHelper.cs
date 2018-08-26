@@ -98,7 +98,7 @@ namespace FacElec.helpers
                                 detalle.consumidor.ToString("N2"),
                                 detalle.precio.ToString("N2"),
                                 $"{Convert.ToInt32(detalle.descuento * 100)}%",
-                                $"{detalle.montoTotal.ToString("n2")}{((!detalle.IV) ? "*" : "")}");
+                                $"{detalle.montoTotal.ToString("n2")}{((detalle.IV) ? "*" : "")}");
             }
 
             sb.AppendFormat(@"

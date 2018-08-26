@@ -60,35 +60,40 @@ namespace FacElec.model
             {
                 var prod = det.producto[0];
 
-                if (det.IV == true)
-                    totalGravado += det.cantidad * det.precio;
-                else
-                    totalExento += det.cantidad * det.precio;
+                det.montoTotal = det.precio * det.cantidad;
 
                 if (det.descuento > 0)
-                    totalDescuentos += getDescuento(det);
+                    det.montoDescuento = getDescuento(det);
 
                 if (det.IV)
-                    totalImpuestos += getMontoImpuesto(det);
+                {
+                    totalGravado += det.montoTotal;
+                    det.montoImpuesto += getMontoImpuesto(det);
+                }
+                else
+                {
+                    totalExento += det.montoTotal;
+                    det.montoImpuesto = 0;
+                }
 
-                total = totalExento + totalGravado;
-                totalVentaNeta = total - totalDescuentos;
 
-                det.montoImpuesto = getMontoImpuesto(det);
-                det.montoDescuento = getDescuento(det);
-                det.montoTotal = det.precio * det.cantidad;
                 det.subtotal = det.montoTotal - det.montoDescuento;
-                det.montoTotalLinea = det.montoTotal + det.montoImpuesto;
-
-                decimal utilidad = getUtilidad(det, precioId);
-
+                det.montoTotalLinea = det.subtotal + det.montoImpuesto;
+    
+                var utilidad = getUtilidad(det, precioId);
                 det.consumidor = Decimal.Round(prod.costo * (1 + utilidad) / prod.empaque / prod.sub_empaque * (1 + prod.detalle) * (1 + ((det.IV == true) ? new decimal(0.13) : 0)),2,MidpointRounding.AwayFromZero);
 
+
+                total = totalExento + totalGravado;
+                totalDescuentos += det.montoDescuento;
+                totalImpuestos += det.montoImpuesto;
+                totalVentaNeta = total - totalDescuentos;
+                 
             }
 
         }
 
-        private decimal getUtilidad (factura_Detalle det,int precioId){
+        decimal getUtilidad (factura_Detalle det,int precioId){
             
             switch (precioId)
             {
@@ -115,19 +120,12 @@ namespace FacElec.model
 
         private decimal getDescuento(factura_Detalle detalle)
         {
-            return decimal.Round(detalle.cantidad * detalle.precio * detalle.descuento, 2, System.MidpointRounding.AwayFromZero);
+            return decimal.Round(detalle.montoTotal * detalle.descuento, 2, System.MidpointRounding.AwayFromZero);
         }
 
         private decimal getMontoImpuesto(factura_Detalle detalle)
-        {
-
-            decimal imp = new decimal(0.13);
-
-            if (!detalle.IV)
-                return 0;
-            return (
-                decimal.Round(detalle.precio * detalle.cantidad - (getDescuento(detalle)) * imp, 2, System.MidpointRounding.AwayFromZero)
-            );
+        {   
+            return decimal.Round((detalle.montoTotal - detalle.montoDescuento) * decimal.Parse("0.13"), 2, System.MidpointRounding.AwayFromZero);
         }
     }
 }
