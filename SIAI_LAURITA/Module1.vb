@@ -230,6 +230,18 @@ Module Module1
         Return Tbl
     End Function
 
+
+
+    Public Function FACMError(ByVal C As String) As DataTable
+        Dim sql As String
+        sql = "select id_factura id_documento, fecha, id_cliente, coderror, descripcionerror from factura where sincronizada = 1 and Coderror <> 'Error:00' " + _
+        C
+
+        Dim Tbl As DataTable = Table(sql, "")
+        Return Tbl
+    End Function
+
+
     Public Function FACM(ByVal C As String, ByVal Anulados As Boolean, ByVal PK As String) As DataTable
         Dim sql As String
         sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv," + _

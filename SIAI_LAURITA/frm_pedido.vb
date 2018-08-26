@@ -696,7 +696,6 @@ Public Class frm_pedido
                 Exit Sub
             End If
 
-
             Dim hacienda As Boolean = True
 
             Dim res As DialogResult

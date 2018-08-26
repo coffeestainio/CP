@@ -448,6 +448,16 @@ Public Class myForms
             m_principal = Value
         End Set
     End Property
+
+    Private Shared m_hacienda As frm_consulta_hacienda
+    Public Shared Property frm_hacienda() As frm_consulta_hacienda
+        Get
+            Return m_hacienda
+        End Get
+        Set(ByVal Value As frm_consulta_hacienda)
+            m_hacienda = Value
+        End Set
+    End Property
     
     Private Shared m_pedido As frm_pedido
     Public Shared Property frm_pedido() As frm_pedido

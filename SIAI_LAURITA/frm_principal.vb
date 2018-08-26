@@ -65,6 +65,7 @@ Public Class frm_principal
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents PictureBox11 As System.Windows.Forms.PictureBox
     Friend WithEvents ToolStripDropDownButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ErroresHaciendaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
@@ -114,6 +115,7 @@ Public Class frm_principal
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Label12 = New System.Windows.Forms.Label
         Me.PictureBox11 = New System.Windows.Forms.PictureBox
+        Me.ErroresHaciendaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStrip.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,7 +141,7 @@ Public Class frm_principal
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnpedido, Me.btncompra, Me.btndatos, Me.btncredito, Me.btnbodega, Me.btnreporte, Me.btnpunto, Me.btnmovimiento, Me.btnconsulta, Me.ToolStripDropDownButton1})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(1028, 61)
+        Me.ToolStrip.Size = New System.Drawing.Size(1129, 61)
         Me.ToolStrip.TabIndex = 0
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -311,7 +313,7 @@ Public Class frm_principal
         '
         'btnconsulta
         '
-        Me.btnconsulta.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIdocumentos, Me.TSMIpedidos})
+        Me.btnconsulta.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIdocumentos, Me.TSMIpedidos, Me.ErroresHaciendaToolStripMenuItem})
         Me.btnconsulta.Image = CType(resources.GetObject("btnconsulta.Image"), System.Drawing.Image)
         Me.btnconsulta.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnconsulta.Name = "btnconsulta"
@@ -321,13 +323,13 @@ Public Class frm_principal
         'TSMIdocumentos
         '
         Me.TSMIdocumentos.Name = "TSMIdocumentos"
-        Me.TSMIdocumentos.Size = New System.Drawing.Size(142, 22)
+        Me.TSMIdocumentos.Size = New System.Drawing.Size(163, 22)
         Me.TSMIdocumentos.Text = "Documentos"
         '
         'TSMIpedidos
         '
         Me.TSMIpedidos.Name = "TSMIpedidos"
-        Me.TSMIpedidos.Size = New System.Drawing.Size(142, 22)
+        Me.TSMIpedidos.Size = New System.Drawing.Size(163, 22)
         Me.TSMIpedidos.Text = "Pedidos"
         '
         'ToolStripDropDownButton1
@@ -335,7 +337,7 @@ Public Class frm_principal
         Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(98, 52)
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(98, 58)
         Me.ToolStripDropDownButton1.Text = "Conteo"
         '
         'StatusStrip1
@@ -343,7 +345,7 @@ Public Class frm_principal
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SLBL1, Me.SLBL2, Me.SLBL3, Me.SLBL4})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 639)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1028, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1129, 22)
         Me.StatusStrip1.TabIndex = 8
         '
         'SLBL1
@@ -353,7 +355,7 @@ Public Class frm_principal
         Me.SLBL1.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold)
         Me.SLBL1.ForeColor = System.Drawing.Color.LightSlateGray
         Me.SLBL1.Name = "SLBL1"
-        Me.SLBL1.Size = New System.Drawing.Size(974, 17)
+        Me.SLBL1.Size = New System.Drawing.Size(1106, 17)
         Me.SLBL1.Spring = True
         Me.SLBL1.Text = "Software by Pablo Calvo | 6059-8238 | pcalvo@artifexdigitalstudio.com"
         Me.SLBL1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -404,11 +406,17 @@ Public Class frm_principal
         Me.PictureBox11.TabIndex = 122
         Me.PictureBox11.TabStop = False
         '
+        'ErroresHaciendaToolStripMenuItem
+        '
+        Me.ErroresHaciendaToolStripMenuItem.Name = "ErroresHaciendaToolStripMenuItem"
+        Me.ErroresHaciendaToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.ErroresHaciendaToolStripMenuItem.Text = "Errores Hacienda"
+        '
         'frm_principal
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(8, 19)
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(1028, 661)
+        Me.ClientSize = New System.Drawing.Size(1129, 661)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.PictureBox11)
         Me.Controls.Add(Me.ToolStrip)
@@ -645,7 +653,11 @@ Public Class frm_principal
         inventario.Show()
     End Sub
 
-    Private Sub SLBL1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SLBL1.Click
-
+    Private Sub ErroresHaciendaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ErroresHaciendaToolStripMenuItem.Click
+        ToolStrip.Enabled = False
+        Dim hacienda As New frm_consulta_hacienda
+        Consulta = False
+        hacienda.Owner = Me
+        hacienda.Show()
     End Sub
 End Class
