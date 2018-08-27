@@ -1,3 +1,5 @@
+Imports System.Data.SqlClient
+
 Public Class frm_consulta_hacienda
     Dim Documento As DataTable
     Dim Dvdocumento As DataView
@@ -97,4 +99,40 @@ Public Class frm_consulta_hacienda
     Private Sub cbtipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Not Building Then Filtro()
     End Sub
+
+    Private Sub bntReenviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bntReenviar.Click
+        If Documento.Rows.Count = 0 Then
+            MsgBox("No hay nada que reenviar")
+
+        End If
+
+        ReiniciarFacturas()
+
+        EjectuarFacturacionElectronica()
+        myForms.frm_principal.ToolStrip.Enabled = True
+        Me.Close()
+    End Sub
+
+    Private Sub ReiniciarFacturas()
+        Dim sql As String = "update factura set sincronizada = 0, coderror = 0, descripcionerror = 0 where id_factura in ("
+
+        For Each row As DataRow In Documento.Rows
+            sql = sql & row("id_documento") & ","
+        Next
+
+        sql = sql & "0)"
+
+        Try
+            Dim cmd As New SqlCommand
+            OpenConn()
+            cmd.CommandText = sql
+            cmd.Connection = CONN1
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            ONEX(Me.Name, ex)
+            MsgBox("Hubo un error al intentar reiniciar las facturas")
+        End Try
+        
+    End Sub
+
 End Class

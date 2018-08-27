@@ -9,7 +9,6 @@ namespace FacElec
         static void Main(string[] args)
         {
             Sincronizador.SincronizarFacturas();
-            //RestHelper.DoSomething();
         }
     }
 }

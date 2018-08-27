@@ -28,6 +28,7 @@ namespace FacElec.sync
                         XmlHelper.generateXML(fac);
                         PdfHelper.generatePDF(fac);
                         SqlHelper.updateSuccessful(fac.id_factura);
+                        AdemarHelper.callBatchProcess(fac.claveNumerica);
                     }
 
                 }

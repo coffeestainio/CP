@@ -13,13 +13,17 @@ namespace FacElec.helpers
         { 
             var cliente = factura.cliente[0];
 
+            XNamespace tribunet = "https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/tiqueteElectronico";
+            XNamespace name = "http://www.w3.org/2001/XMLSchema";
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+
             var xmlDoc = new XDocument(
                              new XDeclaration("1.0", "utf-8", ""),
                              
                              new XElement("TiqueteElectronico",
-                                          //new XAttribute("xmlns","https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/tiqueteElectronico"),
-                                          //new XAttribute($"{XNamespace.Xmlns}xsd","http://www.w3.org/2001/XMLSchema"),
-                                          //new XAttribute($"{XNamespace.Xmlns}xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                                          new XAttribute("xlmns",tribunet),
+                                          new XAttribute(XNamespace.Xmlns +"xsd",name),
+                                          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                                                 
                                           new XElement("Clave",factura.claveNumerica),
                                           new XElement("NumeroConsecutivo",factura.numConsecutivo),
