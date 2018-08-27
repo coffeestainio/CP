@@ -65,7 +65,7 @@ Public Class frm_pedido
                 Producto = Table("select * from producto  order by id_producto", "id_producto")
                 cliente = Table("select * from cliente where eliminado=0 order by id_cliente", "id_cliente")
                 Agente = Table("select * from agente where eliminado=0 order by id_agente", "id_agente")
-
+                TPD_crear()
 
                 CB_crear(cbid_agente, "Agente", "id_agente")
 
@@ -711,26 +711,34 @@ Public Class frm_pedido
 
             btnfacturar.Enabled = False
 
+            Dim facturagenerada As Boolean = False
+
             ' seleccionar el usuario que hizo el pedido
             If cbid_pedido.Text = "Nuevo" Then
-                Facturas_Generar(USUARIO_ID, hacienda)
+                facturagenerada = Facturas_Generar(USUARIO_ID, hacienda)
             Else
                 Dim TPU As DataTable
                 TPU = Table("select id_usuario from Pedido where id_pedido = " & cbid_pedido.Text, "")
-                Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString), hacienda)
+                facturagenerada = Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString), hacienda)
             End If
 
             Facturas_imprimir("F", True)
 
             ' EjectuarFacturacionElectronica()
 
-            If Not cbid_pedido.Text = "Nuevo" Then
-                Dim cmd As New SqlCommand
-                cmd.Connection = CONN1
-                cmd.CommandText = "delete from Pedido where id_pedido=" + cbid_pedido.Text
-                cmd.ExecuteNonQuery()
-                cmd.CommandText = "delete from pedido_detalle where id_pedido=" + cbid_pedido.Text
-                cmd.ExecuteNonQuery()
+            If facturagenerada Then
+
+                If Not cbid_pedido.Text = "Nuevo" Then
+                    Dim cmd As New SqlCommand
+                    cmd.Connection = CONN1
+                    cmd.CommandText = "delete from Pedido where id_pedido=" + cbid_pedido.Text
+                    cmd.ExecuteNonQuery()
+                    cmd.CommandText = "delete from pedido_detalle where id_pedido=" + cbid_pedido.Text
+                    cmd.ExecuteNonQuery()
+                End If
+            Else
+                MsgBox("Hubo un error al generar la factura, favor de verificar el pedido")
+
             End If
 
             Me.Close()
@@ -744,9 +752,9 @@ Public Class frm_pedido
 
     End Sub
 
-    Private Sub Facturas_Generar(ByVal id_usuario As Integer, ByVal hacienda As Integer)
-
+    Private Function Facturas_Generar(ByVal id_usuario As Integer, ByVal hacienda As Integer) As Boolean
         Try
+
             Dim Sql As String
             Dim cmd As New SqlCommand
             cmd.Connection = CONN1
@@ -761,10 +769,6 @@ Public Class frm_pedido
 
             Dim LI As Integer
             Dim LS As Integer
-
-
-
-
 
             Tsort(TPD, "nombre")
 
@@ -837,11 +841,14 @@ Public Class frm_pedido
 
             Next h
 
-        Catch myerror As Exception
-            ONEX(Me.Name, myerror)
+        Catch ex As Exception
+            ONEX(Me.Name, ex)
+            Return False
         End Try
 
-    End Sub
+        Return True
+
+    End Function
 
 
     Private Sub Facturas_imprimir(ByVal Doc As String, ByVal imprimir As Boolean)
@@ -1056,57 +1063,53 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-                Dim rv As New frm_Report_Viewer
-                rv.crv.ReportSource = rfactura
-                rv.Show()
+                If imprimir Then
 
-                '        If imprimir Then
+                    Dim printed As Boolean = False
+                    While Equals(printed, False)
+                        Try
+                            If ID_ESTACION = 1 Then
+                                If Doc = "P" Then
+                                    rfactura.PrintOptions.PrinterName = "REPORTES"
+                                Else
+                                    rfactura.PrintOptions.PrinterName = "FACTURAS"
+                                End If
+                            Else
+                                If Doc = "P" Then
+                                    rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
+                                Else
+                                    rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\FACTURAS"
+                                End If
+                            End If
 
-                '            Dim printed As Boolean = False
-                '            While Equals(printed, False)
-                '                Try
-                '                    If ID_ESTACION = 1 Then
-                '                        If Doc = "P" Then
-                '                            rfactura.PrintOptions.PrinterName = "REPORTES"
-                '                        Else
-                '                            rfactura.PrintOptions.PrinterName = "FACTURAS"
-                '                        End If
-                '                    Else
-                '                        If Doc = "P" Then
-                '                            rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
-                '                        Else
-                '                            rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\FACTURAS"
-                '                        End If
-                '                    End If
+                            ' impresion 
 
-                '                    ' impresion 
+                            rfactura.PrintToPrinter(1, False, 1, 1)
+                            printed = True
+                        Catch ex As Exception
+                            Dim response As MsgBoxResult = MsgBox("La impresion fallo. ¿Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresión")
+                            If response = MsgBoxResult.No Then
+                                printed = True
+                            End If
+                        End Try
+                    End While
+                    ''impresion
 
-                '                    rfactura.PrintToPrinter(1, False, 1, 1)
-                '                    printed = True
-                '                Catch ex As Exception
-                '                    Dim response As MsgBoxResult = MsgBox("La impresion fallo. ¿Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresión")
-                '                    If response = MsgBoxResult.No Then
-                '                        printed = True
-                '                    End If
-                '                End Try
-                '            End While
-                ''impresion
+                    '        Else
 
-                '        Else
-
-                'Dim filePath As String = getSaveLocation()
-                'If filePath <> "" Then
-                '    rfactura.ExportToDisk(ExportFormatType.PortableDocFormat, filePath)
-                '    rfactura.Dispose()
-                '    rfactura.Close()
-                'End If
+                    'Dim filePath As String = getSaveLocation()
+                    'If filePath <> "" Then
+                    '    rfactura.ExportToDisk(ExportFormatType.PortableDocFormat, filePath)
+                    '    rfactura.Dispose()
+                    '    rfactura.Close()
+                    'End If
 
 
-                'Dim rv As New frm_Report_Viewer
-                'rv.crv.ReportSource = rfactura
-                'rv.Show()
+                    'Dim rv As New frm_Report_Viewer
+                    'rv.crv.ReportSource = rfactura
+                    'rv.Show()
 
-                'End If
+                End If
 
 
             Next h
