@@ -722,6 +722,7 @@ Public Class frm_pedido
 
             Facturas_imprimir("F", True)
 
+            ' EjectuarFacturacionElectronica()
 
             If Not cbid_pedido.Text = "Nuevo" Then
                 Dim cmd As New SqlCommand
@@ -774,11 +775,11 @@ Public Class frm_pedido
             Dim consec As Integer = Table("select top 1 consecutivoElectronico as consecutivo from factura order by id_factura desc", "").Rows(0).Item("consecutivo")
             consec = consec + 1
 
-            'Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
-            'Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345679"
+            Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
+            Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345679"
 
-            Dim numConsecutivo As String = "0"
-            Dim claveNumerica As String = "0"
+            'Dim numConsecutivo As String = "0"
+            'Dim claveNumerica As String = "0"
 
             Dim h As Integer
 

@@ -75,7 +75,7 @@ namespace FacElec.helpers
                                                                     new XElement("FechaResolucion","2016-10-07 10:22:22"))
                                                        )
             );
-            storeXml(xmlDoc, factura.id_factura);
+            storeXml(xmlDoc, factura.claveNumerica);
 
             return xmlDoc;
         }
@@ -155,8 +155,8 @@ namespace FacElec.helpers
 
         }
 
-        public static void storeXml(XDocument xmlDoc, string facId){
-            var fileName = $"facturasEnviadas/facturaElectronica_{facId}.xml";
+        public static void storeXml(XDocument xmlDoc, string claveNumerica){
+            var fileName = $"C://DSign//Temp//{claveNumerica}.xml";
             System.IO.FileInfo file = new System.IO.FileInfo(fileName);
             file.Directory.Create();
             xmlDoc.Save(fileName);

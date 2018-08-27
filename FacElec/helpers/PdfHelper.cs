@@ -149,9 +149,9 @@ namespace FacElec.helpers
                             humanizedTotal,
                             (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : ""
                            );
-
-            var fileName = $"facturasEnviadas/facturaElectronica_{factura.id_factura}.pdf";
-            FileInfo file = new System.IO.FileInfo(fileName);
+            
+            var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
+            FileInfo file = new FileInfo(fileName);
             file.Directory.Create();
 
             var converter = new BasicConverter(new PdfTools());
