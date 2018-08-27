@@ -60,7 +60,7 @@ Public Class frm_rpt_cuentasxcobrar
         End If
         Dim vacio As Boolean = Not (criterio <> "")
         If rbrango.Checked Then
-            fecha = " fecha>='" + EDATE(Dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
+            fecha = " fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:01' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
         End If
         If txtid_cliente.Text <> "" And rbrango.Checked Then
             criterio = criterio & " and " & fecha
