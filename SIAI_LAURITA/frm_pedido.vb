@@ -65,7 +65,7 @@ Public Class frm_pedido
                 Producto = Table("select * from producto  order by id_producto", "id_producto")
                 cliente = Table("select * from cliente where eliminado=0 order by id_cliente", "id_cliente")
                 Agente = Table("select * from agente where eliminado=0 order by id_agente", "id_agente")
-                TPD_crear()
+
 
                 CB_crear(cbid_agente, "Agente", "id_agente")
 

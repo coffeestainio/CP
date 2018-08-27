@@ -7,7 +7,7 @@ namespace FacElec
     class Program
     {
         static void Main(string[] args)
-        {
+        {       
             Sincronizador.SincronizarFacturas();
         }
     }

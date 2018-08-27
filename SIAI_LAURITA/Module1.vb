@@ -60,7 +60,7 @@ Module Module1
     End Sub
 
     Public Sub EjectuarFacturacionElectronica()
-        Process.Start("cmd", "/c dotnet c:/FacElecCP/FacElec.dll")
+        Process.Start("cmd", "/c dotnet H:/FacElecCP/FacElec.dll")
     End Sub
 
     Public Sub dstable(ByVal dataset As DataSet, ByVal tabla_nombre As String, ByVal sql As String, ByVal Pk As String)

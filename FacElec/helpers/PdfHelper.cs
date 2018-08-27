@@ -107,7 +107,7 @@ namespace FacElec.helpers
                                     <h3>{6}</d3>
                                 </div>
                                 <div class='totales'>
-                                       <table class='tabla-totales' cellpadding='30'>
+                                       <table class='tabla-totales' cellpadding='10'>
                                             <tr class='row-totales'>
                                                 <td class='toti'><strong>Gravado:</strong></td>
                                                 <td> ₡</td>

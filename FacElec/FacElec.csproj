@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Remove="ServiceReference1\Reference.cs" />
     <Compile Remove="helpers\RestHelper.cs" />
+    <Compile Remove="Service\FacElecService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Update="libwkhtmltox.dll">

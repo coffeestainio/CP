@@ -108,7 +108,7 @@ Public Class frm_consulta_hacienda
 
         ReiniciarFacturas()
 
-        EjectuarFacturacionElectronica()
+        'EjectuarFacturacionElectronica()
         myForms.frm_principal.ToolStrip.Enabled = True
         Me.Close()
     End Sub
