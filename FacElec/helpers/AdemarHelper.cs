@@ -8,7 +8,7 @@ namespace FacElec.helpers
             //var batCommand = $"C:\\DSign\\ExeFirmaFactura\\FacturaElectronicaCR_CS.exe DFD {claveFactura} -Q  -M D";
             var batCommand = "C:\\facelecCP\\bat.bat";
 
-            Process proc = Process.Start(batCommand);
+            //Process proc = Process.Start(batCommand);
         }
     }
 }
