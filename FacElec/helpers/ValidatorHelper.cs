@@ -2,11 +2,14 @@
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using FacElec.model;
+using log4net;
 
 namespace FacElec.helpers
 {
     public static class ValidatorHelper
     {
+        internal static ILog log;
+
         public static Error validarFacturas(Factura factura)
         {
 

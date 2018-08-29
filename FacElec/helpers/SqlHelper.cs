@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using FacElec.model;
+using log4net;
 using Newtonsoft.Json;
 
 namespace FacElec.helpers
@@ -13,11 +14,15 @@ namespace FacElec.helpers
     {
         private const string V = "server=Server01\\SQLExpress;User ID = sa; password=SQLCP123456!;Database=CP2;Persist Security Info=True";
 
-        //private const string sqlConnection = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog = cp2_test2; Persist Security Info=False;User ID = CPSQL; Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
+        //private const string V = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog = cp2_test2; Persist Security Info=False;User ID = CPSQL; Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
 
         private const string sqlConnection = V;
+        internal static ILog log;
+
         public static List<Factura> GetFacturas()
         {
+            log.Info("Obteniendo facturas pendientes");
+
             List<Factura> facturas = new List<Factura>();
             try
             {
@@ -53,7 +58,7 @@ namespace FacElec.helpers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                log.Error(ex.Message);
                 return null;
 
             }
@@ -63,7 +68,11 @@ namespace FacElec.helpers
         }
 
         public static void updateWithError(Error error){
-            try{
+
+            log.Info("Guardando error en la base de datos");
+
+            try
+            {
 
                 var sqlQuery = $"update factura set " +
                     $"actualizada = getDate(), " +
@@ -78,7 +87,7 @@ namespace FacElec.helpers
                     connection.Open();
                     var cantidadError = command.ExecuteNonQuery();
                     if (cantidadError > 0)
-                        Console.WriteLine("Error loguedo satisfactoriamente : "+
+                        log.Error("Error loguedo satisfactoriamente : "+
                                           $"Factura : {error.NumFacturaInterno}. " +
                                           $"Codigo : {error.CodigoError}. " +
                                           $"Descipcion : {error.DescripcionError} ");
@@ -87,12 +96,14 @@ namespace FacElec.helpers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                log.Error(ex.Message);
             }
         }
 
-        public static void updateSuccessful(string idFactura)
+        public static bool UpdateSuccessful(string idFactura)
         {
+            log.Info($"Actualizando el estado de la factura");
+
             try
             {
 
@@ -116,8 +127,11 @@ namespace FacElec.helpers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                log.Error(ex.Message);
+                return false;
             }
+
+            return true;
         }
       
     }

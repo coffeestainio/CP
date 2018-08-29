@@ -4,14 +4,17 @@ using System.Text;
 using DinkToPdf;
 using FacElec.model;
 using Humanizer;
+using log4net;
 
 namespace FacElec.helpers
 {
     public static class PdfHelper
     {
+        internal static ILog log;
 
-        public static void generatePDF(Factura factura)
+        public static bool GeneratePDF(Factura factura)
         {
+            log.Info($"Generando el PDF");
 
             var cliente = factura.cliente[0];
 
@@ -19,10 +22,13 @@ namespace FacElec.helpers
             string humanizedTotal = humanizeTotal(factura);
             string formatedDireccion = XmlHelper.formatedDireccion(cliente);
 
-            string cssPath = Path.Combine(Directory.GetCurrentDirectory(), "dist/template.css");
+            try
+            {
 
-            var sb = new StringBuilder();
-            sb.AppendFormat(@"
+                string cssPath = Path.Combine(Directory.GetCurrentDirectory(), "dist/template.css");
+
+                var sb = new StringBuilder();
+                sb.AppendFormat(@"
                            <html>
                              <head>
                              </head>
@@ -74,15 +80,15 @@ namespace FacElec.helpers
                                         <th>Descuento</th>
                                         <th>SubTotal</th>
                                     </tr>", factura.numConsecutivo, factura.claveNumerica, factura.fecha,
-                            cliente.nombre,
-                            formatedId,
-                            cliente.telefono, cliente.email, formatedDireccion,
-                            factura.id_factura,
-                            $"{(factura.plazo == 0 ? "Contado" : $"Credito a {factura.plazo} dias plazo")}");
+                                cliente.nombre,
+                                formatedId,
+                                cliente.telefono, cliente.email, formatedDireccion,
+                                factura.id_factura,
+                                $"{(factura.plazo == 0 ? "Contado" : $"Credito a {factura.plazo} dias plazo")}");
 
-            foreach (factura_Detalle detalle in factura.factura_Detalle)
-            {
-                sb.AppendFormat(@"<tr class='table-row' align='center'>
+                foreach (factura_Detalle detalle in factura.factura_Detalle)
+                {
+                    sb.AppendFormat(@"<tr class='table-row' align='center'>
                                     <td>{0}</td>
                                     <td>{1}</td>
                                     <td>{2}</td>
@@ -92,16 +98,16 @@ namespace FacElec.helpers
                                     <td>{6}</td>
                                     <td>₡{7}</td>
                                   </tr>", detalle.Id_Producto,
-                                detalle.cantidad,
-                                detalle.unidadString,
-                                detalle.producto[0].nombre,
-                                detalle.consumidor.ToString("N2"),
-                                detalle.precio.ToString("N2"),
-                                $"{Convert.ToInt32(detalle.descuento * 100)}%",
-                                $"{detalle.montoTotal.ToString("n2")}{((!detalle.IV) ? "*" : "")}");
-            }
+                                    detalle.cantidad,
+                                    detalle.unidadString,
+                                    detalle.producto[0].nombre,
+                                    detalle.consumidor.ToString("N2"),
+                                    detalle.precio.ToString("N2"),
+                                    $"{Convert.ToInt32(detalle.descuento * 100)}%",
+                                    $"{detalle.montoTotal.ToString("n2")}{((!detalle.IV) ? "*" : "")}");
+                }
 
-            sb.AppendFormat(@"
+                sb.AppendFormat(@"
                                 </table>
                                 <div>
                                     <h3>{6}</d3>
@@ -142,28 +148,28 @@ namespace FacElec.helpers
                                 </div>
                             </body>
                         </html>", factura.totalGravado.ToString("N2"),
-                            factura.totalExento.ToString("N2"),
-                            factura.totalDescuentos.ToString("N2"),
-                            factura.totalImpuestos.ToString("N2"),
-                            factura.totalComprobante.ToString("N2"),
-                            humanizedTotal,
-                            (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : ""
-                           );
-            
-            var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
-            FileInfo file = new FileInfo(fileName);
-            file.Directory.Create();
+                                factura.totalExento.ToString("N2"),
+                                factura.totalDescuentos.ToString("N2"),
+                                factura.totalImpuestos.ToString("N2"),
+                                factura.totalComprobante.ToString("N2"),
+                                humanizedTotal,
+                                (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : ""
+                               );
 
-            var converter = new BasicConverter(new PdfTools());
-            var doc = new HtmlToPdfDocument()
-            {
-                GlobalSettings = {
+                var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
+                FileInfo file = new FileInfo(fileName);
+                file.Directory.Create();
+
+                var converter = new BasicConverter(new PdfTools());
+                var doc = new HtmlToPdfDocument()
+                {
+                    GlobalSettings = {
                     ColorMode = ColorMode.Color,
                     Orientation = Orientation.Portrait,
                     PaperSize = PaperKind.Letter,
                     Out = fileName
             },
-                Objects = {
+                    Objects = {
                     new ObjectSettings() {
                         PagesCount = true,
                         HtmlContent = sb.ToString(),
@@ -176,9 +182,16 @@ namespace FacElec.helpers
                         }
                 }
             }
-            };
+                };
 
-            converter.Convert(doc);
+                converter.Convert(doc);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return false;
+            }
+            return true;
 
         }
 

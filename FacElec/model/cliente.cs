@@ -23,7 +23,7 @@
             if (tipoIdentificacion == 5) tipoIdentificacion = 10;
             this.tipoIdentificacion = tipoIdentificacion;
             this.nombre = nombre;
-            this.telefono = telefono;
+            this.telefono = telefono.Trim().Replace("-","");
             this.email = email;
             this.direccion = direccion;
             this.provincia = provincia;

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using FacElec.model;
 using FacElec.helpers;
 using System.Xml.Linq;
+using log4net;
 
 namespace FacElec.sync
 {
     public static class Sincronizador
     {
+
+        public static ILog log;
 
         public static void SincronizarFacturas()
         {
@@ -20,21 +23,25 @@ namespace FacElec.sync
             {
                 foreach (Factura fac in facturas)
                 {
-
+                    log.Info($"** Procesando la factura: {fac.id_factura} **");
                     var error = ValidatorHelper.validarFacturas(fac);
+
                     if (error != null)
+                    {
                         SqlHelper.updateWithError(error);
-                    else {
-                        XmlHelper.generateXML(fac);
-                        PdfHelper.generatePDF(fac);
-                        SqlHelper.updateSuccessful(fac.id_factura);
-                        AdemarHelper.callBatchProcess(fac.claveNumerica);
+                    }
+                    else
+                    {
+                        XmlHelper.GenerateXML(fac);
+                        PdfHelper.GeneratePDF(fac);
+                        AdemarHelper.CallBatchProcess(fac.claveNumerica);
+                        SqlHelper.UpdateSuccessful(fac.id_factura);
                     }
 
                 }
             }
             else{
-                Console.WriteLine("Nothing to sync.");
+                log.Info("No se encontraron facturas pendientes");
             }
 
         }

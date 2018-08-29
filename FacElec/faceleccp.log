@@ -1,0 +1,46 @@
+2018-08-28 09:33:47,238 [1] INFO FacElec.Program - Process started
+2018-08-28 09:55:23,274 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 09:55:23,317 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 09:55:24,509 [1] INFO FacElec.Program - No se encontraron facturas pendientes
+2018-08-28 09:55:24,509 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-28 10:10:28,866 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 10:10:29,000 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 10:10:29,628 [1] ERROR FacElec.Program - Cannot connect to SQL Server Browser. Ensure SQL Server Browser has been started.
+2018-08-28 10:10:29,628 [1] INFO FacElec.Program - No se encontraron facturas pendientes
+2018-08-28 10:10:29,628 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-28 17:02:48,425 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:02:48,581 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:02:53,406 [1] INFO FacElec.Program - No se encontraron facturas pendientes
+2018-08-28 17:02:53,406 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-28 17:04:33,590 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:04:33,742 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:04:37,333 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:04:37,418 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:06:22,793 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:06:22,937 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:06:27,518 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:06:27,596 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:07:26,225 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:07:26,366 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:07:29,774 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:07:29,849 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:12:24,774 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:12:24,921 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:12:29,329 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:12:29,407 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:15:42,014 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:15:42,171 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:15:46,529 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:15:46,642 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:16:17,145 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:16:17,287 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:16:22,057 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:16:22,140 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:20:51,325 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:20:51,483 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:21:00,431 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:21:00,524 [1] INFO FacElec.Program - Generando el XML
+2018-08-28 17:24:05,584 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-28 17:24:05,744 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-28 17:24:08,217 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-28 17:24:08,307 [1] INFO FacElec.Program - Generando el XML

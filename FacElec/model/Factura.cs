@@ -39,7 +39,7 @@ namespace FacElec.model
             this.id_cliente = id_cliente;
             this.id_agente = id_agente;
             this.plazo = plazo;
-            this.fecha = fecha.ToString("yyyy-MM-dd hh:mm:ss tt", CultureInfo.InvariantCulture);
+            this.fecha = $"{fecha.ToString("yyyy-MM-dd")}T{fecha.ToString("HH:mm:ss")}";
             this.id_usuario = id_usuario;
             PIV = pIV;
             this.factura_Detalle = factura_Detalle;

@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
+using log4net;
 
 namespace FacElec.helpers
 {
     public static class AdemarHelper
     {
-        static public void callBatchProcess (string claveFactura){
+        internal static ILog log;
+
+        static public void CallBatchProcess (string claveFactura){
+            log.Info($"Ejecutando proceso de sincronizacion y envio de factura");
+
             try
             {
                 var batCommand = $"DFD {claveFactura} -Q -M D";
@@ -20,7 +25,7 @@ namespace FacElec.helpers
 
             }
             catch (Exception ex){
-                Console.WriteLine(ex.Message);
+                log.Error(ex.Message);
             }
         }
     }
