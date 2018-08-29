@@ -91,7 +91,11 @@ namespace FacElec.helpers
         }
 
         static XElement GenerateReceptor (bool clienteTributa, cliente cliente, XNamespace tribunet) {
-            return (clienteTributa) ? new XElement(tribunet + "Receptor",
+
+            log.Info($"Generando datos del cliente receptor: {clienteTributa}");
+
+            return clienteTributa
+                ? new XElement(tribunet + "Receptor",
                                                              new XElement(tribunet + "Nombre", cliente.nombre),
                                                              new XElement(tribunet + "Identificacion",
                                                                           new XElement(tribunet + "Tipo", cliente.tipoIdentificacion.ToString("00")),
@@ -110,8 +114,8 @@ namespace FacElec.helpers
                                                                     new XElement(tribunet + "NumTelefono", cliente.telefono)
                                                                    ),
                                                        new XElement(tribunet + "CorreoElectronico", cliente.email)
-                                                      )
-                    : null;
+                            )
+                : null;
         }
 
         static XElement generarNotaCredito(Factura factura, XNamespace tribunet){
