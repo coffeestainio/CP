@@ -1418,7 +1418,7 @@
   </provincia>
   <provincia>
     <nombre>Heredia</nombre>
-    <codigo>1</codigo>
+    <codigo>4</codigo>
     <cantones>
       <canton>
         <nombre>Heredia</nombre>
@@ -1664,7 +1664,7 @@
   </provincia>
   <provincia>
     <nombre>Guanacaste</nombre>
-    <codigo>1</codigo>
+    <codigo>5</codigo>
     <cantones>
       <canton>
         <nombre>Liberia</nombre>

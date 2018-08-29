@@ -23,7 +23,7 @@ Module Module1
     Public Const TELEFONO As String = "2282-6030  2282-4516"
     Public Const DIRECCION As String = "100 Sur Iglesia Pozos, Santa Ana"
 
-    Public Const CEDULA = "000310115991"
+    Public Const CEDULA = "003101159911"
 
     Public Prst(4) As String
 

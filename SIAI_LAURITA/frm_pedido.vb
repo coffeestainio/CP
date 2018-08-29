@@ -210,7 +210,7 @@ Public Class frm_pedido
 
             total = tExento + tGravado + tiv
             lblproductos.Text = TPD.Rows.Count
-            lbltotal.Text = "¢ " + FormatNumber(total, 2)
+            lbltotal.Text = "â‚¡ " + FormatNumber(total, 2)
             If total > 0 And alistarFlag = False Then
                 botones(True)
             Else
@@ -284,7 +284,7 @@ Public Class frm_pedido
             .lblexento.Text = FormatNumber(tExento, 2)
             .lbldescuento.Text = FormatNumber(tdescuento, 2)
             .lbliv.Text = FormatNumber(tiv, 2)
-            .lbltotal.Text = "¢ " + FormatNumber(total, 2)
+            .lbltotal.Text = "â‚¡ " + FormatNumber(total, 2)
         End With
         pedido_totales.Show()
     End Sub
@@ -478,7 +478,7 @@ Public Class frm_pedido
         Next
 
         If Vencido > 0 Then
-            lblvencido.Text = "VENCIDO ¢" + FormatNumber(Vencido, 2)
+            lblvencido.Text = "VENCIDO â‚¡" + FormatNumber(Vencido, 2)
         Else
             lblvencido.Text = ""
         End If
@@ -504,13 +504,13 @@ Public Class frm_pedido
         End If
 
         If Val(txtid_cliente.Text) = 0 Then
-            MessageBox.Show("Debe Escribir un Código de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Debe Escribir un Codigo de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_cliente.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
         End If
         If cliente_ID <> txtid_cliente.Text Then
-            MessageBox.Show("Escriba de Nuevo el código del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Escriba de Nuevo el codigo del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_cliente.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
@@ -684,13 +684,13 @@ Public Class frm_pedido
                 Exit Sub
             End If
             If Val(txtid_cliente.Text) = 0 Then
-                MessageBox.Show("Debe Escribir un Código de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Debe Escribir un Codigo de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 txtid_cliente.Focus()
                 SendKeys.Send("{home}+{end}")
                 Exit Sub
             End If
             If cliente_ID <> txtid_cliente.Text Then
-                MessageBox.Show("Escriba de Nuevo el código del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Escriba de Nuevo el codigo del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 txtid_cliente.Focus()
                 SendKeys.Send("{home}+{end}")
                 Exit Sub
@@ -776,11 +776,6 @@ Public Class frm_pedido
             Dim Facturas As Integer = IIf(TPD.Rows.Count > 28, IIf(TPD.Rows.Count Mod 28 > 0, Int(TPD.Rows.Count / 28) + 1, TPD.Rows.Count / 28), 1)
             ReDim FS(Facturas + 1)
 
-            Dim consec As Integer = Table("select top 1 consecutivoElectronico as consecutivo from factura order by id_factura desc", "").Rows(0).Item("consecutivo")
-            consec = consec + 1
-
-            Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
-            Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345679"
 
             'Dim numConsecutivo As String = "0"
             'Dim claveNumerica As String = "0"
@@ -788,6 +783,12 @@ Public Class frm_pedido
             Dim h As Integer
 
             For h = 1 To Facturas
+
+                Dim consec As Integer = Table("select top 1 consecutivoElectronico as consecutivo from factura order by consecutivoElectronico desc", "").Rows(0).Item("consecutivo")
+                consec = consec + 1
+
+                Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
+                Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
 
                 FGravado = 0
                 FExento = 0
@@ -1003,7 +1004,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("Total")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = "¢ " + FormatNumber(FGravado + Fiv + FExento, 2)
+                rParameterDiscreteValue.Value = "â‚¡ " + FormatNumber(FGravado + Fiv + FExento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -1038,7 +1039,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("totalg")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = IIf(h = Facturas, "TOTAL GENERAL  ¢" + FormatNumber(total, 2), "")
+                rParameterDiscreteValue.Value = IIf(h = Facturas, "TOTAL GENERAL  â‚¡" + FormatNumber(total, 2), "")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -1087,7 +1088,7 @@ Public Class frm_pedido
                             rfactura.PrintToPrinter(1, False, 1, 1)
                             printed = True
                         Catch ex As Exception
-                            Dim response As MsgBoxResult = MsgBox("La impresion fallo. ¿Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresión")
+                            Dim response As MsgBoxResult = MsgBox("La impresion fallo. Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresion")
                             If response = MsgBoxResult.No Then
                                 printed = True
                             End If
