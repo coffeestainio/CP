@@ -16,25 +16,16 @@ namespace FacElec.helpers
         public static string sqlConnection;
         internal static ILog log;
 
-        public static List<Factura> GetFacturas()
+        public static List<Factura> GetFacturas(bool notaCredito)
         {
-            log.Info("Obteniendo facturas pendientes");
+            log.Info($"Obteniendo {(notaCredito ? "notas de credito" : "facturas")} pendientes");
+
+            var sqlQuery = notaCredito ? selectDevoluciones : selectFacturas;
 
             List<Factura> facturas = new List<Factura>();
             try
             {
-                var sqlQuery = "SELECT *, " +
-                    "factura_Detalle = ( " +
-                                       "select *, " +
-                                       "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
-                                       "from Factura_Detalle fd where f.id_factura = fd.id_factura " +
-                    "FOR JSON PATH ) ,    " +
-                    " cliente = ( " +
-                    "select * from cliente where cliente.id_cliente = f.id_cliente " +
-                    "FOR JSON AUTO " +
-                    ") " +
-                    " from Factura f where sincronizada = 0 " +
-                                            "For JSON PATH  ";
+
 
                 using (var connection = new SqlConnection(sqlConnection))
                 {
@@ -88,14 +79,22 @@ namespace FacElec.helpers
             }
         }
 
-        public static void updateWithError(Error error){
+        public static void updateWithError(Error error, bool notaDeCredito){
 
             log.Info("Guardando error en la base de datos");
 
             try
             {
 
-                var sqlQuery = $"update factura set " +
+                var sqlQuery = notaDeCredito ?
+                    $"update devolucion set " +
+                    $"actualizada = getDate(), " +
+                    $"sincronizada = 1 ," +
+                    $"coderror = '{error.CodigoError}' ," +
+                    $"DESCRIPCIONERROR = '{ error.DescripcionError}' " +
+                    $"where id_devolucion = {error.NumFacturaInterno}"
+                    :
+                    $"update factura set " +
                     $"actualizada = getDate(), " +
                     $"sincronizada = 1 ," +
                     $"coderror = '{error.CodigoError}' ," +
@@ -154,6 +153,32 @@ namespace FacElec.helpers
 
             return true;
         }
-      
+
+        static string selectFacturas = "SELECT *, " +
+                    "factura_Detalle = ( " +
+                                       "select *, " +
+                                       "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
+                                       "from Factura_Detalle fd where f.id_factura = fd.id_factura " +
+                    "FOR JSON PATH ) ,    " +
+                    " cliente = ( " +
+                    "select * from cliente where cliente.id_cliente = f.id_cliente " +
+                    "FOR JSON AUTO " +
+                    ") " +
+                    " from Factura f where sincronizada = 0 " +
+                                            "For JSON PATH  ";
+
+        static string selectDevoluciones = "SELECT devolucion.id_devolucion as id_factura, *, " +
+                    "devolucion_detalle = ( " +
+                                       "select *, " +
+                                       "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
+                                       "from Factura_Detalle fd where f.id_factura = fd.id_factura " +
+                    "FOR JSON PATH ) ,    " +
+                    " cliente = ( " +
+                    "select * from cliente where cliente.id_cliente = f.id_cliente " +
+                    "FOR JSON AUTO " +
+                    ") " +
+                    " from devolucion f where sincronizada = 0 " +
+                                            "For JSON PATH  ";
+
     }
 }

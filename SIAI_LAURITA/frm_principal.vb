@@ -106,6 +106,7 @@ Public Class frm_principal
         Me.btnconsulta = New System.Windows.Forms.ToolStripDropDownButton
         Me.TSMIdocumentos = New System.Windows.Forms.ToolStripMenuItem
         Me.TSMIpedidos = New System.Windows.Forms.ToolStripMenuItem
+        Me.ErroresHaciendaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripButton
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip
         Me.SLBL1 = New System.Windows.Forms.ToolStripStatusLabel
@@ -115,7 +116,6 @@ Public Class frm_principal
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Label12 = New System.Windows.Forms.Label
         Me.PictureBox11 = New System.Windows.Forms.PictureBox
-        Me.ErroresHaciendaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStrip.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -332,6 +332,12 @@ Public Class frm_principal
         Me.TSMIpedidos.Size = New System.Drawing.Size(163, 22)
         Me.TSMIpedidos.Text = "Pedidos"
         '
+        'ErroresHaciendaToolStripMenuItem
+        '
+        Me.ErroresHaciendaToolStripMenuItem.Name = "ErroresHaciendaToolStripMenuItem"
+        Me.ErroresHaciendaToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.ErroresHaciendaToolStripMenuItem.Text = "Errores Hacienda"
+        '
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
@@ -357,7 +363,7 @@ Public Class frm_principal
         Me.SLBL1.Name = "SLBL1"
         Me.SLBL1.Size = New System.Drawing.Size(1106, 17)
         Me.SLBL1.Spring = True
-        Me.SLBL1.Text = "Software by Pablo Calvo | 6059-8238 | pcalvo@artifexdigitalstudio.com"
+        Me.SLBL1.Text = "Software by Pablo Calvo | 6059-8238 | pcalvo@coffeestain.io"
         Me.SLBL1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'SLBL2
@@ -405,12 +411,6 @@ Public Class frm_principal
         Me.PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox11.TabIndex = 122
         Me.PictureBox11.TabStop = False
-        '
-        'ErroresHaciendaToolStripMenuItem
-        '
-        Me.ErroresHaciendaToolStripMenuItem.Name = "ErroresHaciendaToolStripMenuItem"
-        Me.ErroresHaciendaToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.ErroresHaciendaToolStripMenuItem.Text = "Errores Hacienda"
         '
         'frm_principal
         '

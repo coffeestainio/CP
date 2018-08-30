@@ -14,25 +14,25 @@ namespace FacElec.sync
 
         public static ILog log;
 
-        public static void SincronizarFacturas()
+        public static void SincronizarFacturas(Boolean notaCredito)
         {
 
             var facturas = new List<Factura>();
 
             var hayConexion = verificarInternet();
 
-            facturas = SqlHelper.GetFacturas();
+            facturas = SqlHelper.GetFacturas(notaCredito);
 
             if (facturas != null && facturas.Count > 0)
             {
                 foreach (Factura fac in facturas)
                 {
-                    log.Info($"** Procesando la factura: {fac.id_factura} **");
+                    log.Info($"** Procesando la {(notaCredito ? "Nota de Credito" : "Factura")}: {fac.id_factura} **");
                     var error = ValidatorHelper.validarFacturas(fac);
 
                     if (error != null)
                     {
-                        SqlHelper.updateWithError(error);
+                        SqlHelper.updateWithError(error, notaCredito);
                     }
                     else
                     {
@@ -40,21 +40,21 @@ namespace FacElec.sync
                         if (!hayConexion)
                         {
                             fac.claveNumerica = newClaveNumerica(fac.claveNumerica);
-                            SqlHelper.updateNoInternet(fac);
+                            SqlHelper.updateNoInternet(fac, notaCredito);
 
                         }
 
                         //se genera el xml el pdf se llama el proceso y se guarda la factura
-                        XmlHelper.GenerateXML(fac);
-                        PdfHelper.GeneratePDF(fac);
+                        XmlHelper.GenerateXML(fac, notaCredito);
+                        PdfHelper.GeneratePDF(fac, notaCredito);
                         AdemarHelper.CallBatchProcess(fac.claveNumerica);
-                        SqlHelper.UpdateSuccessful(fac.id_factura);
+                        SqlHelper.UpdateSuccessful(fac.id_factura, notaCredito);
                     }
 
                 }
             }
             else{
-                log.Info("No se encontraron facturas pendientes");
+                log.Info($"No se encontraron {(notaCredito ? "Notas de Credito" : "Facturas")} pendientes");
             }
 
         }

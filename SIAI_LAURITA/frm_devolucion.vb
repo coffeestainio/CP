@@ -240,12 +240,30 @@ Public Class frm_devolucion
         Dim D As DataTable
         Dim sql As String
 
+        Dim consec As Integer = Nothing
+        Try
+            consec = Table("select top 1 consecutivoElectronico as consecutivo from devolucion order by consecutivoElectronico desc", "").Rows(0).Item("consecutivo")
+            consec += 1
+        Catch
+            consec = 1
+        End Try
 
-        sql = "insert into devolucion (id_factura,fecha,id_cliente,id_usuario) values (" + _
-        txtid_factura.Text + "," + _
-        "'" + EDATE(Date.Today.ToShortDateString) + "'," + _
-        rowc("id_cliente").ToString + "," + _
-        USUARIO_ID + ")"
+
+        Dim numConsecutivo As String = "0010000103" + consec.ToString("0000000000")
+        Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
+        Dim claveNumericaFactura As String = Factura.Rows(0).Item("claveNumerica")
+        Dim clienteTributa As Boolean = Factura.Rows(0).Item("clienteTributa")
+
+
+        sql = "insert into devolucion (id_factura,fecha,id_cliente,claveNumerica,NumConsecutivo,claveNumericaFactura,clienteTributa,id_usuario) values (" + _
+        txtid_factura.Text & "," & _
+        "'" & EDATE(Date.Today.ToShortDateString) & "'," & _
+        rowc("id_cliente").ToString & "," & _
+        "'" & claveNumerica.ToString & "'," & _
+        "'" & numConsecutivo.ToString & "'," & _
+        "'" & claveNumericaFactura.ToString & "'," & _
+        "'" & clienteTributa.ToString & "'," & _
+        USUARIO_ID.ToString & ")"
 
         D = Table(sql + " select @@IDENTITY as id_devolucion", "")
         DevolucionID = D.Rows(0).Item("id_devolucion")
@@ -281,10 +299,14 @@ Public Class frm_devolucion
                 OpenConn()
                 cmd.ExecuteNonQuery()
 
-                sql = "insert into  devolucion_detalle (id_devolucion,id_producto,cantidad) values (" + _
+                sql = "insert into  devolucion_detalle (id_devolucion,id_producto, unidad, precio, descuento, IV, cantidad) values (" + _
                 DevolucionID + "," + _
                 .Item("id_producto").ToString + "," + _
-                IIf(.Item("unidad") = 1, .Item("cantidad").ToString, (.Item("cantidad") * .Item("empaque")).ToString) + ")"
+                .Item("unidad").ToString + "," + _
+                .Item("precio").ToString + "," + _
+                .Item("descuento").ToString + "," + _
+                "'" + .Item("IV").ToString + "'," + _
+                .Item("cantidad").ToString + ")"
 
 
                 cmd.CommandText = sql
@@ -296,8 +318,8 @@ Public Class frm_devolucion
             End With
         Next
 
-        imprimir(1)
-        imprimir(2)
+        'imprimir(1)
+        'imprimir(2)
 
         Me.Close()
         'Catch myerror As Exception

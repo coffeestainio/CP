@@ -24,3 +24,22 @@ update dbo.factura set consecutivoElectronico = 0;
 
 alter table dbo.factura ADD
 clienteContado bit NULL default 0;
+
+alter table devolucion add 
+Plazo int default 0,
+PIV numeric default 0,
+sincronizada int default 0,
+ClaveNumerica nvarchar(50) null,
+NumConsecutivo nvarchar (50) null,
+CodError nvarchar(50) null,
+DescripcionError nvarchar (150) null,
+Actualizada datetime default getDate() null,
+consecutivoElectronico int null,
+clienteTributa bit null,
+claveNumericaFactura nvarchar(50) null;
+
+alter table devolucion_detalle add
+unidad tinyint,
+precio numeric,
+Descuento numeric,
+IV bit;

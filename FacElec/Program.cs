@@ -17,7 +17,7 @@ namespace FacElec
         static void Main(string[] args)
         {
 
-            var ambiente = "Production";
+            var ambiente = "Development";
 
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
