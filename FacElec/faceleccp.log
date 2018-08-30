@@ -106,3 +106,99 @@
 2018-08-29 14:57:20,700 [1] ERROR FacElec.Program - No such file or directory
 2018-08-29 14:57:20,701 [1] INFO FacElec.Program - Actualizando el estado de la factura
 2018-08-29 14:57:20,821 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 15:01:32,693 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 15:01:32,756 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 15:01:32,757 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 15:02:05,954 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 15:02:07,279 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 15:02:33,298 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 15:03:54,728 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 15:03:54,780 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 15:03:54,780 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 15:04:01,814 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 15:04:02,531 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 15:04:08,727 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 15:14:47,404 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 15:14:47,454 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 15:14:47,454 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 15:14:47,472 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 15:14:48,053 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 15:15:07,758 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 15:15:09,672 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 1075908 **
+2018-08-30 15:15:09,711 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@yahoo.com
+2018-08-30 15:15:09,724 [1] INFO FacElec.Program - Telefono del cliente: 22829593
+2018-08-30 15:15:09,724 [1] INFO FacElec.Program - Identificacion del cliente: 1-000-123456 del tipo: 2
+2018-08-30 15:15:09,764 [1] INFO FacElec.Program - Generando el XML
+2018-08-30 15:15:09,767 [1] INFO FacElec.Program - Generando datos del cliente receptor: True
+2018-08-30 15:15:09,796 [1] INFO FacElec.Program - Generando el PDF
+2018-08-30 15:25:13,325 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 15:25:13,386 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 15:25:13,387 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 15:25:13,406 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 15:25:14,103 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 15:25:27,143 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 15:25:42,384 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 1075908 **
+2018-08-30 15:34:47,118 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 15:34:47,175 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 15:34:47,175 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 15:34:47,194 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 15:34:48,089 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 15:35:15,812 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 15:35:45,368 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 285 **
+2018-08-30 15:35:45,422 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@yahoo.com
+2018-08-30 15:35:45,436 [1] INFO FacElec.Program - Telefono del cliente: 22829593
+2018-08-30 15:35:45,436 [1] INFO FacElec.Program - Identificacion del cliente: 1-000-123456 del tipo: 2
+2018-08-30 15:35:45,470 [1] INFO FacElec.Program - Generando el XML
+2018-08-30 15:35:45,474 [1] INFO FacElec.Program - Generando datos del cliente receptor: True
+2018-08-30 15:35:45,507 [1] INFO FacElec.Program - Generando el PDF
+2018-08-30 15:35:48,244 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-08-30 15:35:48,535 [1] ERROR FacElec.Program - No such file or directory
+2018-08-30 15:35:48,536 [1] INFO FacElec.Program - Actualizando el estado de la Nota de credito
+2018-08-30 15:35:48,662 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito
+2018-08-30 16:08:03,929 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 16:08:03,986 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 16:08:03,986 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 16:08:04,008 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 16:08:04,613 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 16:08:32,574 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 16:08:32,636 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 16:08:33,147 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 16:08:33,237 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-30 16:08:42,582 [1] INFO FacElec.Program - No se encontraron Facturas pendientes
+2018-08-30 16:08:42,582 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 16:08:42,582 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 16:08:42,582 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 16:08:42,826 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 16:08:42,859 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 16:08:43,197 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 286 **
+2018-08-30 16:08:43,234 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@yahoo.com
+2018-08-30 16:08:43,250 [1] INFO FacElec.Program - Telefono del cliente: 22829593
+2018-08-30 16:08:43,252 [1] INFO FacElec.Program - Identificacion del cliente: 1-000-123456 del tipo: 2
+2018-08-30 16:08:43,289 [1] INFO FacElec.Program - Generando el XML
+2018-08-30 16:08:43,292 [1] INFO FacElec.Program - Generando datos del cliente receptor: True
+2018-08-30 16:08:43,381 [1] INFO FacElec.Program - Generando el PDF
+2018-08-30 16:08:46,281 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-08-30 16:08:46,496 [1] ERROR FacElec.Program - No such file or directory
+2018-08-30 16:08:46,497 [1] INFO FacElec.Program - Actualizando el estado de la Nota de credito
+2018-08-30 16:08:46,684 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito
+2018-08-30 16:24:19,584 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-30 16:24:19,658 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 16:24:20,378 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 16:24:20,471 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-30 16:24:22,338 [1] INFO FacElec.Program - No se encontraron Facturas pendientes
+2018-08-30 16:24:22,338 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-30 16:24:22,338 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-08-30 16:24:22,338 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-30 16:24:22,785 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-30 16:24:22,796 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-08-30 16:24:23,250 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 289 **
+2018-08-30 16:24:23,287 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@yahoo.com
+2018-08-30 16:24:23,300 [1] INFO FacElec.Program - Telefono del cliente: 22829593
+2018-08-30 16:24:23,300 [1] INFO FacElec.Program - Identificacion del cliente: 1-000-123456 del tipo: 2
+2018-08-30 16:24:23,336 [1] INFO FacElec.Program - Generando el XML
+2018-08-30 16:24:23,339 [1] INFO FacElec.Program - Generando datos del cliente receptor: True
+2018-08-30 16:24:23,369 [1] INFO FacElec.Program - Generando el PDF
+2018-08-30 16:24:25,304 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-08-30 16:24:25,639 [1] ERROR FacElec.Program - No such file or directory
+2018-08-30 16:24:25,640 [1] INFO FacElec.Program - Actualizando el estado de la Nota de credito
+2018-08-30 16:24:25,822 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito

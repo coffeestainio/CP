@@ -525,7 +525,7 @@ Public Class frm_consulta_documento
         TDD.Columns.Add(Monto)
 
         Dim Producto As DataTable
-        Producto = Table("select * from producto order by id", "id")
+        Producto = Table("select * from producto order by id_producto", "id_producto")
         Dim FD As DataTable
         FD = Table("select * from factura_detalle where id_factura=" + factura_id.ToString + "order by id_producto", "id_producto")
 
@@ -544,10 +544,8 @@ Public Class frm_consulta_documento
                 rowdd("Presentacion") = rowp("presentacion")
                 rowdd("Nombre") = rowp("nombre")
                 rowdd("PreCio") = rowfd("preCio")
-                rowdd("descuento1") = rowfd("descuento1") * 100
-                rowdd("descuento2") = rowfd("descuento2") * 100
+                rowdd("descuento") = rowfd("descuento") * 100
                 rowdd("iv") = rowfd("iv")
-                rowdd("comision") = rowfd("comision")
                 TDD.Rows.Add(rowdd)
             End With
         Next

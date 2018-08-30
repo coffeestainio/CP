@@ -17,7 +17,7 @@ namespace FacElec
         static void Main(string[] args)
         {
 
-            var ambiente = "Development";
+            var ambiente = "Production";
 
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
@@ -31,10 +31,12 @@ namespace FacElec
             SqlHelper.sqlConnection = Configuration.GetConnectionString(ambiente);
 
             log.Info("Ejecutando el servicio de sincronizacion de facturas");
-
-            Sincronizador.SincronizarFacturas();
-
+            Sincronizador.SincronizarDocumentos(false);
             log.Info("Finalizando el servicio de sincronizacion de facturas");
+
+            log.Info("Ejecutando el servicio de sincronizacion de notas de credito");
+            Sincronizador.SincronizarDocumentos(true);
+            log.Info("Finalizando el servicio de sincronizacion de credito");
 
         }
 

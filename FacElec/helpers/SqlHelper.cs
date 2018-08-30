@@ -56,14 +56,20 @@ namespace FacElec.helpers
         }
 
 
-        public static void updateNoInternet (Factura fac){
+        public static void updateNoInternet (Factura fac, bool notaCredito){
             log.Info("Guardando nueva ClaveNumerica (Sin internet)");
             try
             {
 
-                var sqlQuery = $"update factura set " +
+                var sqlQuery = notaCredito ?
+                    $"update devolucion set " +
                     $"claveNumerica = '{fac.claveNumerica}' " +
-                    $"where id_factura = {fac.id_factura}";
+                    $"where id_devolucion = {fac.id_documento}"
+                    :
+                    $"update factura set " +
+                    $"claveNumerica = '{fac.claveNumerica}' " +
+                    $"where id_factura = {fac.id_documento}"
+                    ;
 
                 using (var connection = new SqlConnection(sqlConnection))
                 {
@@ -120,19 +126,28 @@ namespace FacElec.helpers
             }
         }
 
-        public static bool UpdateSuccessful(string idFactura)
+        public static bool UpdateSuccessful(string idFactura, bool notaDeCredito)
         {
-            log.Info($"Actualizando el estado de la factura");
+            log.Info($"Actualizando el estado de la {(notaDeCredito ? "Nota de credito" : "Factura")}");
 
             try
             {
-
-                var sqlQuery = $"update factura set " +
+                var sqlQuery = notaDeCredito
+                    ?
+                    $"update devolucion set " +
                     $"sincronizada = 1 ," +
                     $"coderror = 'Error:00' ," +
                     $"DESCRIPCIONERROR = 'No error', " +
                     $"actualizada = getDate() " +
-                    $"where id_factura = {idFactura}";
+                    $"where id_devolucion = {idFactura}"
+                    :
+                    $"update factura set " +
+                    $"sincronizada = 1 ," +
+                    $"coderror = 'Error:00' ," +
+                    $"DESCRIPCIONERROR = 'No error', " +
+                    $"actualizada = getDate() " +
+                    $"where id_factura = {idFactura}"
+                    ;
 
                 using (var connection = new SqlConnection(sqlConnection))
                 {
@@ -154,7 +169,7 @@ namespace FacElec.helpers
             return true;
         }
 
-        static string selectFacturas = "SELECT *, " +
+        static string selectFacturas = "SELECT f.id_factura as id_documento, *, " +
                     "factura_Detalle = ( " +
                                        "select *, " +
                                        "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
@@ -167,11 +182,11 @@ namespace FacElec.helpers
                     " from Factura f where sincronizada = 0 " +
                                             "For JSON PATH  ";
 
-        static string selectDevoluciones = "SELECT devolucion.id_devolucion as id_factura, *, " +
-                    "devolucion_detalle = ( " +
+        static string selectDevoluciones = "SELECT f.id_devolucion as id_documento, *, " +
+                    "factura_detalle = ( " +
                                        "select *, " +
                                        "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +
-                                       "from Factura_Detalle fd where f.id_factura = fd.id_factura " +
+                                       "from devolucion_Detalle fd where f.id_devolucion = fd.id_devolucion " +
                     "FOR JSON PATH ) ,    " +
                     " cliente = ( " +
                     "select * from cliente where cliente.id_cliente = f.id_cliente " +

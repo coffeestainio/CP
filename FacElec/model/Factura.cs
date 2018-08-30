@@ -6,7 +6,7 @@ namespace FacElec.model
 {
     public class Factura
     {
-        public string id_factura;
+        public string id_documento;
         public int id_cliente;
         public int plazo;
         public string fecha;
@@ -29,11 +29,14 @@ namespace FacElec.model
         public bool conError;
         public string codigoError;
         public string descripcionError;
+        public string claveNumericaFactura;
+        public string fechaEmisionFactura;
 
-        public Factura(string id_factura, int id_cliente, int plazo, DateTime fecha , decimal pIV, List<factura_Detalle> factura_Detalle, List<cliente> cliente,
-                       int sincronizada, string claveNumerica, string numConsecutivo, bool clienteTributa)
+        public Factura(string id_documento, int id_cliente, int plazo, DateTime fecha , decimal pIV, List<factura_Detalle> factura_Detalle, List<cliente> cliente,
+                       int sincronizada, string claveNumerica, string numConsecutivo, bool clienteTributa, string claveNumericaFactura,
+                       DateTime fechaEmisionFactura)
         {
-            this.id_factura = id_factura;
+            this.id_documento = id_documento;
             this.id_cliente = id_cliente;
             this.plazo = plazo;
             this.fecha = $"{fecha.ToString("yyyy-MM-dd")}T{fecha.ToString("HH:mm:ss")}";
@@ -44,6 +47,8 @@ namespace FacElec.model
             this.claveNumerica = claveNumerica;
             this.numConsecutivo = numConsecutivo;
             this.clienteTributa = clienteTributa;
+            this.claveNumericaFactura = claveNumericaFactura;
+            this.fechaEmisionFactura = $"{fechaEmisionFactura.ToString("yyyy-MM-dd")}T{fechaEmisionFactura.ToString("HH:mm:ss")}"; ;
 
             condicionVenta = (plazo == 0)? 1:2;
 

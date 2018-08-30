@@ -12,7 +12,7 @@ namespace FacElec.helpers
     {
         internal static ILog log;
 
-        public static bool GeneratePDF(Factura factura)
+        public static bool GeneratePDF(Factura factura, bool notadeCredito)
         {
             log.Info($"Generando el PDF");
 
@@ -21,6 +21,10 @@ namespace FacElec.helpers
             string formatedId = formatIndentificacion(cliente);
             string humanizedTotal = humanizeTotal(factura);
             string formatedDireccion = XmlHelper.formatedDireccion(cliente);
+
+            string consecutivoFactura = notadeCredito
+                         ? factura.claveNumericaFactura.Substring(21, 20)
+                         : "";
 
             try
             {
@@ -34,8 +38,9 @@ namespace FacElec.helpers
                              </head>
                              <body>
                                 <div class='header row'>
-                                    <h1>Factura Electronica No {0}</h1>
+                                    <h1>{0}</h1>
                                     <h1>Clave Numerica {1}</h1>
+                                    {10}
                                     <h3 class='date'><strong>Fecha de emision:</strong> {2}</h3>
                                 </div>
                                 <div class='header row'>
@@ -79,12 +84,15 @@ namespace FacElec.helpers
                                         <th>Precio Unitario</th>
                                         <th>Descuento</th>
                                         <th>SubTotal</th>
-                                    </tr>", factura.numConsecutivo, factura.claveNumerica, factura.fecha,
+                                    </tr>", 
+                                $"{(notadeCredito ? "Nota de Credito": "Factura")} No {factura.numConsecutivo}", 
+                                factura.claveNumerica, factura.fecha,
                                 cliente.nombre,
                                 formatedId,
                                 cliente.telefono, cliente.email, formatedDireccion,
-                                factura.id_factura,
-                                $"{(factura.plazo == 0 ? "Contado" : $"Credito a {factura.plazo} dias plazo")}");
+                                factura.id_documento,
+                                $"{(factura.plazo == 0 ? "Contado" : $"Credito a {factura.plazo} dias plazo")}",
+                                notadeCredito ? $"<h1>Factura de Referencia: {consecutivoFactura}" : "");
 
                 foreach (factura_Detalle detalle in factura.factura_Detalle)
                 {
@@ -135,7 +143,7 @@ namespace FacElec.helpers
                                                 <td class='toti'>{3}</td>
                                             </tr>
                                             <tr class='row-totales'>
-                                                <td class ='toti'><strong>Total Factura:</strong></td>
+                                                <td class ='toti'><strong>Total {7}:</strong></td>
                                                 <td> ₡</td>
                                                 <td class='toti'>{4}</td>
                                             </tr>                                       
@@ -153,7 +161,8 @@ namespace FacElec.helpers
                                 factura.totalImpuestos.ToString("N2"),
                                 factura.totalComprobante.ToString("N2"),
                                 humanizedTotal,
-                                (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : ""
+                                (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : "",
+                                notadeCredito ? "Nota de Credito" : "Factura"
                                );
 
                 var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
@@ -231,7 +240,14 @@ namespace FacElec.helpers
         static string humanizeTotal(Factura factura)
         {
 
-            var decimales = (factura.totalComprobante - Math.Truncate(factura.totalComprobante)).ToString().Remove(0, 2).Remove(2);
+            var decimales = (factura.totalComprobante - Math.Truncate(factura.totalComprobante)).ToString().Remove(0, 2);
+            try
+            {
+                decimales = decimales.Remove(2);
+            }
+            catch {
+                
+            }
             return int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords(new System.Globalization.CultureInfo("es")) +
                                        $" con {int.Parse(decimales).ToWords(new System.Globalization.CultureInfo("es"))}" +
                       " decimos";

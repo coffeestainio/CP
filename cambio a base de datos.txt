@@ -36,10 +36,11 @@ DescripcionError nvarchar (150) null,
 Actualizada datetime default getDate() null,
 consecutivoElectronico int null,
 clienteTributa bit null,
+fechaEmisionFactura datetime null,
 claveNumericaFactura nvarchar(50) null;
 
 alter table devolucion_detalle add
 unidad tinyint,
-precio numeric,
-Descuento numeric,
+precio decimal,
+Descuento decimal,
 IV bit;

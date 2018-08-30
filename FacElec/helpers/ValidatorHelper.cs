@@ -28,7 +28,7 @@ namespace FacElec.helpers
                     //validate phone
                     if (regex.Match(cliente.telefono.Trim().Replace("-", "")) == Match.Empty)
                     {
-                        return (new Error(factura.id_factura, "Error:002", "Formato del numero incorrecto"));
+                        return (new Error(factura.id_documento, "Error:002", "Formato del numero incorrecto"));
                     }
 
                     log.Info($"Identificacion del cliente: {cliente.identificacion} del tipo: {cliente.tipoIdentificacion}");
@@ -37,7 +37,7 @@ namespace FacElec.helpers
                     if (cliente.tipoIdentificacion == 3 &&
                         regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
                     {
-                        return (new Error(factura.id_factura, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
+                        return (new Error(factura.id_documento, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
                     }
 
                     regex = new Regex(@"^[0-9]{10}$");
@@ -45,7 +45,7 @@ namespace FacElec.helpers
                     if (cliente.tipoIdentificacion == 2 &&
                         regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
                     {
-                        return (new Error(factura.id_factura, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
+                        return (new Error(factura.id_documento, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
                     }
 
                     regex = new Regex(@"^[0-9]{9}$");
@@ -53,7 +53,7 @@ namespace FacElec.helpers
                     if (cliente.tipoIdentificacion == 1 &&
                         regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
                     {
-                        return (new Error(factura.id_factura, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
+                        return (new Error(factura.id_documento, "Error:003", "El formato de la cedula no corresponde al tipo de identificacion"));
                     }
 
 
@@ -62,12 +62,12 @@ namespace FacElec.helpers
                 catch (FormatException ex)
                 {
                     log.Error(ex.Message);
-                    return new Error(factura.id_factura, "Error:001", "Formato del correo incorrecto");
+                    return new Error(factura.id_documento, "Error:001", "Formato del correo incorrecto");
                 }
                 catch (NullReferenceException ex)
                 {
                     log.Error(ex.Message);
-                    return new Error(factura.id_factura, "Error:004", "Unhaldled exception");
+                    return new Error(factura.id_documento, "Error:004", "Unhaldled exception");
                 }
             }
                 

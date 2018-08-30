@@ -6,15 +6,15 @@ Imports System.math
 Module Module1
 
 
-    'Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2;Persist Security Info=True"
-    Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test2;Persist Security Info=False;User ID=CPSQL;Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2;Persist Security Info=True"
+    'Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test2;Persist Security Info=False;User ID=CPSQL;Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     'Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2Viejo;Persist Security Info=True"
     'Public Const SERVER As String = "server=SERVER01\SQL2017;User ID=sa;password=SQLCP12345!;Database=CP;Persist Security Info=True"
 
 
     Public Const PRINTER As String = "S1"
 
-    Public Const Version As String = "4.2.08.07 Pruebas Facturacion - Prod"
+    Public Const Version As String = "4.2.08.07 Pruebas Facturacion - Prod Dev"
 
     Public Const NEGOCIO As String = "COMERCIAL POZOS S.A."
 
@@ -107,6 +107,7 @@ Module Module1
         'Return "01/01/2000"
         'End Try
     End Function
+
 
     Public Sub AddParams(ByVal cmd As SqlCommand, ByVal ParamArray cols() As String)
         Try
@@ -549,15 +550,6 @@ Module Module1
 
                 DevD = Table("select * from devolucion_detalle where id_devolucion=" + .Item("id_devolucion").ToString + " order by id_producto", "")
 
-                Dim precio As DataColumn = New DataColumn("precio")
-                precio.DataType = System.Type.GetType("System.Decimal")
-                DevD.Columns.Add(precio)
-
-                Dim descuento As DataColumn = New DataColumn("descuento")
-                descuento.DataType = System.Type.GetType("System.Decimal")
-                DevD.Columns.Add(descuento)
-
-
 
                 Dim ddiv As DataColumn = New DataColumn("ddiv")
                 ddiv.DataType = System.Type.GetType("System.Boolean")
@@ -759,8 +751,6 @@ Module Module1
         Dim schema As DataTable = reader.GetSchemaTable()
         Dim columns(schema.Rows.Count - 1) As DataColumn
         Dim column As DataColumn
-
-
 
 
         For i As Integer = 0 To columns.GetUpperBound(0) Step 1

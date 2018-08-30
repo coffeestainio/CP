@@ -13,7 +13,7 @@ namespace FacElec.helpers
     {
         internal static ILog log;
 
-        public static bool GenerateXML(Factura factura)
+        public static bool GenerateXML(Factura factura, bool notaDeCredito)
         {
             log.Info($"Generando el XML");
 
@@ -21,13 +21,15 @@ namespace FacElec.helpers
             {
                 var cliente = factura.cliente[0];
 
-                XNamespace tribunet = "https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica";
+                XNamespace tribunet = notaDeCredito 
+                    ? "https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/notaCreditoElectronica"
+                    : "https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica";
                 XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
                 XNamespace xsd = "http://www.w3.org/2001/XMLSchema";
 
                 var xmlDoc = new XDocument(
                         new XDeclaration("1.0", "utf-8", ""),
-                        new XElement(tribunet + "FacturaElectronica",                                               
+                    new XElement(tribunet + (notaDeCredito ? "NotaCreditoElectronica" : "FacturaElectronica"),                                               
                                               new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                                               new XAttribute(XNamespace.Xmlns + "xsd", xsd),
 
@@ -76,6 +78,7 @@ namespace FacElec.helpers
                                                                         new XElement(tribunet + "TotalImpuesto", factura.totalImpuestos),
                                                                         new XElement(tribunet + "TotalComprobante", factura.totalComprobante)
                                                                          ),
+                                                           notaDeCredito ? generateRefencia(factura, tribunet) : null,
                                                            new XElement(tribunet + "Normativa",
                                                                         new XElement(tribunet + "NumeroResolucion", "DGT-R-48-2016"),
                                                                         new XElement(tribunet + "FechaResolucion", "2016-10-07 10:22:22"))
@@ -118,16 +121,14 @@ namespace FacElec.helpers
                 : null;
         }
 
-        static XElement generarNotaCredito(Factura factura, XNamespace tribunet){
-            if (factura.notaCredito)
-                return new XElement(tribunet + "InformacionDeReferencia",
-                                    new XElement(tribunet + "Referencia",
-                                                 new XElement(tribunet + "TipoDocRef", 3),
-                                                 new XElement(tribunet + "NumeroDeReferencia", 1),
-                                                 new XElement(tribunet + "CodigoReferencia", "01")
-                                                )
-                                   );
-            return new XElement(tribunet + "InformacionDeReferencia", null);
+        static XElement generateRefencia(Factura factura, XNamespace tribunet)
+        {
+            return new XElement(tribunet + "InformacionReferencia",
+                                             new XElement(tribunet + "TipoDoc", 3),
+                                             new XElement(tribunet + "Numero", factura.claveNumericaFactura),
+                                             new XElement(tribunet + "FechEmision", factura.fechaEmisionFactura),
+                                             new XElement(tribunet + "CodigoReferencia", "03")
+                               );
         }
 
         private static XElement GenerateDetailsXml(List<factura_Detalle> detalles, XNamespace tribunet){
@@ -140,7 +141,8 @@ namespace FacElec.helpers
                                      new XElement(tribunet + "NumeroLinea", i),
                                      new XElement(tribunet + "Codigo",
                                                   new XElement(tribunet + "Tipo", "01"),
-                                                  new XElement(tribunet + "Codigo", "01")
+                                                  new XElement(tribunet + "Codigo", "01"),
+                                                  new XElement(tribunet + "Razon", "Devolucion")
                                                  ),
 
                                      new XElement(tribunet + "Cantidad", $"{detalle.cantidad.ToString("00")}.00"),

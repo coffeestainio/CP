@@ -39,10 +39,10 @@ Public Class frm_devolucion
 
     Public Sub Identifica_Factura()
 
-        Factura = FACM("factura.id_factura=" + txtid_factura.Text, True, "")
+        Factura = FACM(" factura.id_factura=" + txtid_factura.Text + " and factura.sincronizada = 1 and coderror = 'Error:00'", True, "")
 
         If Factura.Rows.Count = 0 Then
-            MessageBox.Show("Factura No Existe", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Factura No Existe o No ha sido enviada a hacienda", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_factura.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
@@ -253,14 +253,17 @@ Public Class frm_devolucion
         Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
         Dim claveNumericaFactura As String = Factura.Rows(0).Item("claveNumerica")
         Dim clienteTributa As Boolean = Factura.Rows(0).Item("clienteTributa")
+        Dim fechaEmisionFactura As String = " (select fecha from factura where id_factura = " + txtid_factura.Text + ")"
 
 
-        sql = "insert into devolucion (id_factura,fecha,id_cliente,claveNumerica,NumConsecutivo,claveNumericaFactura,clienteTributa,id_usuario) values (" + _
+        sql = "insert into devolucion (id_factura,fecha,id_cliente,fechaEmisionFactura, claveNumerica,NumConsecutivo,consecutivoElectronico, claveNumericaFactura,clienteTributa,id_usuario) values (" + _
         txtid_factura.Text & "," & _
-        "'" & EDATE(Date.Today.ToShortDateString) & "'," & _
+        "getDate()," & _
         rowc("id_cliente").ToString & "," & _
+        "" & fechaEmisionFactura & "," & _
         "'" & claveNumerica.ToString & "'," & _
         "'" & numConsecutivo.ToString & "'," & _
+         consec.ToString & "," & _
         "'" & claveNumericaFactura.ToString & "'," & _
         "'" & clienteTributa.ToString & "'," & _
         USUARIO_ID.ToString & ")"
@@ -318,8 +321,8 @@ Public Class frm_devolucion
             End With
         Next
 
-        'imprimir(1)
-        'imprimir(2)
+        imprimir(1)
+        imprimir(2)
 
         Me.Close()
         'Catch myerror As Exception
@@ -561,16 +564,16 @@ Public Class frm_devolucion
             rParameterValues.Add(rParameterDiscreteValue)
             rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-            If ID_ESTACION = 1 Then
-                rdevolucion.PrintOptions.PrinterName = "REPORTES"
-            Else
-                rdevolucion.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
-            End If
-            rdevolucion.PrintToPrinter(1, False, 1, 1)
+            'If ID_ESTACION = 1 Then
+            '    rdevolucion.PrintOptions.PrinterName = "REPORTES"
+            'Else
+            '    rdevolucion.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
+            'End If
+            'rdevolucion.PrintToPrinter(1, False, 1, 1)
 
-            'Dim rv As New frm_Report_Viewer
-            'rv.crv.ReportSource = rdevolucion
-            'rv.Show()
+            Dim rv As New frm_Report_Viewer
+            rv.crv.ReportSource = rdevolucion
+            rv.Show()
 
         Catch myerror As Exception
             ONEX(Me.Name, myerror)

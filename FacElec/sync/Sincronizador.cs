@@ -14,7 +14,7 @@ namespace FacElec.sync
 
         public static ILog log;
 
-        public static void SincronizarFacturas(Boolean notaCredito)
+        public static void SincronizarDocumentos(Boolean notaCredito)
         {
 
             var facturas = new List<Factura>();
@@ -27,7 +27,7 @@ namespace FacElec.sync
             {
                 foreach (Factura fac in facturas)
                 {
-                    log.Info($"** Procesando la {(notaCredito ? "Nota de Credito" : "Factura")}: {fac.id_factura} **");
+                    log.Info($"** Procesando la {(notaCredito ? "Nota de Credito" : "Factura")}: {fac.id_documento} **");
                     var error = ValidatorHelper.validarFacturas(fac);
 
                     if (error != null)
@@ -48,7 +48,7 @@ namespace FacElec.sync
                         XmlHelper.GenerateXML(fac, notaCredito);
                         PdfHelper.GeneratePDF(fac, notaCredito);
                         AdemarHelper.CallBatchProcess(fac.claveNumerica);
-                        SqlHelper.UpdateSuccessful(fac.id_factura, notaCredito);
+                        SqlHelper.UpdateSuccessful(fac.id_documento, notaCredito);
                     }
 
                 }
