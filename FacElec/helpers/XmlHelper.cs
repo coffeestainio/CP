@@ -99,7 +99,7 @@ namespace FacElec.helpers
                                                              new XElement(tribunet + "Nombre", cliente.nombre),
                                                              new XElement(tribunet + "Identificacion",
                                                                           new XElement(tribunet + "Tipo", cliente.tipoIdentificacion.ToString("00")),
-                                                                          new XElement(tribunet + "Numero", cliente.identificacion)
+                                                                          new XElement(tribunet + "Numero", cliente.identificacion.Trim().Replace("-",""))
                                                                          ),
                                                        new XElement(tribunet + "NombreComercial", cliente.nombre),
                                                        new XElement(tribunet + "Ubicacion",
@@ -111,7 +111,7 @@ namespace FacElec.helpers
                                                                    ),
                                                        new XElement(tribunet + "Telefono",
                                                                     new XElement(tribunet + "CodigoPais", "506"),
-                                                                    new XElement(tribunet + "NumTelefono", cliente.telefono)
+                                                                    new XElement(tribunet + "NumTelefono", cliente.telefono.Trim().Replace("-",""))
                                                                    ),
                                                        new XElement(tribunet + "CorreoElectronico", cliente.email)
                             )

@@ -4,6 +4,8 @@ using FacElec.model;
 using FacElec.helpers;
 using System.Xml.Linq;
 using log4net;
+using System.Net;
+using System.Text;
 
 namespace FacElec.sync
 {
@@ -16,6 +18,8 @@ namespace FacElec.sync
         {
 
             var facturas = new List<Factura>();
+
+            var hayConexion = verificarInternet();
 
             facturas = SqlHelper.GetFacturas();
 
@@ -32,6 +36,15 @@ namespace FacElec.sync
                     }
                     else
                     {
+                        //si no hay internet se cambia la situacion de envio a 3
+                        if (!hayConexion)
+                        {
+                            fac.claveNumerica = newClaveNumerica(fac.claveNumerica);
+                            SqlHelper.updateNoInternet(fac);
+
+                        }
+
+                        //se genera el xml el pdf se llama el proceso y se guarda la factura
                         XmlHelper.GenerateXML(fac);
                         PdfHelper.GeneratePDF(fac);
                         AdemarHelper.CallBatchProcess(fac.claveNumerica);
@@ -45,5 +58,32 @@ namespace FacElec.sync
             }
 
         }
+
+        private static string newClaveNumerica(string oldClaveNumerica){
+            var sb = new StringBuilder(oldClaveNumerica);
+            sb[41] = '3';
+            return sb.ToString();
+        }
+
+        private static bool verificarInternet()
+        {
+            log.Info("Verificando conexion a intenet");
+
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://www.google.com"))
+                {
+                    log.Info("Conexion exitosa");
+                    return true;
+                }
+            }
+            catch
+            {
+                log.Warn("No se pudo conectar a internet");
+                return false;
+            }
+        }
+
     }
 }

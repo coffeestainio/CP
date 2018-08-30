@@ -12,11 +12,8 @@ namespace FacElec.helpers
 {
     public static class SqlHelper
     {
-        private const string V = "server=Server01\\SQLExpress;User ID = sa; password=SQLCP123456!;Database=CP2;Persist Security Info=True";
 
-        //private const string V = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog = cp2_test2; Persist Security Info=False;User ID = CPSQL; Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-
-        private const string sqlConnection = V;
+        public static string sqlConnection;
         internal static ILog log;
 
         public static List<Factura> GetFacturas()
@@ -65,6 +62,30 @@ namespace FacElec.helpers
 
 
             return facturas;
+        }
+
+
+        public static void updateNoInternet (Factura fac){
+            log.Info("Guardando nueva ClaveNumerica (Sin internet)");
+            try
+            {
+
+                var sqlQuery = $"update factura set " +
+                    $"claveNumerica = '{fac.claveNumerica}' " +
+                    $"where id_factura = {fac.id_factura}";
+
+                using (var connection = new SqlConnection(sqlConnection))
+                {
+                    var command = new SqlCommand(sqlQuery, connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
         }
 
         public static void updateWithError(Error error){

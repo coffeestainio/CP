@@ -44,3 +44,65 @@
 2018-08-28 17:24:05,744 [1] INFO FacElec.Program - Obteniendo facturas pendientes
 2018-08-28 17:24:08,217 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
 2018-08-28 17:24:08,307 [1] INFO FacElec.Program - Generando el XML
+2018-08-29 14:38:48,331 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-29 14:38:48,415 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-29 14:39:04,978 [1] WARN FacElec.Program - No se pudo conectar a internet
+2018-08-29 14:39:15,542 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-29 14:39:31,021 [1] ERROR FacElec.Program - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 25 - Connection string is not valid)
+2018-08-29 14:39:31,021 [1] INFO FacElec.Program - No se encontraron facturas pendientes
+2018-08-29 14:39:31,021 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-29 14:45:58,678 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-29 14:45:58,756 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-29 14:46:03,327 [1] WARN FacElec.Program - No se pudo conectar a internet
+2018-08-29 14:46:03,391 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-29 14:46:05,928 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-29 14:46:05,969 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@puebas.com
+2018-08-29 14:46:05,982 [1] INFO FacElec.Program - Telefono del cliente: 28228880
+2018-08-29 14:46:05,982 [1] INFO FacElec.Program - Identificacion del cliente: 113900206 del tipo: 1
+2018-08-29 14:46:58,808 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-29 14:46:58,868 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-29 14:47:07,632 [1] WARN FacElec.Program - No se pudo conectar a internet
+2018-08-29 14:47:07,688 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-29 14:47:09,888 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-29 14:47:09,919 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@puebas.com
+2018-08-29 14:47:09,928 [1] INFO FacElec.Program - Telefono del cliente: 28228880
+2018-08-29 14:47:09,929 [1] INFO FacElec.Program - Identificacion del cliente: 113900206 del tipo: 1
+2018-08-29 14:47:49,158 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-29 14:47:49,220 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-29 14:47:49,736 [1] WARN FacElec.Program - No se pudo conectar a internet
+2018-08-29 14:47:49,792 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-29 14:47:52,253 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-29 14:47:52,298 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@puebas.com
+2018-08-29 14:47:52,307 [1] INFO FacElec.Program - Telefono del cliente: 28228880
+2018-08-29 14:47:52,308 [1] INFO FacElec.Program - Identificacion del cliente: 113900206 del tipo: 1
+2018-08-29 14:53:29,462 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-29 14:53:29,537 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-29 14:53:30,119 [1] WARN FacElec.Program - No se pudo conectar a internet
+2018-08-29 14:53:30,180 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-29 14:53:33,073 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-29 14:53:33,112 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@puebas.com
+2018-08-29 14:53:33,131 [1] INFO FacElec.Program - Telefono del cliente: 28228880
+2018-08-29 14:53:33,131 [1] INFO FacElec.Program - Identificacion del cliente: 113900206 del tipo: 1
+2018-08-29 14:53:33,132 [1] INFO FacElec.Program - Guardando nueva ClaveNumerica (Sin internet)
+2018-08-29 14:54:10,518 [1] INFO FacElec.Program - Generando el XML
+2018-08-29 14:54:10,521 [1] INFO FacElec.Program - Generando datos del cliente receptor: True
+2018-08-29 14:54:13,686 [1] INFO FacElec.Program - Generando el PDF
+2018-08-29 14:54:16,417 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-08-29 14:54:16,692 [1] ERROR FacElec.Program - No such file or directory
+2018-08-29 14:54:16,693 [1] INFO FacElec.Program - Actualizando el estado de la factura
+2018-08-29 14:54:16,798 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-08-29 14:57:15,088 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-08-29 14:57:15,169 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-08-29 14:57:15,647 [1] INFO FacElec.Program - Conexion exitosa
+2018-08-29 14:57:15,768 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-08-29 14:57:18,476 [1] INFO FacElec.Program - ** Procesando la factura: 1075909 **
+2018-08-29 14:57:18,512 [1] INFO FacElec.Program - Correo del cliente: pjcalvo@puebas.com
+2018-08-29 14:57:18,525 [1] INFO FacElec.Program - Telefono del cliente: 28228880
+2018-08-29 14:57:18,526 [1] INFO FacElec.Program - Identificacion del cliente: 113900206 del tipo: 1
+2018-08-29 14:57:18,561 [1] INFO FacElec.Program - Generando el XML
+2018-08-29 14:57:18,565 [1] INFO FacElec.Program - Generando datos del cliente receptor: True
+2018-08-29 14:57:18,596 [1] INFO FacElec.Program - Generando el PDF
+2018-08-29 14:57:20,502 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-08-29 14:57:20,700 [1] ERROR FacElec.Program - No such file or directory
+2018-08-29 14:57:20,701 [1] INFO FacElec.Program - Actualizando el estado de la factura
+2018-08-29 14:57:20,821 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas

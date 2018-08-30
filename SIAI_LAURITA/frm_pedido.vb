@@ -1096,14 +1096,14 @@ Public Class frm_pedido
                     End While
                     ''impresion
 
-                    '        Else
+                Else
 
-                    'Dim filePath As String = getSaveLocation()
-                    'If filePath <> "" Then
-                    '    rfactura.ExportToDisk(ExportFormatType.PortableDocFormat, filePath)
-                    '    rfactura.Dispose()
-                    '    rfactura.Close()
-                    'End If
+                    Dim filePath As String = getSaveLocation()
+                    If filePath <> "" Then
+                        rfactura.ExportToDisk(ExportFormatType.PortableDocFormat, filePath)
+                        rfactura.Dispose()
+                        rfactura.Close()
+                    End If
 
 
                     'Dim rv As New frm_Report_Viewer
