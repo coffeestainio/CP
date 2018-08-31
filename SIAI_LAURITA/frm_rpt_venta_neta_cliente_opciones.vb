@@ -21,7 +21,7 @@ Public Class frm_rpt_venta_neta_cliente_opciones
 
     Private Sub btnaceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaceptar.Click
         btnaceptar.Enabled = False
-        Criterio = "fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:01' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+        Criterio = "fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
         CriterioNC = "fecha>='" + EDATE(Dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
 
         If Val(txtid_cliente.Text) > 0 Then

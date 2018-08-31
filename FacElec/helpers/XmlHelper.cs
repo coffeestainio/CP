@@ -127,7 +127,8 @@ namespace FacElec.helpers
                                              new XElement(tribunet + "TipoDoc", "01"),
                                              new XElement(tribunet + "Numero", factura.claveNumericaFactura),
                                              new XElement(tribunet + "FechEmision", factura.fechaEmisionFactura),
-                                             new XElement(tribunet + "CodigoReferencia", "03")
+                                             new XElement(tribunet + "Codigo", "03"),
+                                             new XElement(tribunet + "Razon", "Devolucion")
                                );
         }
 
@@ -141,8 +142,7 @@ namespace FacElec.helpers
                                      new XElement(tribunet + "NumeroLinea", i),
                                      new XElement(tribunet + "Codigo",
                                                   new XElement(tribunet + "Tipo", "01"),
-                                                  new XElement(tribunet + "Codigo", "01"),
-                                                  new XElement(tribunet + "Razon", "Devolucion")
+                                                  new XElement(tribunet + "Codigo", detalle.producto[0].id_producto)
                                                  ),
 
                                      new XElement(tribunet + "Cantidad", $"{detalle.cantidad.ToString("00")}.00"),

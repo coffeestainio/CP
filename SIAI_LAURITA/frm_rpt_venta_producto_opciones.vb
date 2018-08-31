@@ -34,7 +34,7 @@ Public Class frm_rpt_venta_producto_opciones
         Dim c4 As String = ""
 
 
-        C1 = " fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:01' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+        C1 = " fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
         If Val(txtid_proveedor.Text) > 0 Then c2 = c2 + "  producto.id_proveedor=" + txtid_proveedor.Text
         If Val(txtid_linea.Text) > 0 Then c2 = c2 + IIf(c2 = "", "", " and ") + " producto.id_linea=" + txtid_linea.Text
         If Val(txtid_producto.Text) > 0 Then c2 = " producto.id_producto='" + txtid_producto.Text + "'"

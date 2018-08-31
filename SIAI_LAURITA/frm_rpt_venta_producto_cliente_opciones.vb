@@ -25,7 +25,7 @@ Public Class frm_rpt_venta_producto_cliente_opciones
         Dim C2 As String = ""
         Dim C3 As String = ""
         Dim c4 As String = ""
-        C1 = " fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:01' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+        C1 = " fecha>='" + EDATE(Dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
 
 
         If Val(txtid_cliente.Text) > 0 Then C1 = C1 + " and id_cliente=" + txtid_cliente.Text

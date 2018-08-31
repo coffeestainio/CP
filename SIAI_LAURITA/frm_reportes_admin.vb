@@ -230,7 +230,7 @@ Public Class frm_reportes_admin
             Case "rbfactura"
                 Dim factura As DataTable
                 Dim rfactura As New rpt_facturas
-                Criterio = " factura.fecha>='" + EDATE(dtpdesde.Text) + " 00:00:01' and factura.fecha<='" + EDATE(dtphasta.Text) + " 23:59:29'"
+                Criterio = " factura.fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and factura.fecha<='" + EDATE(dtphasta.Text) + " 23:59:29'"
                 factura = FACM(Criterio, True, "")
 
 
@@ -331,7 +331,7 @@ Public Class frm_reportes_admin
             Case "rbdevolucion"
                 Dim devolucion As DataTable
                 Dim rdevolucion As New rpt_devoluciones
-                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
+                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
                 devolucion = DEVM(Criterio, True, "")
 
                 Dim nombre_sociedad As DataColumn = New DataColumn("nombre_sociedad")
@@ -611,7 +611,7 @@ Public Class frm_reportes_admin
                 Dim ClienteId As String
 
                 ClienteId = "General"
-                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:01' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
                 criterionc = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
 
 
@@ -655,7 +655,7 @@ Public Class frm_reportes_admin
             Case "rbgrafico"
                 Dim rgrafico As New rpt_grafico
 
-                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:01' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
 
                 V_Venta_Neta_crear()
                 rgrafico.SetDataSource(V_venta_neta)
