@@ -124,7 +124,7 @@ namespace FacElec.helpers
         static XElement generateRefencia(Factura factura, XNamespace tribunet)
         {
             return new XElement(tribunet + "InformacionReferencia",
-                                             new XElement(tribunet + "TipoDoc", 3),
+                                             new XElement(tribunet + "TipoDoc", "01"),
                                              new XElement(tribunet + "Numero", factura.claveNumericaFactura),
                                              new XElement(tribunet + "FechEmision", factura.fechaEmisionFactura),
                                              new XElement(tribunet + "CodigoReferencia", "03")
