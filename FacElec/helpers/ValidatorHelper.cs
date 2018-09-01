@@ -32,7 +32,7 @@ namespace FacElec.helpers
                     }
 
                     log.Info($"Identificacion del cliente: {cliente.identificacion} del tipo: {cliente.tipoIdentificacion}");
-                    regex = new Regex(@"^[0-9]{17}$");
+                    regex = new Regex(@"^[0-9]{12}$");
                     //validate identificacion
                     if (cliente.tipoIdentificacion == 3 &&
                         regex.Match(cliente.identificacion.Trim().Replace("-", "")) == Match.Empty)
