@@ -511,7 +511,7 @@ Module Module1
         sql = "select devolucion.id_devolucion,devolucion.fecha,devolucion.id_cliente,devolucion.id_factura,devolucion.id_nota_credito,cliente.nombre, " + _
         " CASE WHEN NOT EXISTS (SELECT * FROM Reversion WHERE reversion.Tipo = 8 AND reversion.id_documento = devolucion.id_devolucion) THEN 0 ELSE 1 END AS anulado" + _
         " from devolucion inner join cliente on devolucion.id_cliente=cliente.id_cliente " + _
-        IIf(C = "", "", " and " + C) + _
+        IIf(C = "", "", " where " + C) + _
         IIf(Anulados, "", " and NOT EXISTS (SELECT * FROM Reversion  WHERE reversion.Tipo = 8 and reversion.id_documento=devolucion.id_devolucion)")
 
 

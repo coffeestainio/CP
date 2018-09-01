@@ -22,8 +22,6 @@ namespace FacElec.helpers
                 proc.StartInfo.FileName = "C:\\DSign\\ExeFirmaFactura\\FacturaElectronicaCR_CS.exe";
                 proc.StartInfo.Arguments = batCommand;
                 proc.Start();
-                proc.WaitForExit();
-                proc.Kill();
 
             }
             catch (Exception ex){

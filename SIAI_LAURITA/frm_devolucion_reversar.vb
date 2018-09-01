@@ -31,7 +31,7 @@ Public Class frm_devolucion_reversar
     Public Sub Identifica_Movimiento()
         'Try
 
-        Dev = DEVM("where id_devolucion=" + txtid_movimiento.Text, True, "")
+        Dev = DEVM(" id_devolucion=" + txtid_movimiento.Text, True, "")
 
         If Dev.Rows.Count = 0 Then
             MessageBox.Show("Devolución No Existe", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -54,8 +54,8 @@ Public Class frm_devolucion_reversar
             Devd_Completar()
 
 
-            Cliente = Table("Select nombre_comercial from cliente where id_cliente=" + F.Rows(0).Item("id_cliente").ToString, "")
-            lblid_cliente.Text = F.Rows(0).Item("id_cliente").ToString + " - " + Cliente.Rows(0).Item("nombre_comercial")
+            Cliente = Table("Select nombre from cliente where id_cliente=" + F.Rows(0).Item("id_cliente").ToString, "")
+            lblid_cliente.Text = F.Rows(0).Item("id_cliente").ToString + " - " + Cliente.Rows(0).Item("nombre")
             Totales()
             movimiento_ID = txtid_movimiento.Text
             lblfactura.Text = .Item("id_factura").ToString
@@ -129,31 +129,13 @@ Public Class frm_devolucion_reversar
 
     Private Sub Devd_Completar()
 
-        Dim precio As DataColumn = New DataColumn("precio")
-        precio.DataType = System.Type.GetType("System.Decimal")
-        Devd.Columns.Add(precio)
-
-        Dim descuento1 As DataColumn = New DataColumn("descuento1")
-        descuento1.DataType = System.Type.GetType("System.Decimal")
-        Devd.Columns.Add(descuento1)
-
-        Dim descuento2 As DataColumn = New DataColumn("descuento2")
-        descuento2.DataType = System.Type.GetType("System.Decimal")
-        Devd.Columns.Add(descuento2)
-
-        Dim iv As DataColumn = New DataColumn("iv")
-        iv.DataType = System.Type.GetType("System.Boolean")
-        Devd.Columns.Add(iv)
-
-
         Dim rowfd As DataRow
         Dim z As Integer
         For z = 0 To Devd.Rows.Count - 1
             With Devd.Rows(z)
                 rowfd = FD.Rows.Find(.Item("id_producto"))
                 .Item("precio") = rowfd("precio")
-                .Item("descuento1") = rowfd("descuento2")
-                .Item("descuento2") = rowfd("descuento2")
+                .Item("descuento") = rowfd("descuento")
                 .Item("iv") = rowfd("iv")
 
             End With
@@ -180,8 +162,7 @@ Public Class frm_devolucion_reversar
             For i = 0 To Devd.Rows.Count - 1
                 With Devd.Rows(i)
                     m = .Item("precio") * .Item("cantidad")
-                    d1 = m * (.Item("descuento1") / 100)
-                    d2 = (m - d1) * (.Item("descuento2") / 100)
+                    d1 = m * (.Item("descuento") / 100)
                     mf = m - d1 - d2
                     If .Item("iv") Then
                         TGravado = TGravado + m
@@ -190,12 +171,11 @@ Public Class frm_devolucion_reversar
                         TExento = TExento + mf
                     End If
                     Tdescuento1 = Tdescuento1 + d1
-                    Tdescuento2 = Tdescuento2 + d2
                     productos = productos + 1
                 End With
             Next i
 
-            total = TGravado + TExento - Tdescuento1 - Tdescuento2 + Tiv
+            total = TGravado + TExento - Tdescuento1 - +Tiv
             
         Catch myerror As Exception
             ONEX(Me.Name, myerror)

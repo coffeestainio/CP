@@ -699,7 +699,7 @@ Public Class frm_pedido
             Dim hacienda As Boolean = True
 
             Dim res As DialogResult
-            res = MessageBox.Show("Desea incluir emisor en la factura?", "Sistema de Facturacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            res = MessageBox.Show("Desea incluir RECEPTOR en la factura?", "Sistema de Facturacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
             If res = Windows.Forms.DialogResult.Cancel Then
                 Exit Sub

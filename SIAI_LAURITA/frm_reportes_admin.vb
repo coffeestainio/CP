@@ -332,7 +332,9 @@ Public Class frm_reportes_admin
                 Dim devolucion As DataTable
                 Dim rdevolucion As New rpt_devoluciones
                 Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+                Dim cliente As DataTable = Table("select id_cliente,nombre from cliente", "id_cliente")
                 devolucion = DEVM(Criterio, True, "")
+
 
                 Dim nombre_sociedad As DataColumn = New DataColumn("nombre_sociedad")
                 nombre_sociedad.DataType = System.Type.GetType("System.String")
@@ -341,7 +343,7 @@ Public Class frm_reportes_admin
                 Dim rowc As DataRow
                 For z = 0 To devolucion.Rows.Count - 1
                     With devolucion.Rows(z)
-                        rowc = Cliente.Rows.Find(.Item("id_cliente"))
+                        rowc = cliente.Rows.Find(.Item("id_cliente"))
                         .Item("nombre_sociedad") = rowc("nombre")
                     End With
                 Next
@@ -354,6 +356,13 @@ Public Class frm_reportes_admin
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
                 rParameterDiscreteValue.Value = "Del " + dtpdesde.Text + " al " + dtphasta.Text
+                rParameterValues.Add(rParameterDiscreteValue)
+                rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
+
+                rParameterFieldLocation = rParameterFieldDefinitions.Item("NEGOCIO")
+                rParameterValues = rParameterFieldLocation.CurrentValues
+                rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
+                rParameterDiscreteValue.Value = "Comercial Pozos"
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 

@@ -304,6 +304,7 @@ Public Class frm_principal
         Me.TSMdevolucion_reversar.Name = "TSMdevolucion_reversar"
         Me.TSMdevolucion_reversar.Size = New System.Drawing.Size(205, 22)
         Me.TSMdevolucion_reversar.Text = "Reversar Devolución"
+        Me.TSMdevolucion_reversar.Visible = False
         '
         'tsmireversar_nc
         '

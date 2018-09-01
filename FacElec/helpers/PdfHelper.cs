@@ -39,34 +39,34 @@ namespace FacElec.helpers
                              <body>
                                 <div class='header row'>
                                     <h1>{0}</h1>
-                                    <h1>Clave Numerica {1}</h1>
+                                    <h1>Clave Numérica {1}</h1>
                                     {10}
-                                    <h3 class='date'><strong>Fecha de emision:</strong> {2}</h3>
+                                    <h3 class='date'><strong>Fecha de emisión:</strong> {2}</h3>
                                 </div>
                                 <div class='header row'>
                                     <div class='col-50'>
                                         <h1><strong>Comercial Pozos, S.A</strong></h1>
                                         <h2><strong>Comercial Pozos, S.A</strong></h2>
-                                        <h2><strong>Cedula Juridica: </strong> 3-101-123133</h2>
+                                        <h2><strong>Cédula Jurídica: </strong> 3-101-123133</h2>
                                     </div>
                                     <div class='col-50'>
-                                       <h2><strong>Telefono: </strong>+(506) 60598239</h2> 
-                                       <h2><strong>Correo: </strong>pablo@calvo.com</h2>
-                                       <h2><strong>Direccion: </strong>Ahi por comercial pozos, cerquita cerquita</h2>  
+                                       <h2><strong>Tel.: </strong>2282-6030 / 2282-4516 / 2282-1420 / 2282-1889 / 2282-4571 </h2> 
+                                       <h2><strong>Correo: </strong>comercialpozos2@hotmail.com</h2>
+                                       <h2><strong>Direccion: </strong>San José, Santa Ana, Pozos. 100 metros sur de la iglesia de pozos.</h2>  
                                     </div>
                                 </div>
                                 
                                  <div class='header row'>
                                     <div class='col-50'>
                                        <h2><strong>Receptor: </strong>{3}</h2> 
-                                       <h2><strong>Identificacion: </strong>{4}</h2>
-                                       <h2><strong>Telefono: </strong>{5}</h2>
+                                       <h2><strong>Identificación: </strong>{4}</h2>
+                                       <h2><strong>Teléfono: </strong>{5}</h2>
                                        <h2><strong>Correo: </strong>{6}</h2>
-                                       <h2><strong>Direccion: </strong>{7}</h2>
+                                       <h2><strong>Dirección: </strong>{7}</h2>
                                     </div>
                                     <div class='col-50'>
-                                       <h2><strong>Numero de referencia: </strong>{8}</h2> 
-                                       <h2><strong>Condicion de venta: </strong>{9}</h2>  
+                                       <h2><strong>Número de referencia: </strong>{8}</h2> 
+                                       <h2><strong>Condición de venta: </strong>{9}</h2>  
                                     </div>
                                 </div>
 
@@ -76,22 +76,22 @@ namespace FacElec.helpers
 
                                 <table align='center'>
                                     <tr class='table-header'>
-                                        <th>Codigo</th>
+                                        <th>Código</th>
                                         <th>Cantidad</th>
                                         <th>Unidad Medida</th>
-                                        <th>Descipcion del Producto</th>
+                                        <th>Descipción del Producto</th>
                                         <th>Consumidor</th>
                                         <th>Precio Unitario</th>
                                         <th>Descuento</th>
                                         <th>SubTotal</th>
                                     </tr>", 
-                                $"{(notadeCredito ? "Nota de Credito": "Factura")} No {factura.numConsecutivo}", 
+                                $"{(notadeCredito ? "Nota de Crédito" : "Factura")} No {factura.numConsecutivo}", 
                                 factura.claveNumerica, factura.fecha,
                                 cliente.nombre,
                                 formatedId,
                                 cliente.telefono, cliente.email, formatedDireccion,
                                 factura.id_documento,
-                                $"{(factura.plazo == 0 ? "Contado" : $"Credito a {factura.plazo} dias plazo")}",
+                                $"{(factura.plazo == 0 ? "Contado" : $"Crédito a {factura.plazo} dias plazo")}",
                                 notadeCredito ? $"<h1>Factura de Referencia: {consecutivoFactura}" : "");
 
                 foreach (factura_Detalle detalle in factura.factura_Detalle)
@@ -151,8 +151,8 @@ namespace FacElec.helpers
                                        <p>{5}</p>
                                 </div>                              
                                 <div class='header foota'>
-                                    <h1>Emitida confirme lo establecido en la resolucion de Facturacion Eletronica, No DGT-R-48-2016 siete de octubre
-                                        de dos mil dieciseis de la Direccion General de Tributacion</h1>                     
+                                    <h1>Emitida confirme lo establecido en la resolución de Facturación Electrónica, No DGT-R-48-2016 siete de octubre
+                                        de dos mil dieciseis de la Direccion General de Tributación</h1>                     
                                 </div>
                             </body>
                         </html>", factura.totalGravado.ToString("N2"),
@@ -162,7 +162,7 @@ namespace FacElec.helpers
                                 factura.totalComprobante.ToString("N2"),
                                 humanizedTotal,
                                 (factura.totalDescuentos > 0) ? "<strong>Motivo del descuento: </strong>Pronto Pago" : "",
-                                notadeCredito ? "Nota de Credito" : "Factura"
+                                notadeCredito ? "Nota de Crédito" : "Factura"
                                );
 
                 var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
