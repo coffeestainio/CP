@@ -126,7 +126,7 @@ namespace FacElec.helpers
             return new XElement(tribunet + "InformacionReferencia",
                                              new XElement(tribunet + "TipoDoc", "01"),
                                              new XElement(tribunet + "Numero", factura.claveNumericaFactura),
-                                             new XElement(tribunet + "FechEmision", factura.fechaEmisionFactura),
+                                             new XElement(tribunet + "FechaEmision", factura.fechaEmisionFactura),
                                              new XElement(tribunet + "Codigo", "03"),
                                              new XElement(tribunet + "Razon", "Devolucion")
                                );
