@@ -901,13 +901,15 @@ Public Class frm_pedido
 
                     With TPD.Rows(z)
 
-                        m = .Item("precio") * .Item("cantidad")
-                        d = m * (.Item("descuento") / 100)
+                        m = .Item("precio") * .Item("cantidad") * (1 - .Item("descuento") / 100)
+                        d = .Item("precio") * .Item("cantidad") * (.Item("descuento") / 100)
+
+                        .Item("precio") = .Item("precio") * (1 - .Item("descuento") / 100)
 
                         mf = m
                         If .Item("iv") Then
                             FGravado = FGravado + mf
-                            Fiv = Fiv + ((mf - d) * PIV)
+                            Fiv = Fiv + (mf * PIV)
                         Else
                             FExento = FExento + mf
                         End If
@@ -1026,7 +1028,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("Total")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = "₡ " + FormatNumber(FGravado + Fiv + FExento - Fdescuento, 2)
+                rParameterDiscreteValue.Value = "₡ " + FormatNumber(FGravado + Fiv + FExento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -1088,38 +1090,45 @@ Public Class frm_pedido
                 'rv.crv.ReportSource = rfactura
                 'rv.Show()
 
-
                 If imprimir Then
 
-                    Dim printed As Boolean = False
-                    While Equals(printed, False)
-                        Try
-                            If ID_ESTACION = 1 Then
-                                If Doc = "P" Then
-                                    rfactura.PrintOptions.PrinterName = "REPORTES"
-                                Else
-                                    rfactura.PrintOptions.PrinterName = "FACTURAS"
-                                End If
-                            Else
-                                If Doc = "P" Then
-                                    rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
-                                Else
-                                    rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\FACTURAS"
-                                End If
-                            End If
+                    If Produccion Then
 
-                            ' impresion 
+                        Dim printed As Boolean = False
+                        While Equals(printed, False)
+                            Try
+                                If ID_ESTACION = 1 Then
+                                    If Doc = "P" Then
+                                        rfactura.PrintOptions.PrinterName = "REPORTES"
+                                    Else
+                                        rfactura.PrintOptions.PrinterName = "FACTURAS"
+                                    End If
+                                Else
+                                    If Doc = "P" Then
+                                        rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
+                                    Else
+                                        rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\FACTURAS"
+                                    End If
+                                End If
 
-                            rfactura.PrintToPrinter(1, False, 1, 1)
-                            printed = True
-                        Catch ex As Exception
-                            Dim response As MsgBoxResult = MsgBox("La impresion fallo. Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresion")
-                            If response = MsgBoxResult.No Then
+                                ' impresion 
+
+                                rfactura.PrintToPrinter(1, False, 1, 1)
                                 printed = True
-                            End If
-                        End Try
-                    End While
-                    ''impresion
+                            Catch ex As Exception
+                                Dim response As MsgBoxResult = MsgBox("La impresion fallo. Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresion")
+                                If response = MsgBoxResult.No Then
+                                    printed = True
+                                End If
+                            End Try
+                        End While
+
+                    Else
+                        Dim rv As New frm_Report_Viewer
+                        rv.crv.ReportSource = rfactura
+                        rv.Show()
+
+                    End If
 
                 Else
 
@@ -1131,12 +1140,7 @@ Public Class frm_pedido
                     End If
 
 
-                    'Dim rv As New frm_Report_Viewer
-                    'rv.crv.ReportSource = rfactura
-                    'rv.Show()
-
                 End If
-
 
             Next h
         Catch myerror As Exception

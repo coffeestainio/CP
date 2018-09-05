@@ -18,7 +18,11 @@ Public Class frm_Pedido_descproductop
                 Dim selectedRows As DataGridViewSelectedRowCollection = .dtgpedido.SelectedRows
                 If selectedRows.Count = 1 Then
                     Dim row As DataRow = .TPD.Rows.Find(lblid_producto.Text)
+                    Dim descuento As Decimal = row("consumidor") * Val(txtdescuento.Text) / 100
+
                     row("descuento") = Val(txtdescuento.Text)
+                    row("consumidor") = row("consumidor") - descuento
+
                 Else
                     For Each row As DataGridViewRow In selectedRows
 

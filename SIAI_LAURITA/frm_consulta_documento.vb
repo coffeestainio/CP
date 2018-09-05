@@ -444,6 +444,7 @@ Public Class frm_consulta_documento
 
         Dim rowp As DataRow
         Dim rowtpd As DataRow
+        Dim descuentos As Decimal
         Dim z As Integer
         For z = 0 To FD.Rows.Count - 1
             With FD.Rows(z)
@@ -483,6 +484,8 @@ Public Class frm_consulta_documento
                 End If
                 rowtpd("nombre") = rowp("nombre")
                 rowtpd("consumidor") = rowp("costo") * (1 + util) / rowp("empaque") / rowp("sub_empaque") * (1 + rowp("detalle")) * (1 + IIf(rowp("iv"), FIV, 0))
+                descuentos = rowtpd("consumidor") * rowp("descuento")
+                rowtpd("consumidor") = rowtpd("consumidor") - descuentos
             End With
         Next
         'Catch myerror As Exception
