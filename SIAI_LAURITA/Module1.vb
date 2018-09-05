@@ -14,7 +14,7 @@ Module Module1
 
     Public Const PRINTER As String = "S1"
 
-    Public Const Version As String = "4.2.08.31 Facturacion - Prod"
+    Public Const Version As String = "4.3.09.04 Facturacion con Hacienda"
 
     Public Const NEGOCIO As String = "COMERCIAL POZOS S.A."
 
@@ -212,13 +212,13 @@ Module Module1
         " ELSE  0 END) AS exento," + _
         "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
         "ELSE  0 END) AS gravado, " + _
-        "SUM((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD) AS subtotal," + _
-        "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * FACTURA.PIV " + _
+        "SUM((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * (1 - Factura_Detalle.Descuento)) AS subtotal," + _
+        "SUM(CASE WHEN factura_detalle.iv = 1 THEN ((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD) * FACTURA.PIV " + _
         "ELSE 0 END) AS IV," + _
-        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
-        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) END) AS MONTO, " + _
-        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
-        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) END) " + _
+        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * (1 - Factura_Detalle.Descuento) " + _
+        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) * (1 - Factura_Detalle.Descuento) END) AS MONTO, " + _
+        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) *  Factura_Detalle.CANTIDAD * (1 - Factura_Detalle.Descuento) " + _
+        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) * (1 - Factura_Detalle.Descuento) END) " + _
         " - (select isnull(sum (R.abono),0) from recibo_Detalle as R where R.id_Factura = FACTURA.id_factura " + _
         " and R.id_Recibo not in (select id_documento as id_recibo from reversion where tipo = 4)) " + _
         " - (select isnull(sum (NC.aplicado),0) from nota_credito_Detalle as NC where NC.id_Factura = FACTURA.id_factura) as SALDO, " + _
@@ -247,7 +247,7 @@ Module Module1
 
     Public Function FACM(ByVal C As String, ByVal Anulados As Boolean, ByVal PK As String) As DataTable
         Dim sql As String
-        sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.clienteTributa, " + _
+        sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa, " + _
         "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
         " ELSE  0 END) AS exento," + _
         "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
@@ -262,7 +262,7 @@ Module Module1
         " INNER JOIN CLIENTE ON Factura.Id_Cliente = CLIENTE.Id_Cliente " + _
         IIf(Anulados, "", " and NOT EXISTS (SELECT * FROM Reversion  WHERE reversion.Tipo = 2 and reversion.id_documento=factura.id_factura)") + _
         IIf(C = "", "", " and " + C) + _
-        " GROUP BY Factura.Id_Factura, Factura.FECHA, Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.clienteTributa"
+        " GROUP BY Factura.Id_Factura, Factura.FECHA, Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa"
 
 
         Dim Tbl As DataTable = Table(sql, PK)

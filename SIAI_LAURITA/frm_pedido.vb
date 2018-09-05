@@ -18,6 +18,8 @@ Public Class frm_pedido
     Public rowc As DataRow
 
     Dim FS(0) As String
+    Dim FK(0) As String
+    Dim FC(0) As String
 
     Dim alistarFlag As Boolean = False
 
@@ -35,6 +37,8 @@ Public Class frm_pedido
     Dim Alistar As String
     Public Fecha As String
     Public FacturaID As String
+    Public facturaClave As String
+    Public facturaConsecutivo As String
     Public PedidoID As String
     Public PIV As Decimal
     Public PMensaje As String
@@ -199,7 +203,8 @@ Public Class frm_pedido
                     mf = m
                     If .Item("iv") Then
                         tGravado = tGravado + mf
-                        tiv = tiv + mf * PIV
+                        'tiv = tiv + mf * PIV
+                        tiv = tiv + ((mf - d) * PIV)
                     Else
                         tExento = tExento + mf
                     End If
@@ -208,7 +213,7 @@ Public Class frm_pedido
                 End With
             Next i
 
-            total = tExento + tGravado + tiv
+            total = tExento + tGravado + tiv - tdescuento
             lblproductos.Text = TPD.Rows.Count
             lbltotal.Text = "₡ " + FormatNumber(total, 2)
             If total > 0 And alistarFlag = False Then
@@ -775,6 +780,8 @@ Public Class frm_pedido
 
             Dim Facturas As Integer = IIf(TPD.Rows.Count > 28, IIf(TPD.Rows.Count Mod 28 > 0, Int(TPD.Rows.Count / 28) + 1, TPD.Rows.Count / 28), 1)
             ReDim FS(Facturas + 1)
+            ReDim FK(Facturas + 1)
+            ReDim FC(Facturas + 1)
 
 
             'Dim numConsecutivo As String = "0"
@@ -789,6 +796,7 @@ Public Class frm_pedido
 
                 Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
                 Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
+
 
                 FGravado = 0
                 FExento = 0
@@ -811,7 +819,11 @@ Public Class frm_pedido
                 F = Table(Sql & " select @@IDENTITY as id_factura", "")
 
                 FacturaID = F.Rows(0).Item("id_factura")
+                FacturaClave = claveNumerica
+                FacturaConsecutivo = numConsecutivo
                 FS(h) = FacturaID
+                FK(h) = facturaClave
+                FC(h) = facturaConsecutivo
 
                 LI = 28 * (h - 1)
                 LS = IIf((LI + 27) >= TPD.Rows.Count, TPD.Rows.Count - 1, LI + 27)
@@ -890,12 +902,12 @@ Public Class frm_pedido
                     With TPD.Rows(z)
 
                         m = .Item("precio") * .Item("cantidad")
-
+                        d = m * (.Item("descuento") / 100)
 
                         mf = m
                         If .Item("iv") Then
                             FGravado = FGravado + mf
-                            Fiv = Fiv + mf * PIV
+                            Fiv = Fiv + ((mf - d) * PIV)
                         Else
                             FExento = FExento + mf
                         End If
@@ -913,7 +925,21 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("documento")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = IIf(Doc = "P", "PROFORMA", "")
+                If (Doc = "P") Then
+                    rParameterDiscreteValue.Value = "PROFORMA"
+                Else
+                    If Consulta Then
+                        rParameterDiscreteValue.Value = "ClaveNumerica: " + facturaClave + vbCrLf + "Consecutivo: " + facturaConsecutivo
+                    Else
+                        If Doc = "F" Then
+                            rParameterDiscreteValue.Value = "ClaveNumerica: " + FK(h) + vbCrLf + "Consecutivo: " + FC(h)
+                        Else
+                            rParameterDiscreteValue.Value = ""
+                        End If
+
+                    End If
+                End If
+
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -948,8 +974,6 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-
-
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("contado")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
@@ -964,14 +988,12 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("telefono")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
                 rParameterDiscreteValue.Value = rowc("telefono")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
-
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("gravado")
                 rParameterValues = rParameterFieldLocation.CurrentValues
@@ -997,14 +1019,14 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("descuento")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = ""
+                rParameterDiscreteValue.Value = FormatNumber(Fdescuento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("Total")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = "₡ " + FormatNumber(FGravado + Fiv + FExento, 2)
+                rParameterDiscreteValue.Value = "₡ " + FormatNumber(FGravado + Fiv + FExento - Fdescuento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -1022,8 +1044,6 @@ Public Class frm_pedido
                     End If
 
                 End If
-
-
 
 
                 rParameterValues.Add(rParameterDiscreteValue)
@@ -1063,6 +1083,11 @@ Public Class frm_pedido
                 rParameterDiscreteValue.Value = IIf(Consulta, "", M3)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
+
+                'Dim rv As New frm_Report_Viewer
+                'rv.crv.ReportSource = rfactura
+                'rv.Show()
+
 
                 If imprimir Then
 

@@ -172,6 +172,8 @@ Public Class frm_consulta_documento
 
                     .Totales()
                     .FacturaID = rowf("id_factura").ToString
+                    .facturaClave = rowf("claveNumerica").ToString
+                    .facturaConsecutivo = rowf("numConsecutivo").ToString
                     .pnencabezado.Enabled = False
                     .botones(False)
                     .btnimprimir.Visible = True

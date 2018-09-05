@@ -5,7 +5,9 @@ Public Class frm_pedido_descgeneralp
             With myForms.frm_pedido
                 Dim z As Integer
                 For z = 0 To .TPD.Rows.Count - 1
+                    Dim descuento As Decimal = .TPD.Rows(z).Item("consumidor") * Val(txtdescuento.Text) / 100
                     .TPD.Rows(z).Item("descuento") = Val(txtdescuento.Text)
+                    .TPD.Rows(z).Item("consumidor") = .TPD.Rows(z).Item("consumidor") - descuento
                 Next
                 .lbldescg.Text = txtdescuento.Text
             End With

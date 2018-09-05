@@ -25,7 +25,9 @@ Public Class frm_Pedido_descproductop
                         Dim codigo As String = row.Cells("id_producto").Value
 
                         Dim trow As DataRow = .TPD.Rows.Find(codigo)
+                        Dim descuento As Decimal = trow("consumidor") * Val(txtdescuento.Text) / 100
                         trow("descuento") = Val(txtdescuento.Text)
+                        trow("consumidor") = trow("consumidor") - descuento
                     Next
                 End If
             End With
