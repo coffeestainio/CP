@@ -468,7 +468,6 @@ Public Class frm_pedido
         'End Try
     End Sub
 
-
     Private Sub Estado()
         Dim Vencido As Decimal = 0.0
         Dim criterio As String = "(factura.id_cliente=" + rowc("id_cliente").ToString + ")"
@@ -819,8 +818,8 @@ Public Class frm_pedido
                 F = Table(Sql & " select @@IDENTITY as id_factura", "")
 
                 FacturaID = F.Rows(0).Item("id_factura")
-                FacturaClave = claveNumerica
-                FacturaConsecutivo = numConsecutivo
+                facturaClave = claveNumerica
+                facturaConsecutivo = numConsecutivo
                 FS(h) = FacturaID
                 FK(h) = facturaClave
                 FC(h) = facturaConsecutivo
@@ -902,14 +901,15 @@ Public Class frm_pedido
                     With TPD.Rows(z)
 
                         m = .Item("precio") * .Item("cantidad")
-                        d = .Item("precio") * .Item("cantidad") * (.Item("descuento") / 100)
+                        d = m * (.Item("descuento") / 100)
 
-                        '.Item("precio") = .Item("precio") * (1 - .Item("descuento") / 100)
+                        Dim consumidor As Decimal = .Item("consumidor") - (.Item("consumidor") * .Item("descuento") / 100)
+                        .Item("consumidor") = consumidor
 
                         mf = m
                         If .Item("iv") Then
                             FGravado = FGravado + mf
-                            Fiv = Fiv + (mf * PIV)
+                            Fiv = Fiv + ((mf - d) * PIV)
                         Else
                             FExento = FExento + mf
                         End If

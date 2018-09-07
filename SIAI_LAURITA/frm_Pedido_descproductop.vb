@@ -18,10 +18,10 @@ Public Class frm_Pedido_descproductop
                 Dim selectedRows As DataGridViewSelectedRowCollection = .dtgpedido.SelectedRows
                 If selectedRows.Count = 1 Then
                     Dim row As DataRow = .TPD.Rows.Find(lblid_producto.Text)
-                    Dim descuento As Decimal = row("consumidor") * Val(txtdescuento.Text) / 100
+                    'Dim descuento As Decimal = row("consumidor") * Val(txtdescuento.Text) / 100
 
                     row("descuento") = Val(txtdescuento.Text)
-                    row("consumidor") = row("consumidor") - descuento
+                    'row("consumidor") = row("consumidor") - descuento
 
                 Else
                     For Each row As DataGridViewRow In selectedRows
@@ -29,9 +29,9 @@ Public Class frm_Pedido_descproductop
                         Dim codigo As String = row.Cells("id_producto").Value
 
                         Dim trow As DataRow = .TPD.Rows.Find(codigo)
-                        Dim descuento As Decimal = trow("consumidor") * Val(txtdescuento.Text) / 100
+                        '  Dim descuento As Decimal = trow("consumidor") * Val(txtdescuento.Text) / 100
                         trow("descuento") = Val(txtdescuento.Text)
-                        trow("consumidor") = trow("consumidor") - descuento
+                        '   trow("consumidor") = trow("consumidor") - descuento
                     Next
                 End If
             End With
