@@ -484,7 +484,7 @@ Public Class frm_consulta_documento
                 End If
                 rowtpd("nombre") = rowp("nombre")
                 rowtpd("consumidor") = rowp("costo") * (1 + util) / rowp("empaque") / rowp("sub_empaque") * (1 + rowp("detalle")) * (1 + IIf(rowp("iv"), FIV, 0))
-                descuentos = rowtpd("consumidor") * rowp("descuento")
+                descuentos = rowtpd("consumidor") * rowtpd("descuento") / 100
                 rowtpd("consumidor") = rowtpd("consumidor") - descuentos
             End With
         Next

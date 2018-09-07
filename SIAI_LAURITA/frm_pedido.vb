@@ -901,10 +901,10 @@ Public Class frm_pedido
 
                     With TPD.Rows(z)
 
-                        m = .Item("precio") * .Item("cantidad") * (1 - .Item("descuento") / 100)
+                        m = .Item("precio") * .Item("cantidad")
                         d = .Item("precio") * .Item("cantidad") * (.Item("descuento") / 100)
 
-                        .Item("precio") = .Item("precio") * (1 - .Item("descuento") / 100)
+                        '.Item("precio") = .Item("precio") * (1 - .Item("descuento") / 100)
 
                         mf = m
                         If .Item("iv") Then
@@ -1028,7 +1028,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("Total")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = "₡ " + FormatNumber(FGravado + Fiv + FExento, 2)
+                rParameterDiscreteValue.Value = "₡ " + FormatNumber(FGravado + Fiv + FExento - Fdescuento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
