@@ -168,8 +168,6 @@ Public Class frm_inventario
 
                 rowtpd("precio") = .Item("precio")
 
-                Dim util As Decimal
-
                 rowtpd("nombre") = rowp("nombre")
                 rowtpd("empaque") = rowp("empaque")
 

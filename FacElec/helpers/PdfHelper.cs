@@ -45,9 +45,9 @@ namespace FacElec.helpers
                                 </div>
                                 <div class='header row'>
                                     <div class='col-50'>
-                                        <h1><strong>Comercial Pozos, S.A</strong></h1>
-                                        <h2><strong>Comercial Pozos, S.A</strong></h2>
-                                        <h2><strong>Cédula Jurídica: </strong> 3-101-123133</h2>
+                                        <h1><strong>Comercial Pozos de Santa Ana S.A</strong></h1>
+                                        <h2><strong>Comercial Pozos de Santa Ana S.A</strong></h2>
+                                        <h2><strong>Cédula Jurídica: </strong> 3-101-159911</h2>
                                     </div>
                                     <div class='col-50'>
                                        <h2><strong>Tel.: </strong>2282-6030 / 2282-4516 / 2282-1420 / 2282-1889 / 2282-4571 </h2> 

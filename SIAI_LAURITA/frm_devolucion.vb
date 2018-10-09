@@ -109,7 +109,7 @@ Public Class frm_devolucion
         Try
             Dim mf As Decimal
             Dim m As Decimal = 0
-            'Dim d As Decimal = 0
+            Dim d As Decimal = 0
 
 
             Dim productos As Decimal = 0
@@ -123,20 +123,20 @@ Public Class frm_devolucion
             For i = 0 To devolucion.Rows.Count - 1
                 With devolucion.Rows(i)
                     m = .Item("precio") * .Item("cantidad")
-                    'd = m * (.Item("descuento") / 100)
+                    d = m * (.Item("descuento") / 100)
                     mf = m
                     If .Item("iv") Then
                         TGravado = TGravado + mf
-                        Tiv = Tiv + mf * PIV
+                        Tiv = Tiv + ((mf - d) * PIV)
                     Else
                         TExento = TExento + mf
                     End If
-                    'Tdescuento = Tdescuento + d
+                    Tdescuento = Tdescuento + d
                     productos = productos + 1
                 End With
             Next i
 
-            Total = TExento + TGravado + Tiv
+            Total = TExento + TGravado + Tiv - Tdescuento
             lblproductos.Text = productos
             lbltotal.Text = "¢ " + FormatNumber(Total, 2)
         Catch myerror As Exception
@@ -271,11 +271,13 @@ Public Class frm_devolucion
         D = Table(sql + " select @@IDENTITY as id_devolucion", "")
         DevolucionID = D.Rows(0).Item("id_devolucion")
 
-        sql = "insert into Nota_credito (fecha,id_cliente,exento,gravado,piv,observaciones,id_usuario) values (" + _
+        sql = "insert into Nota_credito (fecha,id_cliente,exento,gravado,descuento,tiv,piv,observaciones,id_usuario) values (" + _
                 "'" + EDATE(Date.Today.ToShortDateString) + "'," + _
                 rowc("id_cliente").ToString + "," + _
                 (TExento).ToString + "," + _
                 (TGravado).ToString + "," + _
+                (Tdescuento).ToString + "," + _
+                (Tiv).ToString + "," + _
                 (PIV).ToString + "," + _
                 "'DEV " + DevolucionID + "'," + _
                 USUARIO_ID + ")"

@@ -1134,7 +1134,7 @@ Public Class frm_pedido
 
                     Dim filePath As String = getSaveLocation()
                     If filePath <> "" Then
-                        rfactura.ExportToDisk(ExportFormatType.PortableDocFormat, filePath)
+                        rfactura.ExportToDisk(ExportFormatType.WordForWindows, filePath)
                         rfactura.Dispose()
                         rfactura.Close()
                     End If
@@ -1362,7 +1362,7 @@ Public Class frm_pedido
 
     Public Function getSaveLocation() As String
         Try
-            SaveReportDialog.Filter = "Report Files (*.pdf*)|*.pdf"
+            SaveReportDialog.Filter = "Report Files (*.doc*)|*.doc"
             If SaveReportDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
                 Return SaveReportDialog.FileName
             Else

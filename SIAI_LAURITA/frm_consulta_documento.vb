@@ -444,7 +444,6 @@ Public Class frm_consulta_documento
 
         Dim rowp As DataRow
         Dim rowtpd As DataRow
-        Dim descuentos As Decimal
         Dim z As Integer
         For z = 0 To FD.Rows.Count - 1
             With FD.Rows(z)

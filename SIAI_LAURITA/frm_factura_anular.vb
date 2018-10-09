@@ -5,8 +5,9 @@ Public Class frm_factura_anular
     Dim FD As DataTable
     Dim Factura_ID As String
     Dim cc As String
-    
 
+    Public DevolucionID As String
+    
 
     Private Sub txtid_factura_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtid_factura.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
@@ -23,13 +24,12 @@ Public Class frm_factura_anular
 
     Public Sub Identifica_Factura()
         'Try
-        cc = "factura.id_factura=" + txtid_factura.Text
+        cc = "factura.id_factura=" + txtid_factura.Text + " and factura.sincronizada = 1 and coderror = 'Error:00'"
        
-
-        Fac = FACM(cc, True, "")
+        Fac = FACMDescuento(cc, True, "")
 
         If Fac.Rows.Count = 0 Then
-            MessageBox.Show("Factura No Existe", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Factura No Existe o No ha sido enviada a hacienda", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_factura.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
@@ -130,6 +130,9 @@ Public Class frm_factura_anular
 
     Private Sub btnaceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaceptar.Click
         'Try
+
+        Dim D As DataTable
+
         If Val(txtid_factura.Text) = 0 Then
             MessageBox.Show("Debe Escribir un Número de Factura", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_factura.Focus()
@@ -149,15 +152,42 @@ Public Class frm_factura_anular
         cmd.Connection = CONN1
         Dim sql As String
 
+        Dim consec As Integer = Nothing
+        Try
+            consec = Table("select top 1 consecutivoElectronico as consecutivo from devolucion order by consecutivoElectronico desc", "").Rows(0).Item("consecutivo")
+            consec += 1
+        Catch
+            consec = 1
+        End Try
+
+
+        Dim numConsecutivo As String = "0010000103" + consec.ToString("0000000000")
+        Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
+        Dim claveNumericaFactura As String = Fac.Rows(0).Item("claveNumerica")
+        Dim clienteTributa As Boolean = Fac.Rows(0).Item("clienteTributa")
+        Dim facturaCliente As Boolean = Fac.Rows(0).Item("id_cliente")
+        Dim fechaEmisionFactura As String = " (select fecha from factura where id_factura = " + txtid_factura.Text + ")"
+
+
         sql = "insert into Reversion (id_documento,tipo,fecha,id_usuario) values (" + _
          txtid_factura.Text + "," + _
          "2" + "," + _
           "'" + EDATE(Date.Today.ToShortDateString) + "'," + _
-         USUARIO_ID + ")"
+         USUARIO_ID + "); " & _
+        "insert into devolucion (id_factura,fecha,id_cliente,fechaEmisionFactura, claveNumerica,NumConsecutivo,consecutivoElectronico, claveNumericaFactura,clienteTributa,id_usuario) values (" & _
+        txtid_factura.Text & "," & _
+        "getDate()," & _
+        IIf(facturaCliente, "1", "0") & "," & _
+        "" & fechaEmisionFactura & "," & _
+        "'" & claveNumerica.ToString & "'," & _
+        "'" & numConsecutivo.ToString & "'," & _
+         consec.ToString & "," & _
+        "'" & claveNumericaFactura.ToString & "'," & _
+        "'" & clienteTributa.ToString & "'," & _
+        USUARIO_ID.ToString & ")"
 
-        cmd.CommandText = sql
-        OpenConn()
-        cmd.ExecuteNonQuery()
+        D = Table(sql + " select @@IDENTITY as id_devolucion", "")
+        DevolucionID = D.Rows(0).Item("id_devolucion")
         '
 
         sqlquery("delete from tfacs where id_factura = " & txtid_factura.Text)
@@ -177,6 +207,20 @@ Public Class frm_factura_anular
                     sql = "update producto set existencia=existencia+" + _
                    IIf(.Item("unidad") = 1, .Item("cantidad").ToString, (.Item("cantidad") * p.Rows(0).Item("empaque")).ToString) + _
                    " where id_producto=" + .Item("id_producto").ToString
+                    cmd.CommandText = sql
+                    OpenConn()
+                    cmd.ExecuteNonQuery()
+
+                    sql = "insert into  devolucion_detalle (id_devolucion,id_producto, unidad, precio, descuento, IV, cantidad) values (" + _
+                    DevolucionID + "," + _
+                    .Item("id_producto").ToString + "," + _
+                    .Item("unidad").ToString + "," + _
+                    .Item("precio").ToString + "," + _
+                    .Item("descuento").ToString + "," + _
+                    "'" + .Item("IV").ToString + "'," + _
+                    .Item("cantidad").ToString + ")"
+
+
                     cmd.CommandText = sql
                     OpenConn()
                     cmd.ExecuteNonQuery()
