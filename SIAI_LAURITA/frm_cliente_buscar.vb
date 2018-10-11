@@ -320,14 +320,14 @@ Public Class frm_cliente_buscar
         If txtbuscar_cliente.Text.Length > 0 Then
 
             If IsNumeric(txtbuscar_cliente.Text.Substring(0, 1)) Then
-                cliente = Table("select id_cliente,nombre,telefono from cliente where eliminado=0 and id_cliente Like '%" & txtbuscar_cliente.Text & "%'", "")
+                cliente = Table("select id_cliente,nombre,telefono,identificacion from cliente where eliminado=0 and id_cliente Like '%" & txtbuscar_cliente.Text & "%' or identificacion like '%" & txtbuscar_cliente.Text & "%'", "")
                 Dvcliente = New DataView(cliente)
 
                 Dvcliente.Sort = "id_cliente"
                 'Dvcliente.RowFilter = "id_cliente = " & txtbuscar_cliente.Text
             Else
 
-                cliente = Table("select id_cliente,nombre,telefono from cliente where eliminado=0 and nombre Like '%" & txtbuscar_cliente.Text & "%'", "")
+                cliente = Table("select id_cliente,nombre,telefono,identificacion from cliente where eliminado=0 and nombre Like '%" & txtbuscar_cliente.Text & "%' or identificacion like '%" & txtbuscar_cliente.Text & "%'", "")
                 Dvcliente = New DataView(cliente)
 
                 'Dvcliente.Sort = "nombre"

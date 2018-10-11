@@ -256,11 +256,12 @@ Public Class frm_devolucion
         Dim fechaEmisionFactura As String = " (select fecha from factura where id_factura = " + txtid_factura.Text + ")"
 
 
-        sql = "insert into devolucion (id_factura,fecha,id_cliente,fechaEmisionFactura, claveNumerica,NumConsecutivo,consecutivoElectronico, claveNumericaFactura,clienteTributa,id_usuario) values (" + _
+        sql = "insert into devolucion (id_factura,fecha,id_cliente,fechaEmisionFactura, numeroBoleta, claveNumerica,NumConsecutivo,consecutivoElectronico, claveNumericaFactura,clienteTributa,id_usuario) values (" + _
         txtid_factura.Text & "," & _
         "getDate()," & _
         rowc("id_cliente").ToString & "," & _
         "" & fechaEmisionFactura & "," & _
+        "'" & txtBoleta.Text & "'," & _
         "'" & claveNumerica.ToString & "'," & _
         "'" & numConsecutivo.ToString & "'," & _
          consec.ToString & "," & _
@@ -279,8 +280,8 @@ Public Class frm_devolucion
                 (Tdescuento).ToString + "," + _
                 (Tiv).ToString + "," + _
                 (PIV).ToString + "," + _
-                "'DEV " + DevolucionID + "'," + _
-                USUARIO_ID + ")"
+                "'DEV " & DevolucionID & "-" & txtBoleta.Text & "'," + _
+        USUARIO_ID + ")"
 
 
         Dim T As DataTable = Table(sql + " select @@IDENTITY as id_nota_credito", "")
