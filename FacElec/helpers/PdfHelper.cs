@@ -165,7 +165,8 @@ namespace FacElec.helpers
                                 notadeCredito ? "Nota de Crédito" : "Factura"
                                );
 
-                var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
+                // var fileName = $"C://DSign//Temp//{factura.claveNumerica}.pdf";
+                var fileName = $"C://FacturasTemporales//{factura.claveNumerica}.pdf";
                 FileInfo file = new FileInfo(fileName);
                 file.Directory.Create();
 

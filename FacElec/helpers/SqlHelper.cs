@@ -179,7 +179,7 @@ namespace FacElec.helpers
                     "select * from cliente where cliente.id_cliente = f.id_cliente " +
                     "FOR JSON AUTO " +
                     ") " +
-                    " from Factura f where sincronizada = 0 " +
+                    " from Factura f where sincronizada = 4 " +
                                             "For JSON PATH  ";
 
         static string selectDevoluciones = "SELECT f.id_devolucion as id_documento, *, " +

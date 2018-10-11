@@ -34,9 +34,9 @@ namespace FacElec
             Sincronizador.SincronizarDocumentos(false);
             log.Info("Finalizando el servicio de sincronizacion de facturas");
 
-            log.Info("Ejecutando el servicio de sincronizacion de notas de credito");
+            /*log.Info("Ejecutando el servicio de sincronizacion de notas de credito");
             Sincronizador.SincronizarDocumentos(true);
-            log.Info("Finalizando el servicio de sincronizacion de credito");
+            log.Info("Finalizando el servicio de sincronizacion de credito");*/
 
         }
 

@@ -37,18 +37,18 @@ namespace FacElec.sync
                     else
                     {
                         //si no hay internet se cambia la situacion de envio a 3
-                        if (!hayConexion)
+                        /*if (!hayConexion)
                         {
                             fac.claveNumerica = newClaveNumerica(fac.claveNumerica);
                             SqlHelper.updateNoInternet(fac, notaCredito);
 
-                        }
+                        }*/
 
                         //se genera el xml el pdf se llama el proceso y se guarda la factura
-                        XmlHelper.GenerateXML(fac, notaCredito);
+                        //XmlHelper.GenerateXML(fac, notaCredito);
                         PdfHelper.GeneratePDF(fac, notaCredito);
-                        AdemarHelper.CallBatchProcess(fac.claveNumerica);
-                        SqlHelper.UpdateSuccessful(fac.id_documento, notaCredito);
+                        //AdemarHelper.CallBatchProcess(fac.claveNumerica);
+                        //SqlHelper.UpdateSuccessful(fac.id_documento, notaCredito);
                     }
 
                 }
