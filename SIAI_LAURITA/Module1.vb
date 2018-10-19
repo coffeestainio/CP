@@ -15,7 +15,7 @@ Module Module1
 
     Public Const PRINTER As String = "S1"
 
-    Public Const Version As String = "4.09.10.2 Numero Boleta"
+    Public Const Version As String = "4.10.17.1 No Contribuyente"
 
     Public Const NEGOCIO As String = "COMERCIAL POZOS S.A."
 

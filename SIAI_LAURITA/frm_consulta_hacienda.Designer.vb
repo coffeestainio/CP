@@ -20,15 +20,16 @@ Partial Class frm_consulta_hacienda
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.bntReenviar = New System.Windows.Forms.Button
         Me.dtphasta = New System.Windows.Forms.DateTimePicker
         Me.Label1 = New System.Windows.Forms.Label
         Me.dtpdesde = New System.Windows.Forms.DateTimePicker
@@ -41,7 +42,7 @@ Partial Class frm_consulta_hacienda
         Me.coderror = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DescripcionError = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.bntReenviar = New System.Windows.Forms.Button
+        Me.btnContribuyente = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         CType(Me.dtgdocumento, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -49,6 +50,7 @@ Partial Class frm_consulta_hacienda
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.btnContribuyente)
         Me.Panel1.Controls.Add(Me.bntReenviar)
         Me.Panel1.Controls.Add(Me.dtphasta)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -58,6 +60,16 @@ Partial Class frm_consulta_hacienda
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1042, 61)
         Me.Panel1.TabIndex = 47
+        '
+        'bntReenviar
+        '
+        Me.bntReenviar.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bntReenviar.Location = New System.Drawing.Point(842, 5)
+        Me.bntReenviar.Name = "bntReenviar"
+        Me.bntReenviar.Size = New System.Drawing.Size(193, 43)
+        Me.bntReenviar.TabIndex = 68
+        Me.bntReenviar.Text = "Reenviar Documentos"
+        Me.bntReenviar.UseVisualStyleBackColor = True
         '
         'dtphasta
         '
@@ -115,49 +127,49 @@ Partial Class frm_consulta_hacienda
         Me.dtgdocumento.AllowUserToDeleteRows = False
         Me.dtgdocumento.AllowUserToResizeColumns = False
         Me.dtgdocumento.AllowUserToResizeRows = False
-        DataGridViewCellStyle25.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtgdocumento.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle25
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle26.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dtgdocumento.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtgdocumento.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dtgdocumento.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dtgdocumento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgdocumento.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id_documento, Me.id_cliente, Me.fecha, Me.coderror, Me.DescripcionError})
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle30.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dtgdocumento.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dtgdocumento.DefaultCellStyle = DataGridViewCellStyle6
         Me.dtgdocumento.Location = New System.Drawing.Point(26, 96)
         Me.dtgdocumento.Name = "dtgdocumento"
         Me.dtgdocumento.ReadOnly = True
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle31.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dtgdocumento.RowHeadersDefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dtgdocumento.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dtgdocumento.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtgdocumento.RowsDefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtgdocumento.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.dtgdocumento.Size = New System.Drawing.Size(1042, 618)
         Me.dtgdocumento.TabIndex = 48
         '
         'id_documento
         '
         Me.id_documento.DataPropertyName = "id_documento"
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle27.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.id_documento.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id_documento.DefaultCellStyle = DataGridViewCellStyle3
         Me.id_documento.HeaderText = "Documento"
         Me.id_documento.Name = "id_documento"
         Me.id_documento.ReadOnly = True
@@ -166,10 +178,10 @@ Partial Class frm_consulta_hacienda
         'id_cliente
         '
         Me.id_cliente.DataPropertyName = "id_cliente"
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle28.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle28.NullValue = Nothing
-        Me.id_cliente.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.id_cliente.DefaultCellStyle = DataGridViewCellStyle4
         Me.id_cliente.HeaderText = "Cliente"
         Me.id_cliente.Name = "id_cliente"
         Me.id_cliente.ReadOnly = True
@@ -177,8 +189,8 @@ Partial Class frm_consulta_hacienda
         'fecha
         '
         Me.fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle29.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle5
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
         Me.fecha.ReadOnly = True
@@ -199,15 +211,16 @@ Partial Class frm_consulta_hacienda
         Me.DescripcionError.ReadOnly = True
         Me.DescripcionError.Width = 550
         '
-        'bntReenviar
+        'btnContribuyente
         '
-        Me.bntReenviar.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bntReenviar.Location = New System.Drawing.Point(842, 5)
-        Me.bntReenviar.Name = "bntReenviar"
-        Me.bntReenviar.Size = New System.Drawing.Size(193, 43)
-        Me.bntReenviar.TabIndex = 68
-        Me.bntReenviar.Text = "Reenviar Documentos"
-        Me.bntReenviar.UseVisualStyleBackColor = True
+        Me.btnContribuyente.BackColor = System.Drawing.SystemColors.Info
+        Me.btnContribuyente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnContribuyente.Location = New System.Drawing.Point(643, 5)
+        Me.btnContribuyente.Name = "btnContribuyente"
+        Me.btnContribuyente.Size = New System.Drawing.Size(193, 43)
+        Me.btnContribuyente.TabIndex = 69
+        Me.btnContribuyente.Text = "No Contribuyente"
+        Me.btnContribuyente.UseVisualStyleBackColor = False
         '
         'frm_consulta_hacienda
         '
@@ -240,4 +253,5 @@ Partial Class frm_consulta_hacienda
     Friend WithEvents coderror As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescripcionError As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents bntReenviar As System.Windows.Forms.Button
+    Friend WithEvents btnContribuyente As System.Windows.Forms.Button
 End Class

@@ -135,4 +135,30 @@ Public Class frm_consulta_hacienda
         
     End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnContribuyente.Click
+
+        Dim sql As String = "update factura set clienteTributa = 0, sincronizada = 0 where id_Factura in ("
+
+        Dim respuesta As MsgBoxResult
+        respuesta = MsgBox("Desea marcar esta factura como no contribuyente?", MsgBoxStyle.YesNoCancel, "No contribuyente")
+        If respuesta = MsgBoxResult.Yes Then
+            For Each row As DataRow In dtgdocumento.SelectedRows
+                sql = sql & row("id_documento") & ","
+            Next
+
+            sql = sql & "0)"
+
+            Try
+                Dim cmd As New SqlCommand
+                OpenConn()
+                cmd.CommandText = sql
+                cmd.Connection = CONN1
+                cmd.ExecuteNonQuery()
+            Catch ex As Exception
+                ONEX(Me.Name, ex)
+                MsgBox("Hubo un error al intentar actualizar las facturas")
+            End Try
+
+        End If
+    End Sub
 End Class
