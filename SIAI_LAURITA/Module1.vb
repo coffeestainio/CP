@@ -7,7 +7,7 @@ Module Module1
 
 
     Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2;Persist Security Info=True"
-    'Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test2;Persist Security Info=False;User ID=CPSQL;Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    'Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test3;Persist Security Info=False;User ID=CPSQL;Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     'Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2Viejo;Persist Security Info=True"
     'Public Const SERVER As String = "server=SERVER01\SQL2017;User ID=sa;password=SQLCP12345!;Database=CP;Persist Security Info=True"
 
@@ -15,7 +15,7 @@ Module Module1
 
     Public Const PRINTER As String = "S1"
 
-    Public Const Version As String = "4.10.17.1 No Contribuyente"
+    Public Const Version As String = "4.11.26.1"
 
     Public Const NEGOCIO As String = "COMERCIAL POZOS S.A."
 
@@ -497,9 +497,6 @@ Module Module1
 
     Public Function DEVM(ByVal C As String, ByVal Anulados As Boolean, ByVal Pk As String) As DataTable
 
-
-        'Try
-
         Dim DTgravado As Decimal
         Dim DTexento As Decimal
         Dim DTiv As Decimal
@@ -585,7 +582,6 @@ Module Module1
                         mf = 0
                         d = 0
 
-
                         m = .Item("precio") * .Item("cantidad")
                         d = m * (.Item("descuento"))
                         mf = m - d
@@ -613,10 +609,7 @@ Module Module1
             End With
         Next i
         Return Dev
-        'Catch myerror As Exception
-        ' ONEX(Me.Name, myerror)
 
-        'End Try
     End Function
     Public Function RECM(ByVal C As String, ByVal ANULADOS As Boolean, ByVal PK As String) As DataTable
 

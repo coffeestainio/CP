@@ -202,3 +202,98 @@
 2018-08-30 16:24:25,639 [1] ERROR FacElec.Program - No such file or directory
 2018-08-30 16:24:25,640 [1] INFO FacElec.Program - Actualizando el estado de la Nota de credito
 2018-08-30 16:24:25,822 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito
+2018-10-22 13:03:05,485 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-10-22 13:03:05,663 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-10-22 13:03:06,721 [1] INFO FacElec.Program - Conexion exitosa
+2018-10-22 13:03:06,900 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-10-22 13:03:10,448 [1] INFO FacElec.Program - ** Procesando la Factura: 1075922 **
+2018-10-22 13:03:10,503 [1] INFO FacElec.Program - La factura esta marcada sin receptor, no necesita validacion
+2018-10-22 13:03:10,541 [1] INFO FacElec.Program - Generando el XML
+2018-10-22 13:03:10,547 [1] INFO FacElec.Program - Generando datos del cliente receptor: False
+2018-10-22 13:03:10,589 [1] INFO FacElec.Program - Generando el PDF
+2018-10-22 13:03:13,718 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-10-22 13:03:13,991 [1] ERROR FacElec.Program - No such file or directory
+2018-10-22 13:03:13,992 [1] INFO FacElec.Program - Actualizando el estado de la Factura
+2018-10-22 13:03:14,172 [1] INFO FacElec.Program - ** Procesando la Factura: 1075923 **
+2018-10-22 13:03:14,173 [1] INFO FacElec.Program - Correo del cliente:                     
+2018-10-22 13:03:14,410 [1] ERROR FacElec.Program - The specified string is not in the form required for an e-mail address.
+2018-10-22 13:03:14,411 [1] INFO FacElec.Program - Guardando error en la base de datos
+2018-10-22 13:03:14,554 [1] ERROR FacElec.Program - Error loguedo satisfactoriamente : Factura : 1075923. Codigo : Error:001. Descipcion : Formato del correo incorrecto 
+2018-10-22 13:03:14,554 [1] INFO FacElec.Program - ** Procesando la Factura: 1075924 **
+2018-10-22 13:03:14,554 [1] INFO FacElec.Program - La factura esta marcada sin receptor, no necesita validacion
+2018-10-22 13:03:14,554 [1] INFO FacElec.Program - Generando el XML
+2018-10-22 13:03:14,554 [1] INFO FacElec.Program - Generando datos del cliente receptor: False
+2018-10-22 13:03:14,556 [1] INFO FacElec.Program - Generando el PDF
+2018-10-22 13:03:15,029 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-10-22 13:03:15,250 [1] ERROR FacElec.Program - No such file or directory
+2018-10-22 13:03:15,250 [1] INFO FacElec.Program - Actualizando el estado de la Factura
+2018-10-22 13:03:15,396 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-10-22 13:03:15,396 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-10-22 13:03:15,396 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-10-22 13:03:15,948 [1] INFO FacElec.Program - Conexion exitosa
+2018-10-22 13:03:15,959 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-10-22 13:03:16,349 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 290 **
+2018-10-22 13:03:16,349 [1] INFO FacElec.Program - Correo del cliente:                     
+2018-10-22 13:03:16,596 [1] ERROR FacElec.Program - The specified string is not in the form required for an e-mail address.
+2018-10-22 13:03:16,597 [1] INFO FacElec.Program - Guardando error en la base de datos
+2018-10-22 13:03:16,783 [1] ERROR FacElec.Program - Error loguedo satisfactoriamente : Factura : 290. Codigo : Error:001. Descipcion : Formato del correo incorrecto 
+2018-10-22 13:03:16,783 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 291 **
+2018-10-22 13:03:16,783 [1] INFO FacElec.Program - Correo del cliente:                     
+2018-10-22 13:03:17,021 [1] ERROR FacElec.Program - The specified string is not in the form required for an e-mail address.
+2018-10-22 13:03:17,021 [1] INFO FacElec.Program - Guardando error en la base de datos
+2018-10-22 13:03:17,154 [1] ERROR FacElec.Program - Error loguedo satisfactoriamente : Factura : 291. Codigo : Error:001. Descipcion : Formato del correo incorrecto 
+2018-10-22 13:03:17,154 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 292 **
+2018-10-22 13:03:17,155 [1] INFO FacElec.Program - Correo del cliente:                     
+2018-10-22 13:03:17,335 [1] ERROR FacElec.Program - The specified string is not in the form required for an e-mail address.
+2018-10-22 13:03:17,335 [1] INFO FacElec.Program - Guardando error en la base de datos
+2018-10-22 13:03:17,492 [1] ERROR FacElec.Program - Error loguedo satisfactoriamente : Factura : 292. Codigo : Error:001. Descipcion : Formato del correo incorrecto 
+2018-10-22 13:03:17,494 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 294 **
+2018-10-22 13:03:17,494 [1] INFO FacElec.Program - Correo del cliente:                     
+2018-10-22 13:03:17,752 [1] ERROR FacElec.Program - The specified string is not in the form required for an e-mail address.
+2018-10-22 13:03:17,753 [1] INFO FacElec.Program - Guardando error en la base de datos
+2018-10-22 13:03:17,909 [1] ERROR FacElec.Program - Error loguedo satisfactoriamente : Factura : 294. Codigo : Error:001. Descipcion : Formato del correo incorrecto 
+2018-10-22 13:03:17,909 [1] INFO FacElec.Program - ** Procesando la Nota de Credito: 293 **
+2018-10-22 13:03:17,909 [1] INFO FacElec.Program - Correo del cliente:                     
+2018-10-22 13:03:18,169 [1] ERROR FacElec.Program - The specified string is not in the form required for an e-mail address.
+2018-10-22 13:03:18,169 [1] INFO FacElec.Program - Guardando error en la base de datos
+2018-10-22 13:03:18,312 [1] ERROR FacElec.Program - Error loguedo satisfactoriamente : Factura : 293. Codigo : Error:001. Descipcion : Formato del correo incorrecto 
+2018-10-22 13:03:18,312 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito
+2018-10-22 13:04:10,194 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-10-22 13:04:10,268 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-10-22 13:04:11,165 [1] INFO FacElec.Program - Conexion exitosa
+2018-10-22 13:04:11,251 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-10-22 13:04:13,854 [1] INFO FacElec.Program - No se encontraron Facturas pendientes
+2018-10-22 13:04:13,855 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-10-22 13:04:13,855 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-10-22 13:04:13,855 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-10-22 13:04:14,400 [1] INFO FacElec.Program - Conexion exitosa
+2018-10-22 13:04:14,411 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-10-22 13:04:14,575 [1] INFO FacElec.Program - No se encontraron Notas de Credito pendientes
+2018-10-22 13:04:14,575 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito
+2018-10-22 14:07:49,196 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de facturas
+2018-10-22 14:07:49,279 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-10-22 14:07:49,831 [1] INFO FacElec.Program - Conexion exitosa
+2018-10-22 14:07:49,964 [1] INFO FacElec.Program - Obteniendo facturas pendientes
+2018-10-22 14:07:52,195 [1] INFO FacElec.Program - ** Procesando la Factura: 1075925 **
+2018-10-22 14:07:52,236 [1] INFO FacElec.Program - La factura esta marcada sin receptor, no necesita validacion
+2018-10-22 14:07:52,272 [1] INFO FacElec.Program - Generando el XML
+2018-10-22 14:07:52,275 [1] INFO FacElec.Program - Generando datos del cliente receptor: False
+2018-10-22 14:07:52,316 [1] INFO FacElec.Program - Generando el PDF
+2018-10-22 14:07:55,155 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-10-22 14:07:55,400 [1] ERROR FacElec.Program - No such file or directory
+2018-10-22 14:07:55,401 [1] INFO FacElec.Program - Actualizando el estado de la Factura
+2018-10-22 14:07:55,532 [1] INFO FacElec.Program - ** Procesando la Factura: 1075926 **
+2018-10-22 14:07:55,532 [1] INFO FacElec.Program - La factura esta marcada sin receptor, no necesita validacion
+2018-10-22 14:07:55,532 [1] INFO FacElec.Program - Generando el XML
+2018-10-22 14:07:55,532 [1] INFO FacElec.Program - Generando datos del cliente receptor: False
+2018-10-22 14:07:55,533 [1] INFO FacElec.Program - Generando el PDF
+2018-10-22 14:07:55,845 [1] INFO FacElec.Program - Ejecutando proceso de sincronizacion y envio de factura
+2018-10-22 14:07:56,026 [1] ERROR FacElec.Program - No such file or directory
+2018-10-22 14:07:56,026 [1] INFO FacElec.Program - Actualizando el estado de la Factura
+2018-10-22 14:07:56,203 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de facturas
+2018-10-22 14:07:56,203 [1] INFO FacElec.Program - Ejecutando el servicio de sincronizacion de notas de credito
+2018-10-22 14:07:56,203 [1] INFO FacElec.Program - Verificando conexion a intenet
+2018-10-22 14:07:56,443 [1] INFO FacElec.Program - Conexion exitosa
+2018-10-22 14:07:56,453 [1] INFO FacElec.Program - Obteniendo notas de credito pendientes
+2018-10-22 14:07:56,585 [1] INFO FacElec.Program - No se encontraron Notas de Credito pendientes
+2018-10-22 14:07:56,585 [1] INFO FacElec.Program - Finalizando el servicio de sincronizacion de credito

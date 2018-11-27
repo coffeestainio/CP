@@ -726,7 +726,7 @@ Public Class frm_pedido
                 facturagenerada = Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString), hacienda)
             End If
 
-            Facturas_imprimir("F", True)
+            Facturas_imprimir("F", True, hacienda)
 
             ' EjectuarFacturacionElectronica()
 
@@ -863,7 +863,7 @@ Public Class frm_pedido
     End Function
 
 
-    Private Sub Facturas_imprimir(ByVal Doc As String, ByVal imprimir As Boolean)
+    Private Sub Facturas_imprimir(ByVal Doc As String, ByVal imprimir As Boolean, ByVal hacienda As Boolean)
         Try
 
             Dim FGravado As Decimal
@@ -918,6 +918,9 @@ Public Class frm_pedido
                     V_Factura.ImportRow(TPD.Rows(z))
                 Next z
 
+                Dim direc As String = IIf(hacienda, rowc("direccion"), "")
+                'direc = IIf(txtid_cliente.Text = "154", "OBSERVACION COMITE DE PRIVADOS DE LIBERTAD", direc)
+
                 Dim rfactura As New rpt_Factura
 
                 rfactura.SetDataSource(V_Factura)
@@ -927,8 +930,9 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("documento")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
+
                 If (Doc = "P") Then
-                    rParameterDiscreteValue.Value = "PROFORMA"
+                    rParameterDiscreteValue.Value = ""
                 Else
                     If Consulta Then
                         rParameterDiscreteValue.Value = "ClaveNumerica: " + facturaClave + vbCrLf + "Consecutivo: " + facturaConsecutivo
@@ -945,6 +949,12 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
+                rParameterFieldLocation = rParameterFieldDefinitions.Item("men4")
+                rParameterValues = rParameterFieldLocation.CurrentValues
+                rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
+                rParameterDiscreteValue.Value = IIf(Doc = "P", "", "AUTORIZADO MEDIANTE OFICIO No. 01-0068-97 DE FECHA 26-09-97 DE LA D.G.TD.")
+                rParameterValues.Add(rParameterDiscreteValue)
+                rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("tantos")
                 rParameterValues = rParameterFieldLocation.CurrentValues
@@ -953,19 +963,17 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("cliente")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = txtid_cliente.Text + "-" + lblcliente_nombre.Text
+                rParameterDiscreteValue.Value = IIf(hacienda, txtid_cliente.Text + "-" + lblcliente_nombre.Text, txtid_cliente.Text + " - Cliente Contado")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
-
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("direccion")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = rowc("direccion")
+                rParameterDiscreteValue.Value = direc
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -993,7 +1001,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("telefono")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = rowc("telefono")
+                rParameterDiscreteValue.Value = IIf(hacienda, rowc("telefono"), "")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -1239,7 +1247,7 @@ Public Class frm_pedido
         Alistar = ""
         Guardar(True)
         Tsort(TPD, "nombre")
-        Facturas_imprimir("P", True)
+        Facturas_imprimir("P", True, True)
         Me.Close()
     End Sub
 
@@ -1350,14 +1358,14 @@ Public Class frm_pedido
 
 
     Private Sub btnimprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnimprimir.Click
-        Facturas_imprimir("F", True)
+        Facturas_imprimir("F", True, True)
     End Sub
 
     Private Sub btnproformarweb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnproformarweb.Click
         Alistar = ""
         Guardar(True)
         Tsort(TPD, "nombre")
-        Facturas_imprimir("P", False)
+        Facturas_imprimir("P", False, True)
     End Sub
 
     Public Function getSaveLocation() As String

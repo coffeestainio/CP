@@ -58,7 +58,7 @@ namespace FacElec.helpers
                                 
                                  <div class='header row'>
                                     <div class='col-50'>
-                                       <h2>{3}</h2> 
+                                       <h2><strong>Receptor: </strong>{3}</h2> 
                                        <h2>{4}</h2>
                                        <h2>{5}</h2>
                                        <h2>{6}</h2>
@@ -87,11 +87,11 @@ namespace FacElec.helpers
                                     </tr>", 
                                 $"{(notadeCredito ? "Nota de Crédito" : "Factura")} No {factura.numConsecutivo}", 
                                 factura.claveNumerica, factura.fecha,
-                                factura.clienteTributa ? $"<strong>Receptor: {cliente.nombre}</strong>" : "",
-                                factura.clienteTributa ? $"<strong>Identificación: {formatedId}</strong>":"",
-                                factura.clienteTributa ? $"<strong>Teléfono: {cliente.telefono}</strong>" : "", 
-                                factura.clienteTributa ? $"<strong>Correo: {cliente.email }</strong>" : "", 
-                                factura.clienteTributa ? $"<strong>Dirección: {formatedDireccion} </strong>" : "",
+                                factura.clienteTributa ? cliente.nombre : "Cliente Contado",
+                                factura.clienteTributa ? $"<strong>Identificación: </strong>{formatedId}" :"",
+                                factura.clienteTributa ? $"<strong>Teléfono: </strong>{cliente.telefono}" : "", 
+                                factura.clienteTributa ? $"<strong>Correo: </strong>{cliente.email }" : "", 
+                                factura.clienteTributa ? $"<strong>Dirección: </strong>{formatedDireccion}" : "",
                                 factura.id_documento,
                                 $"{(factura.plazo == 0 ? "Contado" : $"Crédito a {factura.plazo} dias plazo")}",
                                 notadeCredito ? $"<h1>Factura de Referencia: {consecutivoFactura}" : "");

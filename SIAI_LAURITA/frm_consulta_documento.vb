@@ -367,7 +367,7 @@ Public Class frm_consulta_documento
                         rowd("id_documento") = .Item("id_factura")
                     Case 3
                         rowd("id_documento") = .Item("id_recibo")
-                    Case "7"
+                    Case 7
                         rowd("id_documento") = .Item("id_devolucion")
                     Case 5
                         rowd("id_documento") = .Item("id_nota_credito")

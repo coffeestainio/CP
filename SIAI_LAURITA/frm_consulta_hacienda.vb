@@ -108,6 +108,8 @@ Public Class frm_consulta_hacienda
 
         ReiniciarFacturas()
 
+        Filtro()
+
         'EjectuarFacturacionElectronica()
         myForms.frm_principal.ToolStrip.Enabled = True
         Me.Close()
@@ -132,7 +134,8 @@ Public Class frm_consulta_hacienda
             ONEX(Me.Name, ex)
             MsgBox("Hubo un error al intentar reiniciar las facturas")
         End Try
-        
+
+        Filtro()
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnContribuyente.Click
@@ -142,8 +145,10 @@ Public Class frm_consulta_hacienda
         Dim respuesta As MsgBoxResult
         respuesta = MsgBox("Desea marcar esta factura como no contribuyente?", MsgBoxStyle.YesNoCancel, "No contribuyente")
         If respuesta = MsgBoxResult.Yes Then
-            For Each row As DataRow In dtgdocumento.SelectedRows
-                sql = sql & row("id_documento") & ","
+
+            For Each row As DataGridViewRow In dtgdocumento.SelectedRows
+                Dim codigo As String = row.Cells("id_documento").Value
+                sql = sql & codigo & ","
             Next
 
             sql = sql & "0)"

@@ -8,7 +8,6 @@
     <Folder Include="sync\" />
     <Folder Include="model\" />
     <Folder Include="helpers\" />
-    <Folder Include="facturasEnviadas\" />
     <Folder Include="dist\" />
   </ItemGroup>
   <ItemGroup>
