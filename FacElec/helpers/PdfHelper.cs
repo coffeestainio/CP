@@ -246,13 +246,13 @@ namespace FacElec.helpers
             try
             {
                 decimales = decimales.Remove(2);
+                return int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords(new System.Globalization.CultureInfo("es")) +
+                                       $" con {int.Parse(decimales).ToWords(new System.Globalization.CultureInfo("es"))} decimos";
             }
             catch {
                 
             }
-            return int.Parse(factura.totalComprobante.ToString().Remove(factura.totalComprobante.ToString().IndexOf('.'))).ToWords(new System.Globalization.CultureInfo("es")) +
-                                       $" con {int.Parse(decimales).ToWords(new System.Globalization.CultureInfo("es"))}" +
-                      " decimos";
+            return "";
         }
     }
 }

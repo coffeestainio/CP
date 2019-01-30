@@ -36,6 +36,7 @@
     <None Remove="facturasEnviadas\facturaElectronica_1075904.pdf" />
     <None Remove="facturasEnviadas\facturaElectronica_1075907.xml" />
     <None Remove="facturasEnviadas\facturaElectronica_1075906.pdf" />
+    <None Remove="faceleccp.log" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ServiceReference1\Reference.cs" />
