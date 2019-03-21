@@ -29,31 +29,30 @@ namespace FacElec.sync
                 {
                     if (fac.claveNumerica == null)
                         log.Warn($"Documento: {fac.id_documento} no registra a una factura en tributacion");
+                    else{
+                    log.Info($"** Procesando la {(notaCredito ? "Nota de Credito" : "Factura")}: {fac.id_documento} **");
+                    var error = ValidatorHelper.validarFacturas(fac);
+
+                    if (error != null)
+                    {
+                        SqlHelper.updateWithError(error, notaCredito);
+                    }
                     else
                     {
-                        log.Info($"** Procesando la {(notaCredito ? "Nota de Credito" : "Factura")}: {fac.id_documento} **");
-                        var error = ValidatorHelper.validarFacturas(fac);
-
-                        if (error != null)
+                        //si no hay internet se cambia la situacion de envio a 3
+                        if (!hayConexion)
                         {
-                            SqlHelper.updateWithError(error, notaCredito);
-                        }
-                        else
-                        {
-                            //si no hay internet se cambia la situacion de envio a 3
-                            if (!hayConexion)
-                            {
-                                fac.claveNumerica = newClaveNumerica(fac.claveNumerica);
-                                SqlHelper.updateNoInternet(fac, notaCredito);
+                            fac.claveNumerica = newClaveNumerica(fac.claveNumerica);
+                            SqlHelper.updateNoInternet(fac, notaCredito);
 
-                            }
-
-                            //se genera el xml el pdf se llama el proceso y se guarda la factura
-                            XmlHelper.GenerateXML(fac, notaCredito);
-                            PdfHelper.GeneratePDF(fac, notaCredito);
-                            AdemarHelper.CallBatchProcess(fac.claveNumerica);
-                            SqlHelper.UpdateSuccessful(fac.id_documento, notaCredito);
                         }
+
+                        //se genera el xml el pdf se llama el proceso y se guarda la factura
+                        XmlHelper.GenerateXML(fac, notaCredito);
+                        PdfHelper.GeneratePDF(fac, notaCredito);
+                        AdemarHelper.CallBatchProcess(fac.claveNumerica);
+                        SqlHelper.UpdateSuccessful(fac.id_documento, notaCredito);
+                    }
 
                     }
                 }
