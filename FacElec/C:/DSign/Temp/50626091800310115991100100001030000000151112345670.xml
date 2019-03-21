@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NotaCreditoElectronica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/notaCreditoElectronica">
+  <Clave>50626091800310115991100100001030000000151112345670</Clave>
+  <NumeroConsecutivo>00100001030000000151</NumeroConsecutivo>
+  <FechaEmision>2018-09-26T11:28:36</FechaEmision>
+  <Emisor>
+    <Nombre>Comercial Pozos S.A</Nombre>
+    <Identificacion>
+      <Tipo>02</Tipo>
+      <Numero>3101159911</Numero>
+    </Identificacion>
+    <NombreComercial>Comercial Pozos S.A</NombreComercial>
+    <Ubicacion>
+      <Provincia>1</Provincia>
+      <Canton>09</Canton>
+      <Distrito>03</Distrito>
+      <Barrio>01</Barrio>
+      <OtrasSenas>100 Sur Iglesia Pozos, Santa Ana</OtrasSenas>
+    </Ubicacion>
+    <Telefono>
+      <CodigoPais>506</CodigoPais>
+      <NumTelefono>22826030</NumTelefono>
+    </Telefono>
+    <CorreoElectronico>comercialpozos2@hotmail.com</CorreoElectronico>
+  </Emisor>
+  <Receptor>
+    <Nombre>REY DE LOS CAMPOS CHAVARRIA S.A++</Nombre>
+    <Identificacion>
+      <Tipo>02</Tipo>
+      <Numero>3101590124</Numero>
+    </Identificacion>
+    <NombreComercial>REY DE LOS CAMPOS CHAVARRIA S.A++</NombreComercial>
+    <Ubicacion>
+      <Provincia>4</Provincia>
+      <Canton>01</Canton>
+      <Distrito>01</Distrito>
+      <Barrio>01</Barrio>
+      <OtrasSenas>HEREDIA , MERCADO MUNICIPAL ENTRAD SUR 1ER TRAMO</OtrasSenas>
+    </Ubicacion>
+    <Telefono>
+      <CodigoPais>506</CodigoPais>
+      <NumTelefono>22613065</NumTelefono>
+    </Telefono>
+    <CorreoElectronico>ampocr@yahoo.com</CorreoElectronico>
+  </Receptor>
+  <CondicionVenta>01</CondicionVenta>
+  <PlazoCredito>0</PlazoCredito>
+  <MedioPago>01</MedioPago>
+  <DetalleServicio>
+    <LineaDetalle>
+      <NumeroLinea>1</NumeroLinea>
+      <Codigo>
+        <Tipo>01</Tipo>
+        <Codigo>454100</Codigo>
+      </Codigo>
+      <Cantidad>05.00</Cantidad>
+      <UnidadMedida>Unid</UnidadMedida>
+      <UnidadMedidaComercial>Unid</UnidadMedidaComercial>
+      <Detalle>RATICIDA KLERAT 50G GRANULADO  48s</Detalle>
+      <PrecioUnitario>1178.31</PrecioUnitario>
+      <MontoTotal>5891.5500</MontoTotal>
+      <SubTotal>5891.5500</SubTotal>
+      <Impuesto>
+        <Codigo>01</Codigo>
+        <Tarifa>13.00</Tarifa>
+        <Monto>765.90</Monto>
+      </Impuesto>
+      <MontoTotalLinea>6657.4500</MontoTotalLinea>
+    </LineaDetalle>
+  </DetalleServicio>
+  <ResumenFactura>
+    <CodigoMoneda>CRC</CodigoMoneda>
+    <TipoCambio>1</TipoCambio>
+    <TotalServGravados>0</TotalServGravados>
+    <TotalServExentos>0</TotalServExentos>
+    <TotalMercanciasGravadas>5891.5500</TotalMercanciasGravadas>
+    <TotalMercanciasExentas>0</TotalMercanciasExentas>
+    <TotalGravado>5891.5500</TotalGravado>
+    <TotalExento>0</TotalExento>
+    <TotalVenta>5891.5500</TotalVenta>
+    <TotalDescuentos>0</TotalDescuentos>
+    <TotalVentaNeta>5891.5500</TotalVentaNeta>
+    <TotalImpuesto>765.90</TotalImpuesto>
+    <TotalComprobante>6657.4500</TotalComprobante>
+  </ResumenFactura>
+  <InformacionReferencia>
+    <TipoDoc>01</TipoDoc>
+    <Numero>50625091800310115991100100001010000004767112345670</Numero>
+    <FechaEmision>2018-09-25T17:33:41</FechaEmision>
+    <Codigo>03</Codigo>
+    <Razon>Devolucion</Razon>
+  </InformacionReferencia>
+  <Normativa>
+    <NumeroResolucion>DGT-R-48-2016</NumeroResolucion>
+    <FechaResolucion>2016-10-07 10:22:22</FechaResolucion>
+  </Normativa>
+</NotaCreditoElectronica>

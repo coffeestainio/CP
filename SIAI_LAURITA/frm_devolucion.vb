@@ -307,10 +307,10 @@ Public Class frm_devolucion
 
                 sql = "insert into  devolucion_detalle (id_devolucion,id_producto, unidad, precio, descuento, IV, cantidad) values (" + _
                 DevolucionID + "," + _
-                .Item("id_producto").ToString + "," + _
+                "'" & .Item("id_producto") & "'," & _
                 .Item("unidad").ToString + "," + _
                 .Item("precio").ToString + "," + _
-                .Item("descuento").ToString + "," + _
+                (.Item("descuento") / 100).ToString & "," & _
                 "'" + .Item("IV").ToString + "'," + _
                 .Item("cantidad").ToString + ")"
 

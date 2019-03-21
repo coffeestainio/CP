@@ -182,7 +182,8 @@ namespace FacElec.helpers
                     " from Factura f where sincronizada = 0 " +
                                             "For JSON PATH  ";
 
-        static string selectDevoluciones = "SELECT f.id_devolucion as id_documento, *, " +
+        static string selectDevoluciones = "update Devolucion_Detalle set id_producto = '0' + id_producto where len(id_producto) = 5;" +
+                    "SELECT f.id_devolucion as id_documento, *, " +
                     "factura_detalle = ( " +
                                        "select *, " +
                                        "producto = (select * from producto p where p.id_producto = fd.id_producto for JSON PATH) " +

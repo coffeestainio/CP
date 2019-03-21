@@ -621,7 +621,7 @@ Public Class frm_reportes_admin
 
                 ClienteId = "General"
                 Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
-                criterionc = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
+                criterionc = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
 
 
 

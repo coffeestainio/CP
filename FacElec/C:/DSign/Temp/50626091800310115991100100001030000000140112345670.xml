@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NotaCreditoElectronica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/notaCreditoElectronica">
+  <Clave>50626091800310115991100100001030000000140112345670</Clave>
+  <NumeroConsecutivo>00100001030000000140</NumeroConsecutivo>
+  <FechaEmision>2018-09-26T09:42:57</FechaEmision>
+  <Emisor>
+    <Nombre>Comercial Pozos S.A</Nombre>
+    <Identificacion>
+      <Tipo>02</Tipo>
+      <Numero>3101159911</Numero>
+    </Identificacion>
+    <NombreComercial>Comercial Pozos S.A</NombreComercial>
+    <Ubicacion>
+      <Provincia>1</Provincia>
+      <Canton>09</Canton>
+      <Distrito>03</Distrito>
+      <Barrio>01</Barrio>
+      <OtrasSenas>100 Sur Iglesia Pozos, Santa Ana</OtrasSenas>
+    </Ubicacion>
+    <Telefono>
+      <CodigoPais>506</CodigoPais>
+      <NumTelefono>22826030</NumTelefono>
+    </Telefono>
+    <CorreoElectronico>comercialpozos2@hotmail.com</CorreoElectronico>
+  </Emisor>
+  <Receptor>
+    <Nombre>JOSE LUIS BOLAÑOS ULLOA++</Nombre>
+    <Identificacion>
+      <Tipo>01</Tipo>
+      <Numero>111670460</Numero>
+    </Identificacion>
+    <NombreComercial>JOSE LUIS BOLAÑOS ULLOA++</NombreComercial>
+    <Ubicacion>
+      <Provincia>1</Provincia>
+      <Canton>02</Canton>
+      <Distrito>02</Distrito>
+      <Barrio>01</Barrio>
+      <OtrasSenas>500 ESTE Y 100 NORTE HULERA, ESCAZU</OtrasSenas>
+    </Ubicacion>
+    <Telefono>
+      <CodigoPais>506</CodigoPais>
+      <NumTelefono>22898456</NumTelefono>
+    </Telefono>
+    <CorreoElectronico>jolubolu19@gmail.com</CorreoElectronico>
+  </Receptor>
+  <CondicionVenta>01</CondicionVenta>
+  <PlazoCredito>0</PlazoCredito>
+  <MedioPago>01</MedioPago>
+  <DetalleServicio>
+    <LineaDetalle>
+      <NumeroLinea>1</NumeroLinea>
+      <Codigo>
+        <Tipo>01</Tipo>
+        <Codigo>413403</Codigo>
+      </Codigo>
+      <Cantidad>03.00</Cantidad>
+      <UnidadMedida>Unid</UnidadMedida>
+      <UnidadMedidaComercial>Unid</UnidadMedidaComercial>
+      <Detalle>FRIJOL DON PEDRO ROJO 900G + sal solar</Detalle>
+      <PrecioUnitario>1299.74</PrecioUnitario>
+      <MontoTotal>3899.2200</MontoTotal>
+      <SubTotal>3899.2200</SubTotal>
+      <Impuesto>
+        <Codigo>01</Codigo>
+        <Tarifa>00.00</Tarifa>
+        <Monto>0</Monto>
+      </Impuesto>
+      <MontoTotalLinea>3899.2200</MontoTotalLinea>
+    </LineaDetalle>
+  </DetalleServicio>
+  <ResumenFactura>
+    <CodigoMoneda>CRC</CodigoMoneda>
+    <TipoCambio>1</TipoCambio>
+    <TotalServGravados>0</TotalServGravados>
+    <TotalServExentos>0</TotalServExentos>
+    <TotalMercanciasGravadas>0</TotalMercanciasGravadas>
+    <TotalMercanciasExentas>3899.2200</TotalMercanciasExentas>
+    <TotalGravado>0</TotalGravado>
+    <TotalExento>3899.2200</TotalExento>
+    <TotalVenta>3899.2200</TotalVenta>
+    <TotalDescuentos>0</TotalDescuentos>
+    <TotalVentaNeta>3899.2200</TotalVentaNeta>
+    <TotalImpuesto>0</TotalImpuesto>
+    <TotalComprobante>3899.2200</TotalComprobante>
+  </ResumenFactura>
+  <InformacionReferencia>
+    <TipoDoc>01</TipoDoc>
+    <Numero>50617091800310115991100100001010000002933112345670</Numero>
+    <FechaEmision>2018-09-17T10:33:02</FechaEmision>
+    <Codigo>03</Codigo>
+    <Razon>Devolucion</Razon>
+  </InformacionReferencia>
+  <Normativa>
+    <NumeroResolucion>DGT-R-48-2016</NumeroResolucion>
+    <FechaResolucion>2016-10-07 10:22:22</FechaResolucion>
+  </Normativa>
+</NotaCreditoElectronica>
