@@ -946,7 +946,7 @@ Public Class frm_reportes_admin
         '  Try
         V_venta_neta = Table("select  * from V_venta_neta", "")
         Dim Fac As DataTable
-        Fac = FACM(Criterio, False, "")
+        Fac = FACMDescuento(Criterio, False, "")
         Dim rowv As DataRow
         Dim z As Integer
         For z = 0 To Fac.Rows.Count - 1
