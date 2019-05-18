@@ -307,8 +307,9 @@ Public Class frm_consulta_documento
                     .lblid_cliente.Text = cliente.Rows(0).Item("nombre")
                     .txtexento.Text = FormatNumber(NC.Rows(0).Item("exento"), 2)
                     .txtgravado.Text = FormatNumber(NC.Rows(0).Item("gravado"), 2)
-                    .txtiv.Text = FormatNumber(NC.Rows(0).Item("piv") * 100, 2)
-                    monto = NC.Rows(0).Item("exento") + NC.Rows(0).Item("gravado") + NC.Rows(0).Item("gravado") * NC.Rows(0).Item("piv")
+                    .txtDescuento.Text = FormatNumber(NC.Rows(0).Item("descuento"), 2)
+                    .txtiv.Text = FormatNumber(NC.Rows(0).Item("tiv"), 2)
+                    monto = NC.Rows(0).Item("exento") + NC.Rows(0).Item("gravado") - NC.Rows(0).Item("descuento") + NC.Rows(0).Item("tiv")
                     .lblmonto.Text = FormatNumber(monto, 2)
 
 
