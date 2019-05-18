@@ -952,7 +952,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("men4")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = IIf(Doc = "P", "", "AUTORIZADO MEDIANTE OFICIO No. 01-0068-97 DE FECHA 26-09-97 DE LA D.G.TD.")
+                rParameterDiscreteValue.Value = IIf(Doc = "P", "", "AUTORIZADO MEDIANTE OFICIO No. 01-0068-97 DE ` 26-09-97 DE LA D.G.TD.")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 

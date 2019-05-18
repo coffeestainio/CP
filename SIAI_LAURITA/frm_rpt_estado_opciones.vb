@@ -120,7 +120,7 @@ Public Class frm_rpt_estado_opciones
         Dim Notac As DataTable
 
 
-        Factura = FACM(" factura." + criterio + " and factura." + Fecha + " and factura." + Fecha1, True, "")
+        Factura = FACMDescuento(" factura." + criterio + " and factura." + Fecha + " and factura." + Fecha1, True, "")
 
 
         Recibo = RECM(" recibo." + criterio + " and recibo." + Fecha + " and recibo." + Fecha1, True, "")

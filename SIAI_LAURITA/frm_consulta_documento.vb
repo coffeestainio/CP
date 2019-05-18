@@ -153,7 +153,7 @@ Public Class frm_consulta_documento
                 Dim rowf As DataRow
                 F = FACM(" factura.id_factura=" + id_documento, True, "")
                 rowf = F.Rows(0)
-                FD = Table("select  id_producto,cantidad,unidad,precio,descuento,iv from factura_detalle where id_factura=" + id_documento, "")
+                FD = Table("select id_producto,cantidad,unidad,precio,descuento,iv from factura_detalle where id_factura=" + id_documento, "")
                 Dim Pedido As New frm_pedido
                 With Pedido
                     .txtid_cliente.Text = rowf("id_cliente")

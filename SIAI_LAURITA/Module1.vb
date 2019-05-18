@@ -6,8 +6,8 @@ Imports System.math
 Module Module1
 
 
-    Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2;Persist Security Info=True"
-    'Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test3;Persist Security Info=False;User ID=CPSQL;Password=CP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    'Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2;Persist Security Info=True"
+    Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test3;Persist Security Info=False;User ID=CPSQL;Password=CP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     'Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2Viejo;Persist Security Info=True"
     'Public Const SERVER As String = "server=SERVER01\SQL2017;User ID=sa;password=SQLCP12345!;Database=CP;Persist Security Info=True"
 
@@ -237,7 +237,7 @@ Module Module1
     End Function
 
 
-    Public Function FACM(ByVal C As String, ByVal Anulados As Boolean, ByVal PK As String) As DataTable
+    Public Function FACMDescuento(ByVal C As String, ByVal Anulados As Boolean, ByVal PK As String) As DataTable
         Dim sql As String
         sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa, " + _
         "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
