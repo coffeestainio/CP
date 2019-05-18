@@ -30,7 +30,7 @@ Public Class frm_rpt_venta_neta_cliente_opciones
             CriterioNC = CriterioNC + " and CLIENTE.Id_Cliente=" + txtid_cliente.Text
         End If
 
-        Facs = FACM(Criterio, False, "")
+        Facs = FACMDescuento(Criterio, False, "")
         Dim nc As DataTable
         nc = NCM(CriterioNC, False, "")
 

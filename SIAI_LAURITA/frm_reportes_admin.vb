@@ -231,7 +231,7 @@ Public Class frm_reportes_admin
                 Dim factura As DataTable
                 Dim rfactura As New rpt_facturas
                 Criterio = " factura.fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and factura.fecha<='" + EDATE(dtphasta.Text) + " 23:59:29'"
-                factura = FACM(Criterio, True, "")
+                factura = FACMDescuento(Criterio, True, "")
 
 
                 rfactura.SetDataSource(factura)

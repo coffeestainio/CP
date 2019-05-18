@@ -43,6 +43,8 @@ Partial Class frm_Nota_Credito
         Me.Label7 = New System.Windows.Forms.Label
         Me.txtobservaciones = New System.Windows.Forms.TextBox
         Me.btnimprimir = New System.Windows.Forms.Button
+        Me.Label6 = New System.Windows.Forms.Label
+        Me.txtDescuento = New System.Windows.Forms.TextBox
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbid_cliente, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel.SuspendLayout()
@@ -184,6 +186,8 @@ Partial Class frm_Nota_Credito
         'Panel
         '
         Me.Panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel.Controls.Add(Me.txtDescuento)
+        Me.Panel.Controls.Add(Me.Label6)
         Me.Panel.Controls.Add(Me.lbliv)
         Me.Panel.Controls.Add(Me.lblmonto)
         Me.Panel.Controls.Add(Me.Label4)
@@ -288,6 +292,28 @@ Partial Class frm_Nota_Credito
         Me.btnimprimir.UseVisualStyleBackColor = True
         Me.btnimprimir.Visible = False
         '
+        'Label6
+        '
+        Me.Label6.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(298, 136)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(95, 24)
+        Me.Label6.TabIndex = 85
+        Me.Label6.Text = "Descuento"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtDescuento
+        '
+        Me.txtDescuento.AcceptsTab = True
+        Me.txtDescuento.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDescuento.Location = New System.Drawing.Point(394, 136)
+        Me.txtDescuento.MaxLength = 9
+        Me.txtDescuento.Name = "txtDescuento"
+        Me.txtDescuento.Size = New System.Drawing.Size(169, 26)
+        Me.txtDescuento.TabIndex = 86
+        Me.txtDescuento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtDescuento, "Escriba el % correspondiente al Impuesto de Ventas")
+        '
         'frm_Nota_Credito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -331,4 +357,6 @@ Partial Class frm_Nota_Credito
     Friend WithEvents txtgravado As System.Windows.Forms.TextBox
     Friend WithEvents lbliv As System.Windows.Forms.Label
     Friend WithEvents btnimprimir As System.Windows.Forms.Button
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents txtDescuento As System.Windows.Forms.TextBox
 End Class

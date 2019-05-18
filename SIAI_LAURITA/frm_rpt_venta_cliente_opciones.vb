@@ -27,7 +27,7 @@ Public Class frm_rpt_venta_cliente_opciones
             Criterio = Criterio + " and factura.id_cliente=" + txtid_cliente.Text
         End If
 
-        Facs = FACM(Criterio, False, "")
+        Facs = FACMDescuento(Criterio, False, "")
 
         Dim documento As DataColumn = New DataColumn("documento")
         documento.DataType = System.Type.GetType("System.String")

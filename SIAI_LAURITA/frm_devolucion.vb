@@ -39,7 +39,7 @@ Public Class frm_devolucion
 
     Public Sub Identifica_Factura()
 
-        Factura = FACM(" factura.id_factura=" + txtid_factura.Text + " and factura.sincronizada = 1 and coderror = 'Error:00'", True, "")
+        Factura = FACMDescuento(" factura.id_factura=" + txtid_factura.Text + " and factura.sincronizada = 1 and coderror = 'Error:00'", True, "")
 
         If Factura.Rows.Count = 0 Then
             MessageBox.Show("Factura No Existe o No ha sido enviada a hacienda", "", MessageBoxButtons.OK, MessageBoxIcon.Error)

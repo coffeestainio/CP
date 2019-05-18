@@ -47,7 +47,7 @@ Public Class frm_devolucion_reversar
                 SendKeys.Send("{home}+{end}")
                 Exit Sub
             End If
-            F = FACM("factura.id_factura=" + .Item("id_factura").ToString, False, "")
+            F = FACMDescuento("factura.id_factura=" + .Item("id_factura").ToString, False, "")
             piv = F.Rows(0).Item("piv")
             FD = Table("select * from factura_detalle where id_factura=" + .Item("id_factura").ToString + " order by id_Producto", "id_producto")
             Devd = Table("select * from devolucion_detalle where id_devolucion=" + .Item("id_devolucion").ToString + " order by id_producto", "")
