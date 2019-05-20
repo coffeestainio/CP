@@ -39,10 +39,10 @@ Public Class frm_devolucion
 
     Public Sub Identifica_Factura()
 
-        Factura = FACM("factura.id_factura=" + txtid_factura.Text, True, "")
+        Factura = FACM(" factura.id_factura=" + txtid_factura.Text + " and factura.sincronizada = 1 and coderror = 'Error:00'", True, "")
 
         If Factura.Rows.Count = 0 Then
-            MessageBox.Show("Factura No Existe", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Factura No Existe o No ha sido enviada a hacienda", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_factura.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
@@ -109,7 +109,7 @@ Public Class frm_devolucion
         Try
             Dim mf As Decimal
             Dim m As Decimal = 0
-            'Dim d As Decimal = 0
+            Dim d As Decimal = 0
 
 
             Dim productos As Decimal = 0
@@ -123,20 +123,20 @@ Public Class frm_devolucion
             For i = 0 To devolucion.Rows.Count - 1
                 With devolucion.Rows(i)
                     m = .Item("precio") * .Item("cantidad")
-                    'd = m * (.Item("descuento") / 100)
+                    d = m * (.Item("descuento") / 100)
                     mf = m
                     If .Item("iv") Then
                         TGravado = TGravado + mf
-                        Tiv = Tiv + mf * PIV
+                        Tiv = Tiv + ((mf - d) * PIV)
                     Else
                         TExento = TExento + mf
                     End If
-                    'Tdescuento = Tdescuento + d
+                    Tdescuento = Tdescuento + d
                     productos = productos + 1
                 End With
             Next i
 
-            Total = TExento + TGravado + Tiv
+            Total = TExento + TGravado + Tiv - Tdescuento
             lblproductos.Text = productos
             lbltotal.Text = "¢ " + FormatNumber(Total, 2)
         Catch myerror As Exception
@@ -240,24 +240,48 @@ Public Class frm_devolucion
         Dim D As DataTable
         Dim sql As String
 
+        Dim consec As Integer = Nothing
+        Try
+            consec = Table("select top 1 consecutivoElectronico as consecutivo from devolucion order by consecutivoElectronico desc", "").Rows(0).Item("consecutivo")
+            consec += 1
+        Catch
+            consec = 1
+        End Try
 
-        sql = "insert into devolucion (id_factura,fecha,id_cliente,id_usuario) values (" + _
-        txtid_factura.Text + "," + _
-        "'" + EDATE(Date.Today.ToShortDateString) + "'," + _
-        rowc("id_cliente").ToString + "," + _
-        USUARIO_ID + ")"
+
+        Dim numConsecutivo As String = "0010000103" + consec.ToString("0000000000")
+        Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
+        Dim claveNumericaFactura As String = Factura.Rows(0).Item("claveNumerica")
+        Dim clienteTributa As Boolean = Factura.Rows(0).Item("clienteTributa")
+        Dim fechaEmisionFactura As String = " (select fecha from factura where id_factura = " + txtid_factura.Text + ")"
+
+
+        sql = "insert into devolucion (id_factura,fecha,id_cliente,fechaEmisionFactura, numeroBoleta, claveNumerica,NumConsecutivo,consecutivoElectronico, claveNumericaFactura,clienteTributa,id_usuario) values (" + _
+        txtid_factura.Text & "," & _
+        "getDate()," & _
+        rowc("id_cliente").ToString & "," & _
+        "" & fechaEmisionFactura & "," & _
+        "'" & txtBoleta.Text & "'," & _
+        "'" & claveNumerica.ToString & "'," & _
+        "'" & numConsecutivo.ToString & "'," & _
+         consec.ToString & "," & _
+        "'" & claveNumericaFactura.ToString & "'," & _
+        "'" & clienteTributa.ToString & "'," & _
+        USUARIO_ID.ToString & ")"
 
         D = Table(sql + " select @@IDENTITY as id_devolucion", "")
         DevolucionID = D.Rows(0).Item("id_devolucion")
 
-        sql = "insert into Nota_credito (fecha,id_cliente,exento,gravado,piv,observaciones,id_usuario) values (" + _
+        sql = "insert into Nota_credito (fecha,id_cliente,exento,gravado,descuento,tiv,piv,observaciones,id_usuario) values (" + _
                 "'" + EDATE(Date.Today.ToShortDateString) + "'," + _
                 rowc("id_cliente").ToString + "," + _
                 (TExento).ToString + "," + _
                 (TGravado).ToString + "," + _
+                (Tdescuento).ToString + "," + _
+                (Tiv).ToString + "," + _
                 (PIV).ToString + "," + _
-                "'DEV " + DevolucionID + "'," + _
-                USUARIO_ID + ")"
+                "'DEV " & DevolucionID & "-" & txtBoleta.Text & "'," + _
+        USUARIO_ID + ")"
 
 
         Dim T As DataTable = Table(sql + " select @@IDENTITY as id_nota_credito", "")
@@ -281,10 +305,14 @@ Public Class frm_devolucion
                 OpenConn()
                 cmd.ExecuteNonQuery()
 
-                sql = "insert into  devolucion_detalle (id_devolucion,id_producto,cantidad) values (" + _
+                sql = "insert into  devolucion_detalle (id_devolucion,id_producto, unidad, precio, descuento, IV, cantidad) values (" + _
                 DevolucionID + "," + _
-                .Item("id_producto").ToString + "," + _
-                IIf(.Item("unidad") = 1, .Item("cantidad").ToString, (.Item("cantidad") * .Item("empaque")).ToString) + ")"
+                "'" & .Item("id_producto") & "'," & _
+                .Item("unidad").ToString + "," + _
+                .Item("precio").ToString + "," + _
+                (.Item("descuento") / 100).ToString & "," & _
+                "'" + .Item("IV").ToString + "'," + _
+                .Item("cantidad").ToString + ")"
 
 
                 cmd.CommandText = sql
@@ -539,16 +567,16 @@ Public Class frm_devolucion
             rParameterValues.Add(rParameterDiscreteValue)
             rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-            If ID_ESTACION = 1 Then
-                rdevolucion.PrintOptions.PrinterName = "REPORTES"
-            Else
-                rdevolucion.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
-            End If
-            rdevolucion.PrintToPrinter(1, False, 1, 1)
+            'If ID_ESTACION = 1 Then
+            '    rdevolucion.PrintOptions.PrinterName = "REPORTES"
+            'Else
+            '    rdevolucion.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
+            'End If
+            'rdevolucion.PrintToPrinter(1, False, 1, 1)
 
-            'Dim rv As New frm_Report_Viewer
-            'rv.crv.ReportSource = rdevolucion
-            'rv.Show()
+            Dim rv As New frm_Report_Viewer
+            rv.crv.ReportSource = rdevolucion
+            rv.Show()
 
         Catch myerror As Exception
             ONEX(Me.Name, myerror)

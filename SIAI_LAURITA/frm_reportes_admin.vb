@@ -230,7 +230,7 @@ Public Class frm_reportes_admin
             Case "rbfactura"
                 Dim factura As DataTable
                 Dim rfactura As New rpt_facturas
-                Criterio = " factura.fecha>='" + EDATE(dtpdesde.Text) + "' and factura.fecha<='" + EDATE(dtphasta.Text) + "'"
+                Criterio = " factura.fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and factura.fecha<='" + EDATE(dtphasta.Text) + " 23:59:29'"
                 factura = FACM(Criterio, True, "")
 
 
@@ -331,8 +331,10 @@ Public Class frm_reportes_admin
             Case "rbdevolucion"
                 Dim devolucion As DataTable
                 Dim rdevolucion As New rpt_devoluciones
-                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
+                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+                Dim cliente As DataTable = Table("select id_cliente,nombre from cliente", "id_cliente")
                 devolucion = DEVM(Criterio, True, "")
+
 
                 Dim nombre_sociedad As DataColumn = New DataColumn("nombre_sociedad")
                 nombre_sociedad.DataType = System.Type.GetType("System.String")
@@ -341,7 +343,7 @@ Public Class frm_reportes_admin
                 Dim rowc As DataRow
                 For z = 0 To devolucion.Rows.Count - 1
                     With devolucion.Rows(z)
-                        rowc = Cliente.Rows.Find(.Item("id_cliente"))
+                        rowc = cliente.Rows.Find(.Item("id_cliente"))
                         .Item("nombre_sociedad") = rowc("nombre")
                     End With
                 Next
@@ -354,6 +356,13 @@ Public Class frm_reportes_admin
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
                 rParameterDiscreteValue.Value = "Del " + dtpdesde.Text + " al " + dtphasta.Text
+                rParameterValues.Add(rParameterDiscreteValue)
+                rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
+
+                rParameterFieldLocation = rParameterFieldDefinitions.Item("NEGOCIO")
+                rParameterValues = rParameterFieldLocation.CurrentValues
+                rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
+                rParameterDiscreteValue.Value = "Comercial Pozos"
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -611,8 +620,8 @@ Public Class frm_reportes_admin
                 Dim ClienteId As String
 
                 ClienteId = "General"
-                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
-                criterionc = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
+                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
+                criterionc = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
 
 
 
@@ -655,7 +664,7 @@ Public Class frm_reportes_admin
             Case "rbgrafico"
                 Dim rgrafico As New rpt_grafico
 
-                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + "' and fecha<='" + EDATE(dtphasta.Text) + "'"
+                Criterio = "fecha>='" + EDATE(dtpdesde.Text) + " 00:00:00' and fecha<='" + EDATE(dtphasta.Text) + " 23:59:59'"
 
                 V_Venta_Neta_crear()
                 rgrafico.SetDataSource(V_venta_neta)
@@ -937,7 +946,7 @@ Public Class frm_reportes_admin
         '  Try
         V_venta_neta = Table("select  * from V_venta_neta", "")
         Dim Fac As DataTable
-        Fac = FACM(Criterio, False, "")
+        Fac = FACMDescuento(Criterio, False, "")
         Dim rowv As DataRow
         Dim z As Integer
         For z = 0 To Fac.Rows.Count - 1

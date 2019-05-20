@@ -7,13 +7,15 @@ Module Module1
 
 
     Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2;Persist Security Info=True"
-    'Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test;Persist Security Info=False;User ID=CPSQL;Password=SQLCP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    'Public Const SERVER As String = "Server=tcp:cp2.database.windows.net,1433;Initial Catalog=CP2_Test3;Persist Security Info=False;User ID=CPSQL;Password=CP12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     'Public Const SERVER As String = "server=Server01\SQLExpress;User ID=sa;password=SQLCP123456!;Database=CP2Viejo;Persist Security Info=True"
+    'Public Const SERVER As String = "server=SERVER01\SQL2017;User ID=sa;password=SQLCP12345!;Database=CP;Persist Security Info=True"
 
+    Public Const Produccion As Boolean = True
 
     Public Const PRINTER As String = "S1"
 
-    Public Const Version As String = "4.2.08.07"
+    Public Const Version As String = "4.11.26.1"
 
     Public Const NEGOCIO As String = "COMERCIAL POZOS S.A."
 
@@ -21,6 +23,8 @@ Module Module1
     Public Const WEB As String = " "
     Public Const TELEFONO As String = "2282-6030  2282-4516"
     Public Const DIRECCION As String = "100 Sur Iglesia Pozos, Santa Ana"
+
+    Public Const CEDULA As String = "003101159911"
 
     Public Prst(4) As String
 
@@ -56,7 +60,9 @@ Module Module1
         End If
     End Sub
 
-
+    Public Sub EjectuarFacturacionElectronica()
+        Process.Start("cmd", "/c dotnet H:/FacElecCP/FacElec.dll")
+    End Sub
 
     Public Sub dstable(ByVal dataset As DataSet, ByVal tabla_nombre As String, ByVal sql As String, ByVal Pk As String)
         Try
@@ -103,6 +109,7 @@ Module Module1
         'End Try
     End Function
 
+
     Public Sub AddParams(ByVal cmd As SqlCommand, ByVal ParamArray cols() As String)
         Try
             Dim col As String
@@ -115,7 +122,6 @@ Module Module1
     End Sub
 
     Public Function FACS2(ByVal C As String, ByVal Pk As String) As DataTable
-        Dim Sld As Decimal
         Dim DTA As DataTable = FACS(C, Pk)
         'Dim DTB As DataTable = Table("select * from tfacs where " & C, Pk)
         'Dim fac As DataTable
@@ -147,15 +153,7 @@ Module Module1
         'Try
         Dim Fac As DataTable
         Dim Facx As DataTable
-        Dim RecD As DataTable
-        Dim Nc As DataTable
-
-        Dim Trec As Decimal
-        Dim TNC As Decimal
-        Dim Sld As Decimal
-
         Dim i As Integer
-        Dim j As Integer
 
         Fac = FAC_S()
         Facx = FACM1(C + IIf(C = "", "", " and ") + " factura.fecha>='01/01/2011'", False, Pk) 'para cp = edate(date.today)
@@ -206,13 +204,13 @@ Module Module1
         " ELSE  0 END) AS exento," + _
         "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
         "ELSE  0 END) AS gravado, " + _
-        "SUM((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD) AS subtotal," + _
-        "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * FACTURA.PIV " + _
+        "SUM((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * (1 - Factura_Detalle.Descuento)) AS subtotal," + _
+        "SUM(CASE WHEN factura_detalle.iv = 1 THEN ((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD) * FACTURA.PIV " + _
         "ELSE 0 END) AS IV," + _
-        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
-        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) END) AS MONTO, " + _
-        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
-        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) END) " + _
+        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * (1 - Factura_Detalle.Descuento) " + _
+        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) * (1 - Factura_Detalle.Descuento) END) AS MONTO, " + _
+        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) *  Factura_Detalle.CANTIDAD * (1 - Factura_Detalle.Descuento) " + _
+        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 + factura.piv) * (1 - Factura_Detalle.Descuento) END) " + _
         " - (select isnull(sum (R.abono),0) from recibo_Detalle as R where R.id_Factura = FACTURA.id_factura " + _
         " and R.id_Recibo not in (select id_documento as id_recibo from reversion where tipo = 4)) " + _
         " - (select isnull(sum (NC.aplicado),0) from nota_credito_Detalle as NC where NC.id_Factura = FACTURA.id_factura) as SALDO, " + _
@@ -227,9 +225,21 @@ Module Module1
         Return Tbl
     End Function
 
+
+
+    Public Function FACMError(ByVal C As String) As DataTable
+        Dim sql As String
+        sql = "select id_factura id_documento, fecha, id_cliente, coderror, descripcionerror from factura where sincronizada = 1 and Coderror <> 'Error:00' " + _
+        C
+
+        Dim Tbl As DataTable = Table(sql, "")
+        Return Tbl
+    End Function
+
+
     Public Function FACM(ByVal C As String, ByVal Anulados As Boolean, ByVal PK As String) As DataTable
         Dim sql As String
-        sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv," + _
+        sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa, " + _
         "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
         " ELSE  0 END) AS exento," + _
         "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
@@ -244,7 +254,31 @@ Module Module1
         " INNER JOIN CLIENTE ON Factura.Id_Cliente = CLIENTE.Id_Cliente " + _
         IIf(Anulados, "", " and NOT EXISTS (SELECT * FROM Reversion  WHERE reversion.Tipo = 2 and reversion.id_documento=factura.id_factura)") + _
         IIf(C = "", "", " and " + C) + _
-        " GROUP BY Factura.Id_Factura, Factura.FECHA, Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv"
+        " GROUP BY Factura.Id_Factura, Factura.FECHA, Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa"
+
+
+        Dim Tbl As DataTable = Table(sql, PK)
+        Return Tbl
+    End Function
+
+    Public Function FACMDescuento(ByVal C As String, ByVal Anulados As Boolean, ByVal PK As String) As DataTable
+        Dim sql As String
+        sql = "SELECT Factura.Id_Factura, Factura.FECHA, factura.fecha+factura.plazo as vence,Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa, " + _
+        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
+        " ELSE  0 END) AS exento," + _
+        "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD " + _
+        "ELSE  0 END) AS gravado, " + _
+        "SUM((Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD) AS subtotal," + _
+        "SUM(CASE WHEN factura_detalle.iv = 1 THEN (Factura_Detalle.Precio) * Factura_Detalle.CANTIDAD * FACTURA.PIV " + _
+        "ELSE 0 END) AS IV," + _
+        "SUM(CASE WHEN factura_detalle.iv = 0 THEN (Factura_Detalle.Precio) * (1 - factura_detalle.Descuento) * Factura_Detalle.CANTIDAD " + _
+        "ELSE (Factura_Detalle.Precio)* factura_detalle.cantidad * (1 - factura_detalle.Descuento) *  (1 + factura.piv) END) AS MONTO, " + _
+        " CASE WHEN NOT EXISTS (SELECT * FROM Reversion WHERE reversion.Tipo = 2 AND reversion.id_documento = factura.id_factura) THEN 0 ELSE 1 END AS anulado" + _
+        " FROM Factura INNER JOIN Factura_Detalle ON Factura.Id_Factura = Factura_Detalle.Id_Factura " + _
+        " INNER JOIN CLIENTE ON Factura.Id_Cliente = CLIENTE.Id_Cliente " + _
+        IIf(Anulados, "", " and NOT EXISTS (SELECT * FROM Reversion  WHERE reversion.Tipo = 2 and reversion.id_documento=factura.id_factura)") + _
+        IIf(C = "", "", " and " + C) + _
+        " GROUP BY Factura.Id_Factura, Factura.FECHA, Factura.Id_Cliente, CLIENTE.NOMBRE, factura.id_agente,Factura.Plazo, factura.piv, factura.claveNumerica, factura.numConsecutivo, factura.clienteTributa"
 
 
         Dim Tbl As DataTable = Table(sql, PK)
@@ -392,8 +426,8 @@ Module Module1
     Public Function NCM(ByVal C As String, ByVal Anulados As Boolean, ByVal Pk As String) As DataTable
         Dim sql As String
         Dim tbl As DataTable
-        sql = "select nota_credito.id_Nota_credito,nota_credito.fecha,nota_credito.id_cliente,nota_credito.gravado,nota_credito.exento,nota_credito.piv,nota_credito.observaciones," + _
-        "nota_credito.gravado*nota_credito.piv as iv,nota_credito.exento+nota_credito.gravado+(nota_credito.gravado*nota_credito.piv) as monto," + _
+        sql = "select nota_credito.id_Nota_credito,nota_credito.fecha,nota_credito.id_cliente,nota_credito.gravado,nota_credito.exento, nota_credito.piv,nota_credito.observaciones," + _
+        "nota_credito.tiv as iv,(nota_credito.exento+nota_credito.gravado - nota_credito.descuento + nota_credito.tiv) as monto," + _
         "cliente.nombre,  " + _
         "CASE WHEN NOT EXISTS (SELECT * FROM Reversion WHERE reversion.Tipo = 6 AND reversion.id_documento = nota_credito.id_nota_credito) THEN 0 ELSE 1 END AS anulado" + _
         " FROM nota_credito INNER JOIN cliente ON nota_credito.Id_cliente = cliente.Id_cliente " + _
@@ -419,7 +453,7 @@ Module Module1
 
         Dim monto As DataColumn = New DataColumn("monto")
         monto.DataType = System.Type.GetType("System.Decimal")
-        monto.Expression = "exento + gravado * (1 + piv)"
+        monto.Expression = "exento + gravado - descuento + tiv"
         NC.Columns.Add(monto)
 
         Return NC
@@ -463,9 +497,6 @@ Module Module1
 
     Public Function DEVM(ByVal C As String, ByVal Anulados As Boolean, ByVal Pk As String) As DataTable
 
-
-        'Try
-
         Dim DTgravado As Decimal
         Dim DTexento As Decimal
         Dim DTiv As Decimal
@@ -493,7 +524,7 @@ Module Module1
         sql = "select devolucion.id_devolucion,devolucion.fecha,devolucion.id_cliente,devolucion.id_factura,devolucion.id_nota_credito,cliente.nombre, " + _
         " CASE WHEN NOT EXISTS (SELECT * FROM Reversion WHERE reversion.Tipo = 8 AND reversion.id_documento = devolucion.id_devolucion) THEN 0 ELSE 1 END AS anulado" + _
         " from devolucion inner join cliente on devolucion.id_cliente=cliente.id_cliente " + _
-        IIf(C = "", "", " and " + C) + _
+        IIf(C = "", "", " where " + C) + _
         IIf(Anulados, "", " and NOT EXISTS (SELECT * FROM Reversion  WHERE reversion.Tipo = 8 and reversion.id_documento=devolucion.id_devolucion)")
 
 
@@ -532,15 +563,6 @@ Module Module1
 
                 DevD = Table("select * from devolucion_detalle where id_devolucion=" + .Item("id_devolucion").ToString + " order by id_producto", "")
 
-                Dim precio As DataColumn = New DataColumn("precio")
-                precio.DataType = System.Type.GetType("System.Decimal")
-                DevD.Columns.Add(precio)
-
-                Dim descuento As DataColumn = New DataColumn("descuento")
-                descuento.DataType = System.Type.GetType("System.Decimal")
-                DevD.Columns.Add(descuento)
-
-
 
                 Dim ddiv As DataColumn = New DataColumn("ddiv")
                 ddiv.DataType = System.Type.GetType("System.Boolean")
@@ -559,7 +581,6 @@ Module Module1
                         m = 0
                         mf = 0
                         d = 0
-
 
                         m = .Item("precio") * .Item("cantidad")
                         d = m * (.Item("descuento"))
@@ -588,10 +609,7 @@ Module Module1
             End With
         Next i
         Return Dev
-        'Catch myerror As Exception
-        ' ONEX(Me.Name, myerror)
 
-        'End Try
     End Function
     Public Function RECM(ByVal C As String, ByVal ANULADOS As Boolean, ByVal PK As String) As DataTable
 
@@ -742,8 +760,6 @@ Module Module1
         Dim schema As DataTable = reader.GetSchemaTable()
         Dim columns(schema.Rows.Count - 1) As DataColumn
         Dim column As DataColumn
-
-
 
 
         For i As Integer = 0 To columns.GetUpperBound(0) Step 1

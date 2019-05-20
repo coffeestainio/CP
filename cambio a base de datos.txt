@@ -1,0 +1,46 @@
+ALTER TABLE dbo.Cliente ADD
+identificacion VARCHAR(20) NULL,
+tipoIdentificacion int NULL,
+provincia int NULL default 1,
+canton int NULL default 1,
+distrito int NULL default 1
+;
+
+update cliente set provincia = 1, canton =1 , distrito = 1, tipoIdentificacion =1;
+
+ALTER TABLE dbo.factura ADD
+sincronizada int NULL DEFAULT 0,
+IdCarga INT NULL,
+ClaveNumerica nvarchar(50) NULL,
+NumConsecutivo nvarchar(50) NULL,
+CodError nvarchar(50) NULL,
+DescripcionError nvarchar(300) NULL,
+Actualizada datetime null,
+consecutivoElectronico int Null 
+;
+
+UPDATe dbo.factura SET sincronizada =3;
+update dbo.factura set consecutivoElectronico = 0;
+
+alter table dbo.factura ADD
+clienteContado bit NULL default 0;
+
+alter table devolucion add 
+Plazo int default 0,
+PIV numeric default 0,
+sincronizada int default 0,
+ClaveNumerica nvarchar(50) null,
+NumConsecutivo nvarchar (50) null,
+CodError nvarchar(50) null,
+DescripcionError nvarchar (150) null,
+Actualizada datetime default getDate() null,
+consecutivoElectronico int null,
+clienteTributa bit null,
+fechaEmisionFactura datetime null,
+claveNumericaFactura nvarchar(50) null;
+
+alter table devolucion_detalle add
+unidad tinyint,
+precio decimal,
+Descuento decimal,
+IV bit;

@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{EF2EC2CF-5A3E-46A4-8A66-AEE5EB8E1790}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SIAI_LAURITA/frm_proveedor_mantenimiento.vb">
+    <Files>
+      <File FileName="SIAI_LAURITA/frm_proveedor_mantenimiento.vb" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.SIAA2__CP PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

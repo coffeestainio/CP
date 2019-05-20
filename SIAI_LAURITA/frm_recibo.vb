@@ -415,7 +415,7 @@ Public Class frm_recibo
             rParameterValues.Add(rParameterDiscreteValue)
             rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-          
+
             rParameterFieldLocation = rParameterFieldDefinitions.Item("saldo_nuevo")
             rParameterValues = rParameterFieldLocation.CurrentValues
             rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
@@ -586,7 +586,7 @@ Public Class frm_recibo
         End If
 
         
-        If Total < 0 Then
+        If Total <= 0 Then
             MessageBox.Show("El Monto del Recibo debe ser Mayor a Cero", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             SendKeys.Send("{home}+{end}")
             Exit Sub

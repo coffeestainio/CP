@@ -20,6 +20,7 @@ Partial Class frm_pedido
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_pedido))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
@@ -32,9 +33,9 @@ Partial Class frm_pedido
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_pedido))
         Me.lbltitulo = New System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.btnproformarweb = New System.Windows.Forms.Button
         Me.btndescpp = New System.Windows.Forms.Button
         Me.btncambios = New System.Windows.Forms.Button
         Me.btnfacturar = New System.Windows.Forms.Button
@@ -80,7 +81,6 @@ Partial Class frm_pedido
         Me.Label4 = New System.Windows.Forms.Label
         Me.lbldescg = New System.Windows.Forms.Label
         Me.pnencabezado = New System.Windows.Forms.Panel
-        Me.btnproformarweb = New System.Windows.Forms.Button
         Me.SaveReportDialog = New System.Windows.Forms.SaveFileDialog
         Me.Panel1.SuspendLayout()
         CType(Me.dtgpedido, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,6 +120,20 @@ Partial Class frm_pedido
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(903, 548)
         Me.Panel1.TabIndex = 33
+        '
+        'btnproformarweb
+        '
+        Me.btnproformarweb.Enabled = False
+        Me.btnproformarweb.Font = New System.Drawing.Font("Arial", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnproformarweb.Image = CType(resources.GetObject("btnproformarweb.Image"), System.Drawing.Image)
+        Me.btnproformarweb.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnproformarweb.Location = New System.Drawing.Point(842, 444)
+        Me.btnproformarweb.Name = "btnproformarweb"
+        Me.btnproformarweb.Size = New System.Drawing.Size(54, 48)
+        Me.btnproformarweb.TabIndex = 83
+        Me.btnproformarweb.Text = "Prof Web"
+        Me.btnproformarweb.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnproformarweb.UseVisualStyleBackColor = True
         '
         'btndescpp
         '
@@ -664,20 +678,6 @@ Partial Class frm_pedido
         Me.pnencabezado.Name = "pnencabezado"
         Me.pnencabezado.Size = New System.Drawing.Size(868, 63)
         Me.pnencabezado.TabIndex = 0
-        '
-        'btnproformarweb
-        '
-        Me.btnproformarweb.Enabled = False
-        Me.btnproformarweb.Font = New System.Drawing.Font("Arial", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnproformarweb.Image = CType(resources.GetObject("btnproformarweb.Image"), System.Drawing.Image)
-        Me.btnproformarweb.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnproformarweb.Location = New System.Drawing.Point(842, 444)
-        Me.btnproformarweb.Name = "btnproformarweb"
-        Me.btnproformarweb.Size = New System.Drawing.Size(54, 48)
-        Me.btnproformarweb.TabIndex = 83
-        Me.btnproformarweb.Text = "Prof Web"
-        Me.btnproformarweb.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnproformarweb.UseVisualStyleBackColor = True
         '
         'frm_pedido
         '

@@ -142,19 +142,6 @@ Public Class frm_datos_mantenimiento
     Friend WithEvents aidentificacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents aobservaciones As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dtgaeliminado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dtgcid As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cnombre As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cTelefono As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cdireccion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cplazo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cfax As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cemail As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cnombre_encargado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ctelefono_encargado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents climite As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cobservaciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents celiminado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents precio As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dtgprvid As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents prNombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents prtelefono As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -201,6 +188,26 @@ Public Class frm_datos_mantenimiento
     Friend WithEvents pobservaciones As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pid_proverdor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pbarcode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents dtgcid As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents identificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cnombre As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cTelefono As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cdireccion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cplazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cfax As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cemail As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cnombre_encargado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ctelefono_encargado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents climite As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cobservaciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents celiminado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents precio As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tipoIdentificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents provincia As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents canton As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents distrito As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents representante As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents numeroRepresentante As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblm2 As System.Windows.Forms.Label
 
 
@@ -250,9 +257,10 @@ Public Class frm_datos_mantenimiento
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
@@ -260,10 +268,9 @@ Public Class frm_datos_mantenimiento
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtbuscar_proveedor = New System.Windows.Forms.TextBox
         Me.txtbuscar_producto = New System.Windows.Forms.TextBox
@@ -341,6 +348,28 @@ Public Class frm_datos_mantenimiento
         Me.id_listA = New System.Windows.Forms.DataGridTextBoxColumn
         Me.Tabproducto = New System.Windows.Forms.TabPage
         Me.dtgproducto = New System.Windows.Forms.DataGridView
+        Me.dtgprdid = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.id_sector = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.pnombre = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.bloqueado = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.Ppresentacion = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.existencia = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.piv = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.pid_proveedor = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.empaque = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.sub_empaque = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.pid_familia = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.id_pasillo = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.id_b_r = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.costo = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.u1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.u2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.u3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.u4 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.detalle = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.pobservaciones = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.pid_proverdor = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.pbarcode = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.PictureBox5 = New System.Windows.Forms.PictureBox
         Me.Label5 = New System.Windows.Forms.Label
         Me.unidad = New System.Windows.Forms.DataGridTextBoxColumn
@@ -348,19 +377,6 @@ Public Class frm_datos_mantenimiento
         Me.id_producto = New System.Windows.Forms.DataGridTextBoxColumn
         Me.Tabcliente = New System.Windows.Forms.TabPage
         Me.dtgcliente = New System.Windows.Forms.DataGridView
-        Me.dtgcid = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cnombre = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cTelefono = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cdireccion = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cplazo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cfax = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cemail = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cnombre_encargado = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ctelefono_encargado = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.climite = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.cobservaciones = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.celiminado = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.PictureBox2 = New System.Windows.Forms.PictureBox
         Me.Label3 = New System.Windows.Forms.Label
         Me.telefonocliente = New System.Windows.Forms.DataGridTextBoxColumn
@@ -389,28 +405,26 @@ Public Class frm_datos_mantenimiento
         Me.tsproducto_presentacion = New System.Windows.Forms.DataGridTextBoxColumn
         Me.tsproducto_nombre = New System.Windows.Forms.DataGridTextBoxColumn
         Me.tsproducto_id_producto = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.dtgprdid = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.id_sector = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.pnombre = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.bloqueado = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.Ppresentacion = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.existencia = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.piv = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.pid_proveedor = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.empaque = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.sub_empaque = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.pid_familia = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.id_pasillo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.id_b_r = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.costo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.u1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.u2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.u3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.u4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.detalle = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.pobservaciones = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.pid_proverdor = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.pbarcode = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.dtgcid = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.identificacion = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cnombre = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cTelefono = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cdireccion = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cplazo = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cfax = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cemail = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cnombre_encargado = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ctelefono_encargado = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.climite = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.cobservaciones = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.celiminado = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.tipoIdentificacion = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.provincia = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.canton = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.distrito = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.representante = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.numeroRepresentante = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Tabparametro.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Tabusuario.SuspendLayout()
@@ -1257,6 +1271,203 @@ Public Class frm_datos_mantenimiento
         Me.dtgproducto.Size = New System.Drawing.Size(549, 477)
         Me.dtgproducto.TabIndex = 1
         '
+        'dtgprdid
+        '
+        Me.dtgprdid.DataPropertyName = "id_producto"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtgprdid.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dtgprdid.FillWeight = 65.0!
+        Me.dtgprdid.HeaderText = "Código"
+        Me.dtgprdid.Name = "dtgprdid"
+        Me.dtgprdid.ReadOnly = True
+        Me.dtgprdid.Width = 65
+        '
+        'id_sector
+        '
+        Me.id_sector.DataPropertyName = "id_sector"
+        Me.id_sector.HeaderText = "Column1"
+        Me.id_sector.Name = "id_sector"
+        Me.id_sector.ReadOnly = True
+        Me.id_sector.Visible = False
+        '
+        'pnombre
+        '
+        Me.pnombre.DataPropertyName = "nombre"
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnombre.DefaultCellStyle = DataGridViewCellStyle8
+        Me.pnombre.FillWeight = 350.0!
+        Me.pnombre.HeaderText = "Nombre"
+        Me.pnombre.Name = "pnombre"
+        Me.pnombre.ReadOnly = True
+        Me.pnombre.Width = 400
+        '
+        'bloqueado
+        '
+        Me.bloqueado.DataPropertyName = "bloqueado"
+        Me.bloqueado.HeaderText = "B"
+        Me.bloqueado.Name = "bloqueado"
+        Me.bloqueado.ReadOnly = True
+        Me.bloqueado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.bloqueado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.bloqueado.Width = 20
+        '
+        'Ppresentacion
+        '
+        Me.Ppresentacion.DataPropertyName = "presentacion"
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Ppresentacion.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Ppresentacion.FillWeight = 40.0!
+        Me.Ppresentacion.HeaderText = "Prst"
+        Me.Ppresentacion.Name = "Ppresentacion"
+        Me.Ppresentacion.ReadOnly = True
+        Me.Ppresentacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Ppresentacion.Visible = False
+        Me.Ppresentacion.Width = 45
+        '
+        'existencia
+        '
+        Me.existencia.DataPropertyName = "existencia"
+        Me.existencia.HeaderText = "Column1"
+        Me.existencia.Name = "existencia"
+        Me.existencia.ReadOnly = True
+        Me.existencia.Visible = False
+        '
+        'piv
+        '
+        Me.piv.DataPropertyName = "iv"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.NullValue = False
+        Me.piv.DefaultCellStyle = DataGridViewCellStyle10
+        Me.piv.FillWeight = 20.0!
+        Me.piv.HeaderText = "iv"
+        Me.piv.Name = "piv"
+        Me.piv.ReadOnly = True
+        Me.piv.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.piv.Visible = False
+        Me.piv.Width = 25
+        '
+        'pid_proveedor
+        '
+        Me.pid_proveedor.HeaderText = "id_proveedor"
+        Me.pid_proveedor.Name = "pid_proveedor"
+        Me.pid_proveedor.ReadOnly = True
+        Me.pid_proveedor.Visible = False
+        '
+        'empaque
+        '
+        Me.empaque.DataPropertyName = "empaque"
+        Me.empaque.HeaderText = "Column1"
+        Me.empaque.Name = "empaque"
+        Me.empaque.ReadOnly = True
+        Me.empaque.Visible = False
+        '
+        'sub_empaque
+        '
+        Me.sub_empaque.DataPropertyName = "sub_empaque"
+        Me.sub_empaque.HeaderText = "Column1"
+        Me.sub_empaque.Name = "sub_empaque"
+        Me.sub_empaque.ReadOnly = True
+        Me.sub_empaque.Visible = False
+        '
+        'pid_familia
+        '
+        Me.pid_familia.DataPropertyName = "id_linea"
+        Me.pid_familia.HeaderText = "id_linea"
+        Me.pid_familia.Name = "pid_familia"
+        Me.pid_familia.ReadOnly = True
+        Me.pid_familia.Visible = False
+        '
+        'id_pasillo
+        '
+        Me.id_pasillo.DataPropertyName = "id_pasillo"
+        Me.id_pasillo.HeaderText = "Column1"
+        Me.id_pasillo.Name = "id_pasillo"
+        Me.id_pasillo.ReadOnly = True
+        Me.id_pasillo.Visible = False
+        '
+        'id_b_r
+        '
+        Me.id_b_r.DataPropertyName = "id_b_r"
+        Me.id_b_r.HeaderText = "Column1"
+        Me.id_b_r.Name = "id_b_r"
+        Me.id_b_r.ReadOnly = True
+        Me.id_b_r.Visible = False
+        '
+        'costo
+        '
+        Me.costo.DataPropertyName = "costo"
+        Me.costo.HeaderText = "Column1"
+        Me.costo.Name = "costo"
+        Me.costo.ReadOnly = True
+        Me.costo.Visible = False
+        '
+        'u1
+        '
+        Me.u1.DataPropertyName = "utilidad_1"
+        Me.u1.HeaderText = "Column1"
+        Me.u1.Name = "u1"
+        Me.u1.ReadOnly = True
+        Me.u1.Visible = False
+        '
+        'u2
+        '
+        Me.u2.DataPropertyName = "utilidad_2"
+        Me.u2.HeaderText = "Column1"
+        Me.u2.Name = "u2"
+        Me.u2.ReadOnly = True
+        Me.u2.Visible = False
+        '
+        'u3
+        '
+        Me.u3.DataPropertyName = "utilidad_3"
+        Me.u3.HeaderText = "Column1"
+        Me.u3.Name = "u3"
+        Me.u3.ReadOnly = True
+        Me.u3.Visible = False
+        '
+        'u4
+        '
+        Me.u4.DataPropertyName = "utilidad_4"
+        Me.u4.HeaderText = "Column1"
+        Me.u4.Name = "u4"
+        Me.u4.ReadOnly = True
+        Me.u4.Visible = False
+        '
+        'detalle
+        '
+        Me.detalle.DataPropertyName = "detalle"
+        Me.detalle.HeaderText = "Column1"
+        Me.detalle.Name = "detalle"
+        Me.detalle.ReadOnly = True
+        Me.detalle.Visible = False
+        '
+        'pobservaciones
+        '
+        Me.pobservaciones.DataPropertyName = "observaciones"
+        Me.pobservaciones.HeaderText = "observaciones"
+        Me.pobservaciones.Name = "pobservaciones"
+        Me.pobservaciones.ReadOnly = True
+        Me.pobservaciones.Visible = False
+        '
+        'pid_proverdor
+        '
+        Me.pid_proverdor.DataPropertyName = "id_proveedor"
+        Me.pid_proverdor.HeaderText = "id_proveedor"
+        Me.pid_proverdor.Name = "pid_proverdor"
+        Me.pid_proverdor.ReadOnly = True
+        Me.pid_proverdor.Visible = False
+        '
+        'pbarcode
+        '
+        Me.pbarcode.DataPropertyName = "barcode"
+        Me.pbarcode.HeaderText = "barcode"
+        Me.pbarcode.Name = "pbarcode"
+        Me.pbarcode.ReadOnly = True
+        Me.pbarcode.Visible = False
+        '
         'PictureBox5
         '
         Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
@@ -1329,126 +1540,13 @@ Public Class frm_datos_mantenimiento
         Me.dtgcliente.AllowUserToResizeColumns = False
         Me.dtgcliente.AllowUserToResizeRows = False
         Me.dtgcliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dtgcliente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dtgcid, Me.cnombre, Me.cTelefono, Me.cdireccion, Me.cplazo, Me.cfax, Me.cemail, Me.cnombre_encargado, Me.ctelefono_encargado, Me.climite, Me.cobservaciones, Me.celiminado, Me.precio})
+        Me.dtgcliente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dtgcid, Me.identificacion, Me.cnombre, Me.cTelefono, Me.cdireccion, Me.cplazo, Me.cfax, Me.cemail, Me.cnombre_encargado, Me.ctelefono_encargado, Me.climite, Me.cobservaciones, Me.celiminado, Me.precio, Me.tipoIdentificacion, Me.provincia, Me.canton, Me.distrito, Me.representante, Me.numeroRepresentante})
         Me.dtgcliente.Location = New System.Drawing.Point(137, 57)
         Me.dtgcliente.Name = "dtgcliente"
         Me.dtgcliente.ReadOnly = True
         Me.dtgcliente.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dtgcliente.Size = New System.Drawing.Size(511, 474)
         Me.dtgcliente.TabIndex = 28
-        '
-        'dtgcid
-        '
-        Me.dtgcid.DataPropertyName = "id_cliente"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtgcid.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dtgcid.HeaderText = "Código"
-        Me.dtgcid.Name = "dtgcid"
-        Me.dtgcid.ReadOnly = True
-        Me.dtgcid.Width = 65
-        '
-        'cnombre
-        '
-        Me.cnombre.DataPropertyName = "nombre"
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cnombre.DefaultCellStyle = DataGridViewCellStyle13
-        Me.cnombre.HeaderText = "Nombre"
-        Me.cnombre.Name = "cnombre"
-        Me.cnombre.ReadOnly = True
-        Me.cnombre.Width = 300
-        '
-        'cTelefono
-        '
-        Me.cTelefono.DataPropertyName = "telefono"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cTelefono.DefaultCellStyle = DataGridViewCellStyle14
-        Me.cTelefono.HeaderText = "Teléfono"
-        Me.cTelefono.Name = "cTelefono"
-        Me.cTelefono.ReadOnly = True
-        Me.cTelefono.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cTelefono.Width = 80
-        '
-        'cdireccion
-        '
-        Me.cdireccion.DataPropertyName = "direccion"
-        Me.cdireccion.HeaderText = "direccion"
-        Me.cdireccion.Name = "cdireccion"
-        Me.cdireccion.ReadOnly = True
-        Me.cdireccion.Visible = False
-        '
-        'cplazo
-        '
-        Me.cplazo.DataPropertyName = "plazo"
-        Me.cplazo.HeaderText = "plazo"
-        Me.cplazo.Name = "cplazo"
-        Me.cplazo.ReadOnly = True
-        Me.cplazo.Visible = False
-        '
-        'cfax
-        '
-        Me.cfax.DataPropertyName = "fax"
-        Me.cfax.HeaderText = "fax"
-        Me.cfax.Name = "cfax"
-        Me.cfax.ReadOnly = True
-        Me.cfax.Visible = False
-        '
-        'cemail
-        '
-        Me.cemail.DataPropertyName = "email"
-        Me.cemail.HeaderText = "email"
-        Me.cemail.Name = "cemail"
-        Me.cemail.ReadOnly = True
-        Me.cemail.Visible = False
-        '
-        'cnombre_encargado
-        '
-        Me.cnombre_encargado.DataPropertyName = "nombre_encargado"
-        Me.cnombre_encargado.HeaderText = "nombre_encargado"
-        Me.cnombre_encargado.Name = "cnombre_encargado"
-        Me.cnombre_encargado.ReadOnly = True
-        Me.cnombre_encargado.Visible = False
-        '
-        'ctelefono_encargado
-        '
-        Me.ctelefono_encargado.DataPropertyName = "telefono_encargado"
-        Me.ctelefono_encargado.HeaderText = "telefono_encargado"
-        Me.ctelefono_encargado.Name = "ctelefono_encargado"
-        Me.ctelefono_encargado.ReadOnly = True
-        Me.ctelefono_encargado.Visible = False
-        '
-        'climite
-        '
-        Me.climite.DataPropertyName = "limite_credito"
-        Me.climite.HeaderText = "limte_credito"
-        Me.climite.Name = "climite"
-        Me.climite.ReadOnly = True
-        Me.climite.Visible = False
-        '
-        'cobservaciones
-        '
-        Me.cobservaciones.DataPropertyName = "observaciones"
-        Me.cobservaciones.HeaderText = "observaciones"
-        Me.cobservaciones.Name = "cobservaciones"
-        Me.cobservaciones.ReadOnly = True
-        Me.cobservaciones.Visible = False
-        '
-        'celiminado
-        '
-        Me.celiminado.DataPropertyName = "eliminado"
-        Me.celiminado.HeaderText = "eliminado"
-        Me.celiminado.Name = "celiminado"
-        Me.celiminado.ReadOnly = True
-        Me.celiminado.Visible = False
-        '
-        'precio
-        '
-        Me.precio.DataPropertyName = "precio"
-        Me.precio.HeaderText = "Column1"
-        Me.precio.Name = "precio"
-        Me.precio.ReadOnly = True
-        Me.precio.Visible = False
         '
         'PictureBox2
         '
@@ -1752,202 +1850,174 @@ Public Class frm_datos_mantenimiento
         Me.tsproducto_id_producto.MappingName = "id_producto"
         Me.tsproducto_id_producto.Width = 55
         '
-        'dtgprdid
+        'dtgcid
         '
-        Me.dtgprdid.DataPropertyName = "id_producto"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtgprdid.DefaultCellStyle = DataGridViewCellStyle7
-        Me.dtgprdid.FillWeight = 65.0!
-        Me.dtgprdid.HeaderText = "Código"
-        Me.dtgprdid.Name = "dtgprdid"
-        Me.dtgprdid.ReadOnly = True
-        Me.dtgprdid.Width = 65
+        Me.dtgcid.DataPropertyName = "id_cliente"
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtgcid.DefaultCellStyle = DataGridViewCellStyle12
+        Me.dtgcid.HeaderText = "Código"
+        Me.dtgcid.Name = "dtgcid"
+        Me.dtgcid.ReadOnly = True
+        Me.dtgcid.Width = 65
         '
-        'id_sector
+        'identificacion
         '
-        Me.id_sector.DataPropertyName = "id_sector"
-        Me.id_sector.HeaderText = "Column1"
-        Me.id_sector.Name = "id_sector"
-        Me.id_sector.ReadOnly = True
-        Me.id_sector.Visible = False
+        Me.identificacion.DataPropertyName = "identificacion"
+        Me.identificacion.HeaderText = "identificacion"
+        Me.identificacion.Name = "identificacion"
+        Me.identificacion.ReadOnly = True
+        Me.identificacion.Visible = False
         '
-        'pnombre
+        'cnombre
         '
-        Me.pnombre.DataPropertyName = "nombre"
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnombre.DefaultCellStyle = DataGridViewCellStyle8
-        Me.pnombre.FillWeight = 350.0!
-        Me.pnombre.HeaderText = "Nombre"
-        Me.pnombre.Name = "pnombre"
-        Me.pnombre.ReadOnly = True
-        Me.pnombre.Width = 400
+        Me.cnombre.DataPropertyName = "nombre"
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cnombre.DefaultCellStyle = DataGridViewCellStyle13
+        Me.cnombre.HeaderText = "Nombre"
+        Me.cnombre.Name = "cnombre"
+        Me.cnombre.ReadOnly = True
+        Me.cnombre.Width = 300
         '
-        'bloqueado
+        'cTelefono
         '
-        Me.bloqueado.DataPropertyName = "bloqueado"
-        Me.bloqueado.HeaderText = "B"
-        Me.bloqueado.Name = "bloqueado"
-        Me.bloqueado.ReadOnly = True
-        Me.bloqueado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.bloqueado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.bloqueado.Width = 20
+        Me.cTelefono.DataPropertyName = "telefono"
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cTelefono.DefaultCellStyle = DataGridViewCellStyle14
+        Me.cTelefono.HeaderText = "Teléfono"
+        Me.cTelefono.Name = "cTelefono"
+        Me.cTelefono.ReadOnly = True
+        Me.cTelefono.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cTelefono.Width = 80
         '
-        'Ppresentacion
+        'cdireccion
         '
-        Me.Ppresentacion.DataPropertyName = "presentacion"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Ppresentacion.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Ppresentacion.FillWeight = 40.0!
-        Me.Ppresentacion.HeaderText = "Prst"
-        Me.Ppresentacion.Name = "Ppresentacion"
-        Me.Ppresentacion.ReadOnly = True
-        Me.Ppresentacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Ppresentacion.Visible = False
-        Me.Ppresentacion.Width = 45
+        Me.cdireccion.DataPropertyName = "direccion"
+        Me.cdireccion.HeaderText = "direccion"
+        Me.cdireccion.Name = "cdireccion"
+        Me.cdireccion.ReadOnly = True
+        Me.cdireccion.Visible = False
         '
-        'existencia
+        'cplazo
         '
-        Me.existencia.DataPropertyName = "existencia"
-        Me.existencia.HeaderText = "Column1"
-        Me.existencia.Name = "existencia"
-        Me.existencia.ReadOnly = True
-        Me.existencia.Visible = False
+        Me.cplazo.DataPropertyName = "plazo"
+        Me.cplazo.HeaderText = "plazo"
+        Me.cplazo.Name = "cplazo"
+        Me.cplazo.ReadOnly = True
+        Me.cplazo.Visible = False
         '
-        'piv
+        'cfax
         '
-        Me.piv.DataPropertyName = "iv"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.NullValue = False
-        Me.piv.DefaultCellStyle = DataGridViewCellStyle10
-        Me.piv.FillWeight = 20.0!
-        Me.piv.HeaderText = "iv"
-        Me.piv.Name = "piv"
-        Me.piv.ReadOnly = True
-        Me.piv.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.piv.Visible = False
-        Me.piv.Width = 25
+        Me.cfax.DataPropertyName = "fax"
+        Me.cfax.HeaderText = "fax"
+        Me.cfax.Name = "cfax"
+        Me.cfax.ReadOnly = True
+        Me.cfax.Visible = False
         '
-        'pid_proveedor
+        'cemail
         '
-        Me.pid_proveedor.HeaderText = "id_proveedor"
-        Me.pid_proveedor.Name = "pid_proveedor"
-        Me.pid_proveedor.ReadOnly = True
-        Me.pid_proveedor.Visible = False
+        Me.cemail.DataPropertyName = "email"
+        Me.cemail.HeaderText = "email"
+        Me.cemail.Name = "cemail"
+        Me.cemail.ReadOnly = True
+        Me.cemail.Visible = False
         '
-        'empaque
+        'cnombre_encargado
         '
-        Me.empaque.DataPropertyName = "empaque"
-        Me.empaque.HeaderText = "Column1"
-        Me.empaque.Name = "empaque"
-        Me.empaque.ReadOnly = True
-        Me.empaque.Visible = False
+        Me.cnombre_encargado.DataPropertyName = "nombre_encargado"
+        Me.cnombre_encargado.HeaderText = "nombre_encargado"
+        Me.cnombre_encargado.Name = "cnombre_encargado"
+        Me.cnombre_encargado.ReadOnly = True
+        Me.cnombre_encargado.Visible = False
         '
-        'sub_empaque
+        'ctelefono_encargado
         '
-        Me.sub_empaque.DataPropertyName = "sub_empaque"
-        Me.sub_empaque.HeaderText = "Column1"
-        Me.sub_empaque.Name = "sub_empaque"
-        Me.sub_empaque.ReadOnly = True
-        Me.sub_empaque.Visible = False
+        Me.ctelefono_encargado.DataPropertyName = "telefono_encargado"
+        Me.ctelefono_encargado.HeaderText = "telefono_encargado"
+        Me.ctelefono_encargado.Name = "ctelefono_encargado"
+        Me.ctelefono_encargado.ReadOnly = True
+        Me.ctelefono_encargado.Visible = False
         '
-        'pid_familia
+        'climite
         '
-        Me.pid_familia.DataPropertyName = "id_linea"
-        Me.pid_familia.HeaderText = "id_linea"
-        Me.pid_familia.Name = "pid_familia"
-        Me.pid_familia.ReadOnly = True
-        Me.pid_familia.Visible = False
+        Me.climite.DataPropertyName = "limite_credito"
+        Me.climite.HeaderText = "limte_credito"
+        Me.climite.Name = "climite"
+        Me.climite.ReadOnly = True
+        Me.climite.Visible = False
         '
-        'id_pasillo
+        'cobservaciones
         '
-        Me.id_pasillo.DataPropertyName = "id_pasillo"
-        Me.id_pasillo.HeaderText = "Column1"
-        Me.id_pasillo.Name = "id_pasillo"
-        Me.id_pasillo.ReadOnly = True
-        Me.id_pasillo.Visible = False
+        Me.cobservaciones.DataPropertyName = "observaciones"
+        Me.cobservaciones.HeaderText = "observaciones"
+        Me.cobservaciones.Name = "cobservaciones"
+        Me.cobservaciones.ReadOnly = True
+        Me.cobservaciones.Visible = False
         '
-        'id_b_r
+        'celiminado
         '
-        Me.id_b_r.DataPropertyName = "id_b_r"
-        Me.id_b_r.HeaderText = "Column1"
-        Me.id_b_r.Name = "id_b_r"
-        Me.id_b_r.ReadOnly = True
-        Me.id_b_r.Visible = False
+        Me.celiminado.DataPropertyName = "eliminado"
+        Me.celiminado.HeaderText = "eliminado"
+        Me.celiminado.Name = "celiminado"
+        Me.celiminado.ReadOnly = True
+        Me.celiminado.Visible = False
         '
-        'costo
+        'precio
         '
-        Me.costo.DataPropertyName = "costo"
-        Me.costo.HeaderText = "Column1"
-        Me.costo.Name = "costo"
-        Me.costo.ReadOnly = True
-        Me.costo.Visible = False
+        Me.precio.DataPropertyName = "precio"
+        Me.precio.HeaderText = "Column1"
+        Me.precio.Name = "precio"
+        Me.precio.ReadOnly = True
+        Me.precio.Visible = False
         '
-        'u1
+        'tipoIdentificacion
         '
-        Me.u1.DataPropertyName = "utilidad_1"
-        Me.u1.HeaderText = "Column1"
-        Me.u1.Name = "u1"
-        Me.u1.ReadOnly = True
-        Me.u1.Visible = False
+        Me.tipoIdentificacion.DataPropertyName = "tipoIdentificacion"
+        Me.tipoIdentificacion.HeaderText = "tipoIdentificacion"
+        Me.tipoIdentificacion.Name = "tipoIdentificacion"
+        Me.tipoIdentificacion.ReadOnly = True
+        Me.tipoIdentificacion.Visible = False
         '
-        'u2
+        'provincia
         '
-        Me.u2.DataPropertyName = "utilidad_2"
-        Me.u2.HeaderText = "Column1"
-        Me.u2.Name = "u2"
-        Me.u2.ReadOnly = True
-        Me.u2.Visible = False
+        Me.provincia.DataPropertyName = "provincia"
+        Me.provincia.HeaderText = "provincia"
+        Me.provincia.Name = "provincia"
+        Me.provincia.ReadOnly = True
+        Me.provincia.Visible = False
         '
-        'u3
+        'canton
         '
-        Me.u3.DataPropertyName = "utilidad_3"
-        Me.u3.HeaderText = "Column1"
-        Me.u3.Name = "u3"
-        Me.u3.ReadOnly = True
-        Me.u3.Visible = False
+        Me.canton.DataPropertyName = "canton"
+        Me.canton.HeaderText = "canton"
+        Me.canton.Name = "canton"
+        Me.canton.ReadOnly = True
+        Me.canton.Visible = False
         '
-        'u4
+        'distrito
         '
-        Me.u4.DataPropertyName = "utilidad_4"
-        Me.u4.HeaderText = "Column1"
-        Me.u4.Name = "u4"
-        Me.u4.ReadOnly = True
-        Me.u4.Visible = False
+        Me.distrito.DataPropertyName = "distrito"
+        Me.distrito.HeaderText = "distrito"
+        Me.distrito.Name = "distrito"
+        Me.distrito.ReadOnly = True
+        Me.distrito.Visible = False
         '
-        'detalle
+        'representante
         '
-        Me.detalle.DataPropertyName = "detalle"
-        Me.detalle.HeaderText = "Column1"
-        Me.detalle.Name = "detalle"
-        Me.detalle.ReadOnly = True
-        Me.detalle.Visible = False
+        Me.representante.DataPropertyName = "representante"
+        Me.representante.HeaderText = "representante"
+        Me.representante.Name = "representante"
+        Me.representante.ReadOnly = True
+        Me.representante.Visible = False
         '
-        'pobservaciones
+        'numeroRepresentante
         '
-        Me.pobservaciones.DataPropertyName = "observaciones"
-        Me.pobservaciones.HeaderText = "observaciones"
-        Me.pobservaciones.Name = "pobservaciones"
-        Me.pobservaciones.ReadOnly = True
-        Me.pobservaciones.Visible = False
-        '
-        'pid_proverdor
-        '
-        Me.pid_proverdor.DataPropertyName = "id_proveedor"
-        Me.pid_proverdor.HeaderText = "id_proveedor"
-        Me.pid_proverdor.Name = "pid_proverdor"
-        Me.pid_proverdor.ReadOnly = True
-        Me.pid_proverdor.Visible = False
-        '
-        'pbarcode
-        '
-        Me.pbarcode.DataPropertyName = "barcode"
-        Me.pbarcode.HeaderText = "barcode"
-        Me.pbarcode.Name = "pbarcode"
-        Me.pbarcode.ReadOnly = True
-        Me.pbarcode.Visible = False
+        Me.numeroRepresentante.DataPropertyName = "numeroRepresentante"
+        Me.numeroRepresentante.HeaderText = "numeroRepresentante"
+        Me.numeroRepresentante.Name = "numeroRepresentante"
+        Me.numeroRepresentante.ReadOnly = True
+        Me.numeroRepresentante.Visible = False
         '
         'frm_datos_mantenimiento
         '
@@ -2157,12 +2227,12 @@ Public Class frm_datos_mantenimiento
             ' Insert
             Dacliente.InsertCommand = CONN1.CreateCommand()
             Dacliente.InsertCommand.CommandText = "INSERT INTO cliente(nombre, telefono,fax,email,direccion,nombre_encargado," + _
-            "telefono_encargado,precio,plazo,limite_credito,observaciones,comercio)" + _
+            "telefono_encargado,precio,plazo,limite_credito,observaciones,comercio, representante, numeroRepresentante, provincia, canton, distrito, tipoIdentificacion,identificacion )" + _
             "values(@nombre, @telefono,@fax,@email,@direccion,@nombre_encargado," + _
-            "@telefono_encargado,@precio,@plazo,@limite_credito,@observaciones,@comercio);" + _
+            "@telefono_encargado,@precio,@plazo,@limite_credito,@observaciones,@comercio,@representante, @numeroRepresentante, @provincia, @canton, @distrito, @tipoIdentificacion, @identificacion);" + _
            "SELECT * FROM cliente WHERE (id_cliente = @@IDENTITY)"
             AddParams(Dacliente.InsertCommand, "nombre", "telefono", "fax", "email", "direccion", "nombre_encargado", _
-            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio")
+            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio", "representante", "numeroRepresentante", "provincia", "canton", "distrito", "tipoIdentificacion", "identificacion")
 
             ' Update
             Dacliente.UpdateCommand = CONN1.CreateCommand()
@@ -2170,10 +2240,10 @@ Public Class frm_datos_mantenimiento
                 "UPDATE cliente SET " + _
                 "nombre=@nombre, telefono=@telefono,fax=@fax,email=@email," + _
                 "direccion=@direccion,nombre_encargado=@nombre_encargado,telefono_encargado=@telefono_encargado," + _
-                "plazo=@plazo,limite_credito=@limite_credito,precio=@precio,observaciones=@observaciones, comercio = @comercio" + _
+                "plazo=@plazo,limite_credito=@limite_credito,precio=@precio,observaciones=@observaciones, comercio = @comercio , tipoIdentificacion = @tipoIdentificacion, representante = @representante, numeroRepresentante = @numeroRepresentante, provincia = @provincia, canton = @canton, distrito = @distrito , identificacion = @identificacion" + _
                 " WHERE id_cliente = @id_cliente"
             AddParams(Dacliente.UpdateCommand, "id_cliente", "nombre", "telefono", "fax", "email", "direccion", "nombre_encargado", _
-            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio")
+            "telefono_encargado", "precio", "plazo", "limite_credito", "observaciones", "comercio", "representante", "numeroRepresentante", "provincia", "canton", "distrito", "tipoIdentificacion", "identificacion")
 
 
         Catch myerror As Exception
@@ -2243,6 +2313,8 @@ Public Class frm_datos_mantenimiento
         Dim cliente_Mantenimiento As New frm_cliente_mantenimiento
         With cliente_Mantenimiento
             .Owner = Me
+            .PopulateCBAddress()
+            .loading = True
             .lblid_cliente.Text = rowc("id_cliente").ToString
             .txtnombre.Text = rowc("nombre")
             .txtemail.Text = rowc("email").ToString.TrimEnd
@@ -2256,9 +2328,17 @@ Public Class frm_datos_mantenimiento
             .txtnombre_encargado.Text = rowc("nombre_encargado").ToString.TrimEnd
             .txttelefono_encargado.Text = rowc("telefono_encargado").ToString.TrimEnd
             .cbcomercio.SelectedIndex = rowc("comercio")
+            .cbProvincia.SelectedIndex = rowc("provincia").ToString - 1
+            .cbCanton.SelectedIndex = rowc("canton").ToString - 1
+            .cbDistrito.SelectedIndex = rowc("distrito").ToString - 1
+            .txtIdentificacion.Text = rowc("identificacion").ToString
+            .cbIdentificacion.SelectedIndex = rowc("tipoIdentificacion").ToString - 1
+            .txtRepresentante.Text = rowc("representante").ToString
+            .txtNumeroRepresentante.Text = rowc("numeroRepresentante").ToString
 
             .lbltitulo.Text = "Modificar Cliente"
             .Show()
+            .loading = False
         End With
         'Catch myerror As Exception
         'ONEX(Me.Name, myerror)
@@ -2269,6 +2349,7 @@ Public Class frm_datos_mantenimiento
             Dim cliente_mantenimiento As New frm_cliente_mantenimiento
             With cliente_mantenimiento
                 .Owner = Me
+                .PopulateCBAddress()
                 cliente_mantenimiento.Show()
                 .lbltitulo.Text = "Incluir Cliente"
                 .cbprecio.SelectedIndex = 0

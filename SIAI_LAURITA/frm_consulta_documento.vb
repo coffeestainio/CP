@@ -172,6 +172,8 @@ Public Class frm_consulta_documento
 
                     .Totales()
                     .FacturaID = rowf("id_factura").ToString
+                    .facturaClave = rowf("claveNumerica").ToString
+                    .facturaConsecutivo = rowf("numConsecutivo").ToString
                     .pnencabezado.Enabled = False
                     .botones(False)
                     .btnimprimir.Visible = True
@@ -365,7 +367,7 @@ Public Class frm_consulta_documento
                         rowd("id_documento") = .Item("id_factura")
                     Case 3
                         rowd("id_documento") = .Item("id_recibo")
-                    Case "7"
+                    Case 7
                         rowd("id_documento") = .Item("id_devolucion")
                     Case 5
                         rowd("id_documento") = .Item("id_nota_credito")
@@ -481,6 +483,8 @@ Public Class frm_consulta_documento
                 End If
                 rowtpd("nombre") = rowp("nombre")
                 rowtpd("consumidor") = rowp("costo") * (1 + util) / rowp("empaque") / rowp("sub_empaque") * (1 + rowp("detalle")) * (1 + IIf(rowp("iv"), FIV, 0))
+                'descuentos = rowtpd("consumidor") * rowtpd("descuento") / 100
+                'rowtpd("consumidor") = rowtpd("consumidor") - descuentos
             End With
         Next
         'Catch myerror As Exception
@@ -525,7 +529,7 @@ Public Class frm_consulta_documento
         TDD.Columns.Add(Monto)
 
         Dim Producto As DataTable
-        Producto = Table("select * from producto order by id", "id")
+        Producto = Table("select * from producto order by id_producto", "id_producto")
         Dim FD As DataTable
         FD = Table("select * from factura_detalle where id_factura=" + factura_id.ToString + "order by id_producto", "id_producto")
 
@@ -544,10 +548,8 @@ Public Class frm_consulta_documento
                 rowdd("Presentacion") = rowp("presentacion")
                 rowdd("Nombre") = rowp("nombre")
                 rowdd("PreCio") = rowfd("preCio")
-                rowdd("descuento1") = rowfd("descuento1") * 100
-                rowdd("descuento2") = rowfd("descuento2") * 100
+                rowdd("descuento") = rowfd("descuento") * 100
                 rowdd("iv") = rowfd("iv")
-                rowdd("comision") = rowfd("comision")
                 TDD.Rows.Add(rowdd)
             End With
         Next

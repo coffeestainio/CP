@@ -129,7 +129,7 @@ Partial Class frm_factura_anular
         Me.lblfecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblfecha.Location = New System.Drawing.Point(107, 94)
         Me.lblfecha.Name = "lblfecha"
-        Me.lblfecha.Size = New System.Drawing.Size(105, 24)
+        Me.lblfecha.Size = New System.Drawing.Size(270, 24)
         Me.lblfecha.TabIndex = 28
         Me.lblfecha.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '

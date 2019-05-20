@@ -18,6 +18,8 @@ Public Class frm_pedido
     Public rowc As DataRow
 
     Dim FS(0) As String
+    Dim FK(0) As String
+    Dim FC(0) As String
 
     Dim alistarFlag As Boolean = False
 
@@ -35,6 +37,8 @@ Public Class frm_pedido
     Dim Alistar As String
     Public Fecha As String
     Public FacturaID As String
+    Public facturaClave As String
+    Public facturaConsecutivo As String
     Public PedidoID As String
     Public PIV As Decimal
     Public PMensaje As String
@@ -199,7 +203,8 @@ Public Class frm_pedido
                     mf = m
                     If .Item("iv") Then
                         tGravado = tGravado + mf
-                        tiv = tiv + mf * PIV
+                        'tiv = tiv + mf * PIV
+                        tiv = tiv + ((mf - d) * PIV)
                     Else
                         tExento = tExento + mf
                     End If
@@ -208,9 +213,9 @@ Public Class frm_pedido
                 End With
             Next i
 
-            total = tExento + tGravado + tiv
+            total = tExento + tGravado + tiv - tdescuento
             lblproductos.Text = TPD.Rows.Count
-            lbltotal.Text = "¢ " + FormatNumber(total, 2)
+            lbltotal.Text = "â‚¡ " + FormatNumber(total, 2)
             If total > 0 And alistarFlag = False Then
                 botones(True)
             Else
@@ -284,7 +289,7 @@ Public Class frm_pedido
             .lblexento.Text = FormatNumber(tExento, 2)
             .lbldescuento.Text = FormatNumber(tdescuento, 2)
             .lbliv.Text = FormatNumber(tiv, 2)
-            .lbltotal.Text = "¢ " + FormatNumber(total, 2)
+            .lbltotal.Text = "â‚¡ " + FormatNumber(total, 2)
         End With
         pedido_totales.Show()
     End Sub
@@ -463,7 +468,6 @@ Public Class frm_pedido
         'End Try
     End Sub
 
-
     Private Sub Estado()
         Dim Vencido As Decimal = 0.0
         Dim criterio As String = "(factura.id_cliente=" + rowc("id_cliente").ToString + ")"
@@ -478,7 +482,7 @@ Public Class frm_pedido
         Next
 
         If Vencido > 0 Then
-            lblvencido.Text = "VENCIDO ¢" + FormatNumber(Vencido, 2)
+            lblvencido.Text = "VENCIDO â‚¡" + FormatNumber(Vencido, 2)
         Else
             lblvencido.Text = ""
         End If
@@ -504,13 +508,13 @@ Public Class frm_pedido
         End If
 
         If Val(txtid_cliente.Text) = 0 Then
-            MessageBox.Show("Debe Escribir un Código de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Debe Escribir un Codigo de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_cliente.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
         End If
         If cliente_ID <> txtid_cliente.Text Then
-            MessageBox.Show("Escriba de Nuevo el código del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Escriba de Nuevo el codigo del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtid_cliente.Focus()
             SendKeys.Send("{home}+{end}")
             Exit Sub
@@ -684,38 +688,61 @@ Public Class frm_pedido
                 Exit Sub
             End If
             If Val(txtid_cliente.Text) = 0 Then
-                MessageBox.Show("Debe Escribir un Código de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Debe Escribir un Codigo de cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 txtid_cliente.Focus()
                 SendKeys.Send("{home}+{end}")
                 Exit Sub
             End If
             If cliente_ID <> txtid_cliente.Text Then
-                MessageBox.Show("Escriba de Nuevo el código del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Escriba de Nuevo el codigo del Cliente y Presione Enter", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 txtid_cliente.Focus()
                 SendKeys.Send("{home}+{end}")
                 Exit Sub
             End If
+
+            Dim hacienda As Boolean = True
+
+            Dim res As DialogResult
+            res = MessageBox.Show("Desea incluir RECEPTOR en la factura?", "Sistema de Facturacion", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+
+            If res = Windows.Forms.DialogResult.Cancel Then
+                Exit Sub
+            End If
+
+            If res = Windows.Forms.DialogResult.No Then
+                hacienda = False
+            End If
+
             btnfacturar.Enabled = False
+
+            Dim facturagenerada As Boolean = False
 
             ' seleccionar el usuario que hizo el pedido
             If cbid_pedido.Text = "Nuevo" Then
-                Facturas_Generar(USUARIO_ID)
+                facturagenerada = Facturas_Generar(USUARIO_ID, hacienda)
             Else
                 Dim TPU As DataTable
                 TPU = Table("select id_usuario from Pedido where id_pedido = " & cbid_pedido.Text, "")
-                Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString))
+                facturagenerada = Facturas_Generar(Val(TPU.Rows(0).Item(0).ToString), hacienda)
             End If
 
-            Facturas_imprimir("F", True)
+            Facturas_imprimir("F", True, hacienda)
 
+            ' EjectuarFacturacionElectronica()
 
-            If Not cbid_pedido.Text = "Nuevo" Then
-                Dim cmd As New SqlCommand
-                cmd.Connection = CONN1
-                cmd.CommandText = "delete from Pedido where id_pedido=" + cbid_pedido.Text
-                cmd.ExecuteNonQuery()
-                cmd.CommandText = "delete from pedido_detalle where id_pedido=" + cbid_pedido.Text
-                cmd.ExecuteNonQuery()
+            If facturagenerada Then
+
+                If Not cbid_pedido.Text = "Nuevo" Then
+                    Dim cmd As New SqlCommand
+                    cmd.Connection = CONN1
+                    cmd.CommandText = "delete from Pedido where id_pedido=" + cbid_pedido.Text
+                    cmd.ExecuteNonQuery()
+                    cmd.CommandText = "delete from pedido_detalle where id_pedido=" + cbid_pedido.Text
+                    cmd.ExecuteNonQuery()
+                End If
+            Else
+                MsgBox("Hubo un error al generar la factura, favor de verificar el pedido")
+
             End If
 
             Me.Close()
@@ -729,9 +756,9 @@ Public Class frm_pedido
 
     End Sub
 
-    Private Sub Facturas_Generar(ByVal id_usuario As Integer)
-
+    Private Function Facturas_Generar(ByVal id_usuario As Integer, ByVal hacienda As Integer) As Boolean
         Try
+
             Dim Sql As String
             Dim cmd As New SqlCommand
             cmd.Connection = CONN1
@@ -747,30 +774,43 @@ Public Class frm_pedido
             Dim LI As Integer
             Dim LS As Integer
 
-
-
-
-
             Tsort(TPD, "nombre")
 
 
             Dim Facturas As Integer = IIf(TPD.Rows.Count > 28, IIf(TPD.Rows.Count Mod 28 > 0, Int(TPD.Rows.Count / 28) + 1, TPD.Rows.Count / 28), 1)
             ReDim FS(Facturas + 1)
+            ReDim FK(Facturas + 1)
+            ReDim FC(Facturas + 1)
+
+
+            'Dim numConsecutivo As String = "0"
+            'Dim claveNumerica As String = "0"
 
             Dim h As Integer
 
             For h = 1 To Facturas
+
+                Dim consec As Integer = Table("select top 1 consecutivoElectronico as consecutivo from factura order by consecutivoElectronico desc", "").Rows(0).Item("consecutivo")
+                consec = consec + 1
+
+                Dim numConsecutivo As String = "0010000101" + consec.ToString("0000000000")
+                Dim claveNumerica As String = "506" + Date.Today.ToString("ddMMyy") + CEDULA + numConsecutivo + "1" + "12345670"
+
 
                 FGravado = 0
                 FExento = 0
                 Fdescuento = 0
                 Fiv = 0
 
-                Sql = "INSERT INTO FACTURA (id_cliente,id_agente,fecha,plazo,piv,id_usuario) values (" & _
+                Sql = "INSERT INTO FACTURA (id_cliente,clavenumerica,numconsecutivo,consecutivoelectronico, id_agente,fecha,plazo,clienteTributa,piv, id_usuario) values (" & _
                 txtid_cliente.Text & "," & _
+                "'" & claveNumerica & "'," & _
+                "'" & numConsecutivo & "'," & _
+                consec & "," & _
                 cbid(cbid_agente.Text) & "," & _
-                "'" & EDATE(Date.Today.ToShortDateString) & "'," & _
+                "getDate()," & _
                 Val(txtplazo.Text).ToString & "," & _
+                hacienda & "," + _
                 PIV.ToString & "," & _
                 id_usuario & ")"
 
@@ -778,7 +818,11 @@ Public Class frm_pedido
                 F = Table(Sql & " select @@IDENTITY as id_factura", "")
 
                 FacturaID = F.Rows(0).Item("id_factura")
+                facturaClave = claveNumerica
+                facturaConsecutivo = numConsecutivo
                 FS(h) = FacturaID
+                FK(h) = facturaClave
+                FC(h) = facturaConsecutivo
 
                 LI = 28 * (h - 1)
                 LS = IIf((LI + 27) >= TPD.Rows.Count, TPD.Rows.Count - 1, LI + 27)
@@ -809,14 +853,17 @@ Public Class frm_pedido
 
             Next h
 
-        Catch myerror As Exception
-            ONEX(Me.Name, myerror)
+        Catch ex As Exception
+            ONEX(Me.Name, ex)
+            Return False
         End Try
 
-    End Sub
+        Return True
+
+    End Function
 
 
-    Private Sub Facturas_imprimir(ByVal Doc As String, ByVal imprimir As Boolean)
+    Private Sub Facturas_imprimir(ByVal Doc As String, ByVal imprimir As Boolean, ByVal hacienda As Boolean)
         Try
 
             Dim FGravado As Decimal
@@ -854,12 +901,15 @@ Public Class frm_pedido
                     With TPD.Rows(z)
 
                         m = .Item("precio") * .Item("cantidad")
+                        d = m * (.Item("descuento") / 100)
 
+                        Dim consumidor As Decimal = .Item("consumidor") - (.Item("consumidor") * .Item("descuento") / 100)
+                        .Item("consumidor") = consumidor
 
                         mf = m
                         If .Item("iv") Then
                             FGravado = FGravado + mf
-                            Fiv = Fiv + mf * PIV
+                            Fiv = Fiv + ((mf - d) * PIV)
                         Else
                             FExento = FExento + mf
                         End If
@@ -867,6 +917,9 @@ Public Class frm_pedido
                     End With
                     V_Factura.ImportRow(TPD.Rows(z))
                 Next z
+
+                Dim direc As String = IIf(hacienda, rowc("direccion"), "")
+                'direc = IIf(txtid_cliente.Text = "154", "OBSERVACION COMITE DE PRIVADOS DE LIBERTAD", direc)
 
                 Dim rfactura As New rpt_Factura
 
@@ -877,10 +930,31 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("documento")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = IIf(Doc = "P", "PROFORMA", "")
+
+                If (Doc = "P") Then
+                    rParameterDiscreteValue.Value = ""
+                Else
+                    If Consulta Then
+                        rParameterDiscreteValue.Value = "ClaveNumerica: " + facturaClave + vbCrLf + "Consecutivo: " + facturaConsecutivo
+                    Else
+                        If Doc = "F" Then
+                            rParameterDiscreteValue.Value = "ClaveNumerica: " + FK(h) + vbCrLf + "Consecutivo: " + FC(h)
+                        Else
+                            rParameterDiscreteValue.Value = ""
+                        End If
+
+                    End If
+                End If
+
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
+                rParameterFieldLocation = rParameterFieldDefinitions.Item("men4")
+                rParameterValues = rParameterFieldLocation.CurrentValues
+                rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
+                rParameterDiscreteValue.Value = IIf(Doc = "P", "", "AUTORIZADO MEDIANTE OFICIO No. 01-0068-97 DE FECHA 26-09-97 DE LA D.G.TD.")
+                rParameterValues.Add(rParameterDiscreteValue)
+                rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("tantos")
                 rParameterValues = rParameterFieldLocation.CurrentValues
@@ -889,19 +963,17 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("cliente")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = txtid_cliente.Text + "-" + lblcliente_nombre.Text
+                rParameterDiscreteValue.Value = IIf(hacienda, txtid_cliente.Text + "-" + lblcliente_nombre.Text, txtid_cliente.Text + " - Cliente Contado")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
-
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("direccion")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = rowc("direccion")
+                rParameterDiscreteValue.Value = direc
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -911,8 +983,6 @@ Public Class frm_pedido
                 rParameterDiscreteValue.Value = DateAdd(DateInterval.Day, Val(txtplazo.Text), Date.Today)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
-
-
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("contado")
                 rParameterValues = rParameterFieldLocation.CurrentValues
@@ -928,14 +998,12 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
-
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("telefono")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = rowc("telefono")
+                rParameterDiscreteValue.Value = IIf(hacienda, rowc("telefono"), "")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
-
 
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("gravado")
                 rParameterValues = rParameterFieldLocation.CurrentValues
@@ -958,10 +1026,17 @@ Public Class frm_pedido
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
+                rParameterFieldLocation = rParameterFieldDefinitions.Item("descuento")
+                rParameterValues = rParameterFieldLocation.CurrentValues
+                rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
+                rParameterDiscreteValue.Value = FormatNumber(Fdescuento, 2)
+                rParameterValues.Add(rParameterDiscreteValue)
+                rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
+
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("Total")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = "¢ " + FormatNumber(FGravado + Fiv + FExento, 2)
+                rParameterDiscreteValue.Value = "â‚¡ " + FormatNumber(FGravado + Fiv + FExento - Fdescuento, 2)
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -981,8 +1056,6 @@ Public Class frm_pedido
                 End If
 
 
-
-
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -996,7 +1069,7 @@ Public Class frm_pedido
                 rParameterFieldLocation = rParameterFieldDefinitions.Item("totalg")
                 rParameterValues = rParameterFieldLocation.CurrentValues
                 rParameterDiscreteValue = New CrystalDecisions.Shared.ParameterDiscreteValue
-                rParameterDiscreteValue.Value = IIf(h = Facturas, "TOTAL GENERAL  ¢" + FormatNumber(total, 2), "")
+                rParameterDiscreteValue.Value = IIf(h = Facturas, "TOTAL GENERAL  â‚¡" + FormatNumber(total, 2), "")
                 rParameterValues.Add(rParameterDiscreteValue)
                 rParameterFieldLocation.ApplyCurrentValues(rParameterValues)
 
@@ -1027,52 +1100,55 @@ Public Class frm_pedido
 
                 If imprimir Then
 
-                    Dim printed As Boolean = False
-                    While Equals(printed, False)
-                        Try
-                            If ID_ESTACION = 1 Then
-                                If Doc = "P" Then
-                                    rfactura.PrintOptions.PrinterName = "REPORTES"
-                                Else
-                                    rfactura.PrintOptions.PrinterName = "FACTURAS"
-                                End If
-                            Else
-                                If Doc = "P" Then
-                                    rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
-                                Else
-                                    rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\FACTURAS"
-                                End If
-                            End If
+                    If Produccion Then
 
-                            ' impresion 
+                        Dim printed As Boolean = False
+                        While Equals(printed, False)
+                            Try
+                                If ID_ESTACION = 1 Then
+                                    If Doc = "P" Then
+                                        rfactura.PrintOptions.PrinterName = "REPORTES"
+                                    Else
+                                        rfactura.PrintOptions.PrinterName = "FACTURAS"
+                                    End If
+                                Else
+                                    If Doc = "P" Then
+                                        rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\REPORTES"
+                                    Else
+                                        rfactura.PrintOptions.PrinterName = "\\" + PRINTER + "\FACTURAS"
+                                    End If
+                                End If
 
-                            rfactura.PrintToPrinter(1, False, 1, 1)
-                            printed = True
-                        Catch ex As Exception
-                            Dim response As MsgBoxResult = MsgBox("La impresion fallo. ¿Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresión")
-                            If response = MsgBoxResult.No Then
+                                ' impresion 
+
+                                rfactura.PrintToPrinter(1, False, 1, 1)
                                 printed = True
-                            End If
-                        End Try
-                    End While
-        'impresion
+                            Catch ex As Exception
+                                Dim response As MsgBoxResult = MsgBox("La impresion fallo. Desea intentarlo nuevamente?", MsgBoxStyle.YesNo, "Fallo en la impresion")
+                                If response = MsgBoxResult.No Then
+                                    printed = True
+                                End If
+                            End Try
+                        End While
+
+                    Else
+                        Dim rv As New frm_Report_Viewer
+                        rv.crv.ReportSource = rfactura
+                        rv.Show()
+
+                    End If
 
                 Else
 
-        Dim filePath As String = getSaveLocation()
-        If filePath <> "" Then
-            rfactura.ExportToDisk(ExportFormatType.PortableDocFormat, filePath)
-            rfactura.Dispose()
-            rfactura.Close()
-        End If
+                    Dim filePath As String = getSaveLocation()
+                    If filePath <> "" Then
+                        rfactura.ExportToDisk(ExportFormatType.WordForWindows, filePath)
+                        rfactura.Dispose()
+                        rfactura.Close()
+                    End If
 
-
-        'Dim rv As New frm_Report_Viewer
-        'rv.crv.ReportSource = rfactura
-        'rv.Show()
 
                 End If
-
 
             Next h
         Catch myerror As Exception
@@ -1171,7 +1247,7 @@ Public Class frm_pedido
         Alistar = ""
         Guardar(True)
         Tsort(TPD, "nombre")
-        Facturas_imprimir("P", True)
+        Facturas_imprimir("P", True, True)
         Me.Close()
     End Sub
 
@@ -1282,19 +1358,19 @@ Public Class frm_pedido
 
 
     Private Sub btnimprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnimprimir.Click
-        Facturas_imprimir("F", True)
+        Facturas_imprimir("F", True, True)
     End Sub
 
     Private Sub btnproformarweb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnproformarweb.Click
         Alistar = ""
         Guardar(True)
         Tsort(TPD, "nombre")
-        Facturas_imprimir("P", False)
+        Facturas_imprimir("P", False, True)
     End Sub
 
     Public Function getSaveLocation() As String
         Try
-            SaveReportDialog.Filter = "Report Files (*.pdf*)|*.pdf"
+            SaveReportDialog.Filter = "Report Files (*.doc*)|*.doc"
             If SaveReportDialog.ShowDialog = Windows.Forms.DialogResult.OK Then
                 Return SaveReportDialog.FileName
             Else

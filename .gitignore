@@ -1,0 +1,8 @@
+**/Release
+FacElec/.vs
+FacElec/.vs*
+FacElec/bin
+FacElec/obj
+*/obj
+*/bin
+FacElec/FacturasEnviadas

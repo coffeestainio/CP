@@ -1,0 +1,4 @@
+razon del descuento = 'por pronto pago' - editable
+nota credito manejo de nota de credito
+generar pdf
+
